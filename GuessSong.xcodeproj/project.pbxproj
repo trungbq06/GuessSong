@@ -1,0 +1,541 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6701008E1969D049001D8926 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6701008D1969D049001D8926 /* Foundation.framework */; };
+		670100901969D049001D8926 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6701008F1969D049001D8926 /* CoreGraphics.framework */; };
+		670100921969D049001D8926 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670100911969D049001D8926 /* UIKit.framework */; };
+		670100981969D04A001D8926 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 670100961969D04A001D8926 /* InfoPlist.strings */; };
+		6701009A1969D04A001D8926 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 670100991969D04A001D8926 /* main.m */; };
+		6701009E1969D04A001D8926 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6701009D1969D04A001D8926 /* AppDelegate.m */; };
+		670100A11969D04A001D8926 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6701009F1969D04A001D8926 /* Main_iPhone.storyboard */; };
+		670100A41969D04A001D8926 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 670100A21969D04A001D8926 /* Main_iPad.storyboard */; };
+		670100A91969D04A001D8926 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 670100A81969D04A001D8926 /* Images.xcassets */; };
+		670100B01969D04A001D8926 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670100AF1969D04A001D8926 /* XCTest.framework */; };
+		670100B11969D04A001D8926 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6701008D1969D049001D8926 /* Foundation.framework */; };
+		670100B21969D04A001D8926 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670100911969D049001D8926 /* UIKit.framework */; };
+		670100BA1969D04A001D8926 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 670100B81969D04A001D8926 /* InfoPlist.strings */; };
+		670100BC1969D04A001D8926 /* GuessSongTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 670100BB1969D04A001D8926 /* GuessSongTests.m */; };
+		673598BF1969DAEE00E35E60 /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 673598BE1969DAEE00E35E60 /* PlayViewController.m */; };
+		67776D161969D708002D27BB /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67776D151969D708002D27BB /* StartViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		670100B31969D04A001D8926 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 670100821969D049001D8926 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 670100891969D049001D8926;
+			remoteInfo = GuessSong;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		6701008A1969D049001D8926 /* GuessSong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessSong.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6701008D1969D049001D8926 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		6701008F1969D049001D8926 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		670100911969D049001D8926 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		670100951969D04A001D8926 /* GuessSong-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GuessSong-Info.plist"; sourceTree = "<group>"; };
+		670100971969D04A001D8926 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		670100991969D04A001D8926 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		6701009B1969D04A001D8926 /* GuessSong-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GuessSong-Prefix.pch"; sourceTree = "<group>"; };
+		6701009C1969D04A001D8926 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		6701009D1969D04A001D8926 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		670100A01969D04A001D8926 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		670100A31969D04A001D8926 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		670100A81969D04A001D8926 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		670100AE1969D04A001D8926 /* GuessSongTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GuessSongTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		670100AF1969D04A001D8926 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		670100B71969D04A001D8926 /* GuessSongTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GuessSongTests-Info.plist"; sourceTree = "<group>"; };
+		670100B91969D04A001D8926 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		670100BB1969D04A001D8926 /* GuessSongTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessSongTests.m; sourceTree = "<group>"; };
+		673598BD1969DAEE00E35E60 /* PlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
+		673598BE1969DAEE00E35E60 /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
+		67776D141969D708002D27BB /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
+		67776D151969D708002D27BB /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		670100871969D049001D8926 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				670100901969D049001D8926 /* CoreGraphics.framework in Frameworks */,
+				670100921969D049001D8926 /* UIKit.framework in Frameworks */,
+				6701008E1969D049001D8926 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		670100AB1969D04A001D8926 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				670100B01969D04A001D8926 /* XCTest.framework in Frameworks */,
+				670100B21969D04A001D8926 /* UIKit.framework in Frameworks */,
+				670100B11969D04A001D8926 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		670100811969D049001D8926 = {
+			isa = PBXGroup;
+			children = (
+				670100931969D049001D8926 /* GuessSong */,
+				670100B51969D04A001D8926 /* GuessSongTests */,
+				6701008C1969D049001D8926 /* Frameworks */,
+				6701008B1969D049001D8926 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6701008B1969D049001D8926 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6701008A1969D049001D8926 /* GuessSong.app */,
+				670100AE1969D04A001D8926 /* GuessSongTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6701008C1969D049001D8926 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6701008D1969D049001D8926 /* Foundation.framework */,
+				6701008F1969D049001D8926 /* CoreGraphics.framework */,
+				670100911969D049001D8926 /* UIKit.framework */,
+				670100AF1969D04A001D8926 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		670100931969D049001D8926 /* GuessSong */ = {
+			isa = PBXGroup;
+			children = (
+				67776D0D1969D6BD002D27BB /* Controller */,
+				67776D0E1969D6BD002D27BB /* Library */,
+				67776D0F1969D6BD002D27BB /* Model */,
+				67776D101969D6BD002D27BB /* View */,
+				6701009C1969D04A001D8926 /* AppDelegate.h */,
+				6701009D1969D04A001D8926 /* AppDelegate.m */,
+				6701009F1969D04A001D8926 /* Main_iPhone.storyboard */,
+				670100A21969D04A001D8926 /* Main_iPad.storyboard */,
+				670100A81969D04A001D8926 /* Images.xcassets */,
+				670100941969D04A001D8926 /* Supporting Files */,
+			);
+			path = GuessSong;
+			sourceTree = "<group>";
+		};
+		670100941969D04A001D8926 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				670100951969D04A001D8926 /* GuessSong-Info.plist */,
+				670100961969D04A001D8926 /* InfoPlist.strings */,
+				670100991969D04A001D8926 /* main.m */,
+				6701009B1969D04A001D8926 /* GuessSong-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		670100B51969D04A001D8926 /* GuessSongTests */ = {
+			isa = PBXGroup;
+			children = (
+				670100BB1969D04A001D8926 /* GuessSongTests.m */,
+				670100B61969D04A001D8926 /* Supporting Files */,
+			);
+			path = GuessSongTests;
+			sourceTree = "<group>";
+		};
+		670100B61969D04A001D8926 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				670100B71969D04A001D8926 /* GuessSongTests-Info.plist */,
+				670100B81969D04A001D8926 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		67776D0D1969D6BD002D27BB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				67776D131969D708002D27BB /* StartViewController */,
+				67776D171969D71C002D27BB /* PlayViewController */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		67776D0E1969D6BD002D27BB /* Library */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		67776D0F1969D6BD002D27BB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		67776D101969D6BD002D27BB /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		67776D131969D708002D27BB /* StartViewController */ = {
+			isa = PBXGroup;
+			children = (
+				67776D141969D708002D27BB /* StartViewController.h */,
+				67776D151969D708002D27BB /* StartViewController.m */,
+			);
+			path = StartViewController;
+			sourceTree = "<group>";
+		};
+		67776D171969D71C002D27BB /* PlayViewController */ = {
+			isa = PBXGroup;
+			children = (
+				673598BD1969DAEE00E35E60 /* PlayViewController.h */,
+				673598BE1969DAEE00E35E60 /* PlayViewController.m */,
+			);
+			path = PlayViewController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		670100891969D049001D8926 /* GuessSong */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 670100BF1969D04A001D8926 /* Build configuration list for PBXNativeTarget "GuessSong" */;
+			buildPhases = (
+				670100861969D049001D8926 /* Sources */,
+				670100871969D049001D8926 /* Frameworks */,
+				670100881969D049001D8926 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GuessSong;
+			productName = GuessSong;
+			productReference = 6701008A1969D049001D8926 /* GuessSong.app */;
+			productType = "com.apple.product-type.application";
+		};
+		670100AD1969D04A001D8926 /* GuessSongTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 670100C21969D04A001D8926 /* Build configuration list for PBXNativeTarget "GuessSongTests" */;
+			buildPhases = (
+				670100AA1969D04A001D8926 /* Sources */,
+				670100AB1969D04A001D8926 /* Frameworks */,
+				670100AC1969D04A001D8926 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				670100B41969D04A001D8926 /* PBXTargetDependency */,
+			);
+			name = GuessSongTests;
+			productName = GuessSongTests;
+			productReference = 670100AE1969D04A001D8926 /* GuessSongTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		670100821969D049001D8926 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Trung Bui";
+				TargetAttributes = {
+					670100AD1969D04A001D8926 = {
+						TestTargetID = 670100891969D049001D8926;
+					};
+				};
+			};
+			buildConfigurationList = 670100851969D049001D8926 /* Build configuration list for PBXProject "GuessSong" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 670100811969D049001D8926;
+			productRefGroup = 6701008B1969D049001D8926 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				670100891969D049001D8926 /* GuessSong */,
+				670100AD1969D04A001D8926 /* GuessSongTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		670100881969D049001D8926 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				670100A41969D04A001D8926 /* Main_iPad.storyboard in Resources */,
+				670100A91969D04A001D8926 /* Images.xcassets in Resources */,
+				670100A11969D04A001D8926 /* Main_iPhone.storyboard in Resources */,
+				670100981969D04A001D8926 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		670100AC1969D04A001D8926 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				670100BA1969D04A001D8926 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		670100861969D049001D8926 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				673598BF1969DAEE00E35E60 /* PlayViewController.m in Sources */,
+				67776D161969D708002D27BB /* StartViewController.m in Sources */,
+				6701009E1969D04A001D8926 /* AppDelegate.m in Sources */,
+				6701009A1969D04A001D8926 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		670100AA1969D04A001D8926 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				670100BC1969D04A001D8926 /* GuessSongTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		670100B41969D04A001D8926 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 670100891969D049001D8926 /* GuessSong */;
+			targetProxy = 670100B31969D04A001D8926 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		670100961969D04A001D8926 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				670100971969D04A001D8926 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		6701009F1969D04A001D8926 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				670100A01969D04A001D8926 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		670100A21969D04A001D8926 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				670100A31969D04A001D8926 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		670100B81969D04A001D8926 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				670100B91969D04A001D8926 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		670100BD1969D04A001D8926 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		670100BE1969D04A001D8926 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		670100C01969D04A001D8926 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GuessSong/GuessSong-Prefix.pch";
+				INFOPLIST_FILE = "GuessSong/GuessSong-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		670100C11969D04A001D8926 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GuessSong/GuessSong-Prefix.pch";
+				INFOPLIST_FILE = "GuessSong/GuessSong-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		670100C31969D04A001D8926 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GuessSong.app/GuessSong";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GuessSong/GuessSong-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "GuessSongTests/GuessSongTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		670100C41969D04A001D8926 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/GuessSong.app/GuessSong";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GuessSong/GuessSong-Prefix.pch";
+				INFOPLIST_FILE = "GuessSongTests/GuessSongTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		670100851969D049001D8926 /* Build configuration list for PBXProject "GuessSong" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				670100BD1969D04A001D8926 /* Debug */,
+				670100BE1969D04A001D8926 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		670100BF1969D04A001D8926 /* Build configuration list for PBXNativeTarget "GuessSong" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				670100C01969D04A001D8926 /* Debug */,
+				670100C11969D04A001D8926 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		670100C21969D04A001D8926 /* Build configuration list for PBXNativeTarget "GuessSongTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				670100C31969D04A001D8926 /* Debug */,
+				670100C41969D04A001D8926 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 670100821969D049001D8926 /* Project object */;
+}
