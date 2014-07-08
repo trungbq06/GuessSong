@@ -7,6 +7,7 @@
 //
 
 #import "PlayViewController.h"
+#import <AVFoundation/AVPlayer.h>
 
 @interface PlayViewController ()
 
@@ -26,7 +27,39 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+}
+
+- (IBAction)playSong:(id)sender
+{
+    [self playSong];
+}
+
+- (void) playSong
+{
+    if (!_isPlaying) {
+        _isPlaying = TRUE;
+        [_playBtn setBackgroundImage:[UIImage imageNamed:@"stop"] forState:UIControlStateNormal];
+        
+        NSString *playString = @"http://210.211.99.70/teenpro.vn/files/song/2012/08/07/5ba44f26374a8bcd6aca3eaed9d00d18.mp3";
+        
+        //Converts songURL into a playable NSURL
+        NSURL *playURL = [NSURL URLWithString:playString];
+
+        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:playURL];
+
+        _songPlayer = [AVPlayer playerWithPlayerItem:playerItem];
+        
+        [_songPlayer play];
+    } else {
+        _isPlaying = FALSE;
+        [_playBtn setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+        
+        [_songPlayer pause];
+    }
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 - (void)didReceiveMemoryWarning

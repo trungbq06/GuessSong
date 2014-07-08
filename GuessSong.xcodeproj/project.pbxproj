@@ -21,7 +21,16 @@
 		670100B21969D04A001D8926 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670100911969D049001D8926 /* UIKit.framework */; };
 		670100BA1969D04A001D8926 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 670100B81969D04A001D8926 /* InfoPlist.strings */; };
 		670100BC1969D04A001D8926 /* GuessSongTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 670100BB1969D04A001D8926 /* GuessSongTests.m */; };
+		67351E2C196B7AB300A922B0 /* CharacterGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 67351E2B196B7AB300A922B0 /* CharacterGenerator.m */; };
 		673598BF1969DAEE00E35E60 /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 673598BE1969DAEE00E35E60 /* PlayViewController.m */; };
+		67633A47196B6A1000475535 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 67633A45196B6A1000475535 /* back.png */; };
+		67633A48196B6A1000475535 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67633A46196B6A1000475535 /* back@2x.png */; };
+		67633A4B196B6C5D00475535 /* coin.png in Resources */ = {isa = PBXBuildFile; fileRef = 67633A49196B6C5D00475535 /* coin.png */; };
+		67633A4C196B6C5D00475535 /* coin@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 67633A4A196B6C5D00475535 /* coin@2x.png */; };
+		67633A4E196B70CF00475535 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67633A4D196B70CF00475535 /* AVFoundation.framework */; };
+		67633A50196B70EC00475535 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67633A4F196B70EC00475535 /* AudioToolbox.framework */; };
+		67633A54196B77FB00475535 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 67633A52196B77FB00475535 /* stop.png */; };
+		67633A56196B784700475535 /* play.png in Resources */ = {isa = PBXBuildFile; fileRef = 67633A55196B784700475535 /* play.png */; };
 		67776D161969D708002D27BB /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67776D151969D708002D27BB /* StartViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -54,8 +63,18 @@
 		670100B71969D04A001D8926 /* GuessSongTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GuessSongTests-Info.plist"; sourceTree = "<group>"; };
 		670100B91969D04A001D8926 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		670100BB1969D04A001D8926 /* GuessSongTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuessSongTests.m; sourceTree = "<group>"; };
+		67351E2A196B7AB300A922B0 /* CharacterGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterGenerator.h; sourceTree = "<group>"; };
+		67351E2B196B7AB300A922B0 /* CharacterGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterGenerator.m; sourceTree = "<group>"; };
 		673598BD1969DAEE00E35E60 /* PlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
 		673598BE1969DAEE00E35E60 /* PlayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayViewController.m; sourceTree = "<group>"; };
+		67633A45196B6A1000475535 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		67633A46196B6A1000475535 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		67633A49196B6C5D00475535 /* coin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coin.png; sourceTree = "<group>"; };
+		67633A4A196B6C5D00475535 /* coin@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "coin@2x.png"; sourceTree = "<group>"; };
+		67633A4D196B70CF00475535 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		67633A4F196B70EC00475535 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		67633A52196B77FB00475535 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
+		67633A55196B784700475535 /* play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play.png; sourceTree = "<group>"; };
 		67776D141969D708002D27BB /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
 		67776D151969D708002D27BB /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,7 +84,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				67633A4E196B70CF00475535 /* AVFoundation.framework in Frameworks */,
 				670100901969D049001D8926 /* CoreGraphics.framework in Frameworks */,
+				67633A50196B70EC00475535 /* AudioToolbox.framework in Frameworks */,
 				670100921969D049001D8926 /* UIKit.framework in Frameworks */,
 				6701008E1969D049001D8926 /* Foundation.framework in Frameworks */,
 			);
@@ -106,6 +127,8 @@
 		6701008C1969D049001D8926 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				67633A4F196B70EC00475535 /* AudioToolbox.framework */,
+				67633A4D196B70CF00475535 /* AVFoundation.framework */,
 				6701008D1969D049001D8926 /* Foundation.framework */,
 				6701008F1969D049001D8926 /* CoreGraphics.framework */,
 				670100911969D049001D8926 /* UIKit.framework */,
@@ -121,6 +144,7 @@
 				67776D0E1969D6BD002D27BB /* Library */,
 				67776D0F1969D6BD002D27BB /* Model */,
 				67776D101969D6BD002D27BB /* View */,
+				67633A44196B6A1000475535 /* Resource */,
 				6701009C1969D04A001D8926 /* AppDelegate.h */,
 				6701009D1969D04A001D8926 /* AppDelegate.m */,
 				6701009F1969D04A001D8926 /* Main_iPhone.storyboard */,
@@ -160,6 +184,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		67633A44196B6A1000475535 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				67633A55196B784700475535 /* play.png */,
+				67633A52196B77FB00475535 /* stop.png */,
+				67633A49196B6C5D00475535 /* coin.png */,
+				67633A4A196B6C5D00475535 /* coin@2x.png */,
+				67633A45196B6A1000475535 /* back.png */,
+				67633A46196B6A1000475535 /* back@2x.png */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		67776D0D1969D6BD002D27BB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,6 +216,8 @@
 		67776D0F1969D6BD002D27BB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				67351E2A196B7AB300A922B0 /* CharacterGenerator.h */,
+				67351E2B196B7AB300A922B0 /* CharacterGenerator.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -285,9 +324,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				670100A41969D04A001D8926 /* Main_iPad.storyboard in Resources */,
+				67633A56196B784700475535 /* play.png in Resources */,
+				67633A54196B77FB00475535 /* stop.png in Resources */,
+				67633A4C196B6C5D00475535 /* coin@2x.png in Resources */,
+				67633A47196B6A1000475535 /* back.png in Resources */,
 				670100A91969D04A001D8926 /* Images.xcassets in Resources */,
 				670100A11969D04A001D8926 /* Main_iPhone.storyboard in Resources */,
 				670100981969D04A001D8926 /* InfoPlist.strings in Resources */,
+				67633A48196B6A1000475535 /* back@2x.png in Resources */,
+				67633A4B196B6C5D00475535 /* coin.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -309,6 +354,7 @@
 				673598BF1969DAEE00E35E60 /* PlayViewController.m in Sources */,
 				67776D161969D708002D27BB /* StartViewController.m in Sources */,
 				6701009E1969D04A001D8926 /* AppDelegate.m in Sources */,
+				67351E2C196B7AB300A922B0 /* CharacterGenerator.m in Sources */,
 				6701009A1969D04A001D8926 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -447,6 +493,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GuessSong/GuessSong-Prefix.pch";
 				INFOPLIST_FILE = "GuessSong/GuessSong-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -460,6 +507,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "GuessSong/GuessSong-Prefix.pch";
 				INFOPLIST_FILE = "GuessSong/GuessSong-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
