@@ -95,6 +95,9 @@
                                         <state key="normal" backgroundImage="back.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="btnBackClick:" destination="y3m-lQ-apM" eventType="touchUpInside" id="juP-RG-Nme"/>
+                                        </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin.png" id="wFM-0F-J96">
                                         <rect key="frame" x="248" y="1" width="32" height="32"/>

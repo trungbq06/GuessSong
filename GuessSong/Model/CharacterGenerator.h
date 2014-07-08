@@ -10,4 +10,7 @@
 
 @interface CharacterGenerator : NSObject
 
+@property (nonatomic, retain) NSString *songName;
+@property (nonatomic, retain) NSMutableArray *songChar;
+
 @end

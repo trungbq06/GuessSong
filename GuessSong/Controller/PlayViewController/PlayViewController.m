@@ -7,6 +7,7 @@
 //
 
 #import "PlayViewController.h"
+#import "UIColor+Expand.h"
 #import <AVFoundation/AVPlayer.h>
 
 @interface PlayViewController ()
@@ -28,6 +29,42 @@
 {
     [super viewDidLoad];
     
+    CGRect appFrame = [[UIScreen mainScreen] bounds];
+    
+    [self.view setBackgroundColor:[UIColor colorFromHex:@"#2E8CC7"]];
+    
+    _charGenerator = [[CharacterGenerator alloc] init];
+    
+    [_charGenerator setSongName:@"take me to your heart"];
+    
+    int i = 1;
+    int offsetX = 0;
+    int offsetY = OFFSETY;
+    for (NSString *character in _charGenerator.songChar) {
+        NSLog(@"CHAR %@", character);
+        
+        offsetX += WIDTH + CHAR_SPACING;
+        if ([character isEqualToString:@" "]) {
+            offsetX += WORD_SPACING;
+            continue;
+        }
+        if (offsetX + WIDTH > appFrame.size.width) {
+            i = 1;
+            offsetY += LINE_SPACING;
+            offsetX = WIDTH + CHAR_SPACING;
+        }
+        NSLog(@"X: %d - Y: %d", offsetX, offsetY);
+        CGRect frame = CGRectMake(offsetX, offsetY, WIDTH, WIDTH);
+        CharSquare *_char = [[CharSquare alloc] initWithChar:character andFrame:frame];
+        
+        [self.view addSubview:_char];
+        i++;
+    }
+}
+
+- (IBAction)btnBackClick:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)playSong:(id)sender
