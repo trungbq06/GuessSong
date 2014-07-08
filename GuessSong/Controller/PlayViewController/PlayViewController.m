@@ -27,6 +27,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 }
 
 - (IBAction)playSong:(id)sender
@@ -34,6 +35,7 @@
     [self playSong];
 }
 
+#pragma mark - PLAYING SONG
 - (void) playSong
 {
     if (!_isPlaying) {
@@ -48,6 +50,8 @@
         AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:playURL];
 
         _songPlayer = [AVPlayer playerWithPlayerItem:playerItem];
+        // Subscribe to the AVPlayerItem's DidPlayToEndTime notification.
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:_songPlayer];
         
         [_songPlayer play];
     } else {
@@ -56,6 +60,12 @@
         
         [_songPlayer pause];
     }
+}
+
+#pragma mark - NOTIFICATION FINISH PLAYING
+- (void) itemDidFinishPlaying:(NSNotification*) notification
+{
+    [_playBtn setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
 }
 
 - (BOOL)prefersStatusBarHidden {
