@@ -6,10 +6,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol CharSourceDelegate;
+
 @interface CharSource : UIView
 
 - (id) initWithChar:(NSString *)character andFrame:(CGRect) frame;
 
-@property (nonatomic, retain) NSString *character;
+@property (nonatomic, weak) id<CharSourceDelegate>  delegate;
+@property (nonatomic, retain) NSString              *character;
+
+@end
+
+@protocol CharSourceDelegate <NSObject>
+
+- (void) charSourceClicked:(CharSource*) source;
 
 @end

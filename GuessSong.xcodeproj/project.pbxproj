@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		379F3D61196F140000864C24 /* NSMutableArray+Shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F3D60196F140000864C24 /* NSMutableArray+Shuffle.m */; };
+		379F3D64196F344C00864C24 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F3D63196F344C00864C24 /* Helper.m */; };
 		6701008E1969D049001D8926 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6701008D1969D049001D8926 /* Foundation.framework */; };
 		670100901969D049001D8926 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6701008F1969D049001D8926 /* CoreGraphics.framework */; };
 		670100921969D049001D8926 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670100911969D049001D8926 /* UIKit.framework */; };
@@ -48,6 +50,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		379F3D5F196F140000864C24 /* NSMutableArray+Shuffle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableArray+Shuffle.h"; sourceTree = "<group>"; };
+		379F3D60196F140000864C24 /* NSMutableArray+Shuffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Shuffle.m"; sourceTree = "<group>"; };
+		379F3D62196F344C00864C24 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
+		379F3D63196F344C00864C24 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		6701008A1969D049001D8926 /* GuessSong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessSong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6701008D1969D049001D8926 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6701008F1969D049001D8926 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -233,6 +239,10 @@
 				6788AACA196CB55B00E2F3DC /* CharSquare.m */,
 				673EB0C5196CCFFE0090E0FB /* CharSource.h */,
 				673EB0C6196CCFFE0090E0FB /* CharSource.m */,
+				379F3D5F196F140000864C24 /* NSMutableArray+Shuffle.h */,
+				379F3D60196F140000864C24 /* NSMutableArray+Shuffle.m */,
+				379F3D62196F344C00864C24 /* Helper.h */,
+				379F3D63196F344C00864C24 /* Helper.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -371,9 +381,11 @@
 				67776D161969D708002D27BB /* StartViewController.m in Sources */,
 				6788AACB196CB55B00E2F3DC /* CharSquare.m in Sources */,
 				6701009E1969D04A001D8926 /* AppDelegate.m in Sources */,
+				379F3D61196F140000864C24 /* NSMutableArray+Shuffle.m in Sources */,
 				67351E2C196B7AB300A922B0 /* CharacterGenerator.m in Sources */,
 				673EB0C7196CCFFE0090E0FB /* CharSource.m in Sources */,
 				6701009A1969D04A001D8926 /* main.m in Sources */,
+				379F3D64196F344C00864C24 /* Helper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

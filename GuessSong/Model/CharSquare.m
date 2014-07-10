@@ -15,11 +15,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        _character = character;
-        UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
+        _character = @"";
+        _charBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         
         [self setBackgroundColor:[UIColor whiteColor]];
-        [self addSubview:button];
+        [self addSubview:_charBtn];
         
         // Setup view
         [self.layer setCornerRadius:3];
@@ -27,10 +27,9 @@
         [self.layer setBorderColor:[[UIColor grayColor] CGColor]];
         
         NSLog(@"Title %@", character);
-        [button setTitle:character forState:UIControlStateNormal];
-        [button.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
-        [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [button addTarget:self action:@selector(charClick:) forControlEvents:UIControlEventTouchUpInside];
+        [_charBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
+        [_charBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_charBtn addTarget:self action:@selector(charClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     
     return self;
@@ -38,8 +37,19 @@
 
 - (IBAction) charClick:(id)sender
 {
-    UIButton *button = (UIButton*) sender;
-    [button setTitle:@"" forState:UIControlStateNormal];
+    _character = @"";
+    [_charBtn setTitle:_character forState:UIControlStateNormal];
+    
+    if ([_delegate respondsToSelector:@selector(charSquareClicked:)]) {
+        [_delegate charSquareClicked:self];
+    }
+}
+
+- (void) setCharacter:(NSString *)character
+{
+    _character = character;
+    
+    [_charBtn setTitle:character forState:UIControlStateNormal];
 }
 
 @end

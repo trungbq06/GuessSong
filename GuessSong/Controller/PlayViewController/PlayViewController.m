@@ -8,6 +8,7 @@
 
 #import "PlayViewController.h"
 #import "UIColor+Expand.h"
+#import "NSMutableArray+Shuffle.h"
 #import <AVFoundation/AVPlayer.h>
 
 @interface PlayViewController ()
@@ -29,37 +30,177 @@
 {
     [super viewDidLoad];
     
-    CGRect appFrame = [[UIScreen mainScreen] bounds];
-    
     [self.view setBackgroundColor:[UIColor colorFromHex:@"#2E8CC7"]];
+    
+    // Init array object
+    _charSquareArray = [[NSMutableArray alloc] initWithCapacity:0];
+    _charSourceArray = [[NSMutableArray alloc] initWithCapacity:0];
     
     _charGenerator = [[CharacterGenerator alloc] init];
     
-    [_charGenerator setSongName:@"take me to your heart"];
+    [self generateNewQuiz:@"You belong"];
+}
+
+- (void) generateNewQuiz:(NSString*) quizName
+{
+    [_charSquareArray removeAllObjects];
     
-    int i = 1;
+    [_charGenerator setSongName:quizName];
+    
+    int iChar = 0;
+    int iLength = 0;
+    int startX = 0;
     int offsetX = 0;
     int offsetY = OFFSETY;
-    for (NSString *character in _charGenerator.songChar) {
-        NSLog(@"CHAR %@", character);
+    
+    for (int line = 1;line <= [_charGenerator.wordOffset count];line++) {
+        NSString *wordStr = [_charGenerator.wordOffset objectForKey:[NSNumber numberWithInt:line]];
+        NSArray *wordArr = [wordStr componentsSeparatedByString:@","];
         
-        offsetX += WIDTH + CHAR_SPACING;
-        if ([character isEqualToString:@" "]) {
-            offsetX += WORD_SPACING;
-            continue;
-        }
-        if (offsetX + WIDTH > appFrame.size.width) {
-            i = 1;
-            offsetY += LINE_SPACING;
-            offsetX = WIDTH + CHAR_SPACING;
-        }
-        NSLog(@"X: %d - Y: %d", offsetX, offsetY);
-        CGRect frame = CGRectMake(offsetX, offsetY, WIDTH, WIDTH);
-        CharSquare *_char = [[CharSquare alloc] initWithChar:character andFrame:frame];
+        // Current character index
+        iChar = [[wordArr objectAtIndex:0] intValue];
+        // Start X
+        startX = [[wordArr objectAtIndex:1] intValue];
+        // Length from current position
+        iLength = [[wordArr objectAtIndex:2] intValue];
+        offsetX = startX;
         
-        [self.view addSubview:_char];
-        i++;
+        for (int j = iChar;j < iLength;j++) {
+            NSString *character = [_charGenerator.songChar objectAtIndex:j];
+            CGRect frame = CGRectMake(offsetX, offsetY, WIDTH, WIDTH);
+            
+            // Init character object
+            CharSquare *_char = [[CharSquare alloc] initWithChar:character andFrame:frame];
+            [_char setICharPos:j];
+            _char.delegate = self;
+            
+            [self.view addSubview:_char];
+            offsetX += WIDTH + CHAR_SPACING;
+            
+            [_charSquareArray addObject:_char];
+        }
+        
+        offsetY += LINE_SPACING;
     }
+    
+    // Calculate total needed source character
+    int totalChar = [_charGenerator.songChar count];
+    int totalRow = ceil((float)(totalChar * SOURCE_CHAR_WIDTH) / SOURCE_VIEW_WIDTH);
+    int nTotalChar = floor((float)(totalRow * SOURCE_VIEW_WIDTH / SOURCE_CHAR_WIDTH));
+    
+    NSMutableArray *_sourceChar = [[NSMutableArray alloc] initWithArray:_charGenerator.songChar];
+    
+    // Need how many more character ???
+    for (int i = 0;i< nTotalChar - totalChar;i++) {
+        [_sourceChar addObject:[self randomChar]];
+    }
+    
+    [_sourceChar shuffle];
+    
+    CGRect appFrame = [[UIScreen mainScreen] bounds];
+    
+    // Draw source character
+    int charPerRow = nTotalChar / totalRow;
+    for (int i = 0;i < totalRow;i++) {
+        offsetX = (appFrame.size.width - SOURCE_VIEW_WIDTH) / 2;
+        offsetY = SOURCE_OFFSET_Y + i * LINE_SPACING;
+        for (int j = 0;j < charPerRow;j++) {
+            iChar = i * charPerRow + j;
+            
+            NSString *character = [_sourceChar objectAtIndex:iChar];
+            NSLog(@"%d: %@", iChar, character);
+            
+            CGRect frame = CGRectMake(offsetX, offsetY, SOURCE_CHAR_WIDTH, SOURCE_CHAR_WIDTH);
+            CharSource *_char = [[CharSource alloc] initWithChar:character andFrame:frame];
+            _char.delegate = self;
+            
+            [self.view addSubview:_char];
+            
+            offsetX += SOURCE_CHAR_WIDTH + CHAR_SPACING;
+            [_charSourceArray addObject:_char];
+        }
+    }
+}
+
+#pragma mark - CHAR SOURCE DELEGATE
+- (void) charSourceClicked:(CharSource *)source
+{
+    for (int i = 0;i < [_charSquareArray count];i++) {
+        CharSquare *_char = [_charSquareArray objectAtIndex:i];
+        if ([_char.character isEqualToString:@""]) {
+            _charGenerator.currPos = i;
+            NSLog(@"New POS: %@ - %d", _char.character, i);
+            break;
+        }
+    }
+    
+    NSLog(@"SOURCE %d - ALL %d", _charGenerator.currPos, [_charGenerator.songChar count]);
+    
+    CharSquare *_char = [_charSquareArray objectAtIndex:_charGenerator.currPos];
+    
+    [_charGenerator.wordResult replaceObjectAtIndex:_charGenerator.currPos withObject:source.character];
+    if ([_char.character isEqualToString:@""]) {
+        _charGenerator.remainingChar++;
+        [_char setCharacter:source.character];
+        [_char setCharSource:source];
+        
+        [source setHidden:YES];
+        
+        if (_charGenerator.remainingChar == [_charGenerator.songChar count]) {
+            [self solving];
+        }
+    }
+}
+
+#pragma mark - SOLVING
+- (void) solving
+{
+    [_charGenerator.wordResult removeAllObjects];
+    for (int i = 0;i < [_charSquareArray count];i++) {
+        CharSquare *_char = [_charSquareArray objectAtIndex:i];
+        [_charGenerator.wordResult addObject:_char.character];
+    }
+    
+    if ([_charGenerator isSolved])
+        [self congratulation];
+    else {
+        [self sorry];
+    }
+}
+
+#pragma mark - CONGRATULATION
+- (void) congratulation
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Good Job" message:@"You got it" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alertView show];
+}
+
+- (void) sorry
+{
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sorry" message:@"You didn't make it. Please try again !" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alertView show];
+}
+
+#pragma mark - CHAR SQUARE DELEGATE
+- (void) charSquareClicked:(CharSquare *)square
+{
+    if (square.charSource) {
+        _charGenerator.remainingChar--;
+        [square.charSource setHidden:NO];
+        [square setCharSource:nil];
+        
+        if (square.iCharPos < _charGenerator.currPos) {
+            _charGenerator.currPos = square.iCharPos;
+        }
+    }
+}
+
+- (NSString*) randomChar
+{
+    NSArray *_char = [[NSArray alloc] initWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"X", @"Y", nil];
+    
+    int random = rand() % [_char count];
+    return [_char objectAtIndex:random];
 }
 
 - (IBAction)btnBackClick:(id)sender

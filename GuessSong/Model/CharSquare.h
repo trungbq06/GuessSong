@@ -7,11 +7,30 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CharSource.h"
+
+@protocol CharSquarelegate;
 
 @interface CharSquare : UIView
+{
+    
+}
 
 - (id) initWithChar:(NSString *)character andFrame:(CGRect) frame;
 
-@property (nonatomic, retain) NSString *character;
+// Current value of this character
+@property (nonatomic, retain) NSString              *character;
+@property (nonatomic, retain) UIButton              *charBtn;
+// Source of this character
+@property (nonatomic, retain) CharSource            *charSource;
+@property (nonatomic, weak) id<CharSquarelegate>    delegate;
+// Current this character position
+@property (nonatomic, assign) int                   iCharPos;
+
+@end
+
+@protocol CharSquarelegate <NSObject>
+
+- (void) charSquareClicked:(CharSquare*) square;
 
 @end

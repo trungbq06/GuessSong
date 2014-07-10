@@ -37,8 +37,9 @@
 
 - (IBAction) charClick:(id)sender
 {
-    UIButton *button = (UIButton*) sender;
-    [button setTitle:@"" forState:UIControlStateNormal];
+    if ([_delegate respondsToSelector:@selector(charSourceClicked:)]) {
+        [_delegate charSourceClicked:self];
+    }
 }
 
 @end

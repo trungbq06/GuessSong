@@ -10,7 +10,13 @@
 
 @interface CharacterGenerator : NSObject
 
-@property (nonatomic, retain) NSString *songName;
-@property (nonatomic, retain) NSMutableArray *songChar;
+@property (nonatomic, retain) NSString              *songName;
+@property (nonatomic, retain) NSMutableArray        *songChar;
+@property (nonatomic, retain) NSMutableDictionary   *wordOffset;
+@property (nonatomic, retain) NSMutableArray        *wordResult;
+@property (nonatomic, assign) int                   currPos;
+@property (nonatomic, assign) int                   remainingChar;
+
+- (BOOL) isSolved;
 
 @end
