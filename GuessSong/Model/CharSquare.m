@@ -27,7 +27,7 @@
         [self.layer setBorderColor:[[UIColor clearColor] CGColor]];
         
         NSLog(@"Title %@", character);
-        [_charBtn.titleLabel setFont:[UIFont fontWithName:@"ArialRoundedMTBold" size:22]];
+        [_charBtn.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:22]];
         [_charBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_charBtn addTarget:self action:@selector(charClick:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -70,6 +70,8 @@
 {
     _isHint = TRUE;
     [_charBtn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [_charBtn.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:26]];
+    [self setBackgroundColor:[UIColor clearColor]];
 }
 
 @end

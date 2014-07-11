@@ -26,6 +26,23 @@
 #define SOURCE_VIEW_WIDTH 250
 #define SOURCE_OFFSET_Y   420
 #define SOURCE_LINE_SPACING 35
+#define FONT_FAMILY         @"ArialRoundedMTBold"
+#define PLAY_ROUND          @"play_round"
+#define APPSTORE_URL        @"http://topapp.us"
+
+//risign text field
+#define kNotificationResignTextField                                @"resign_first_responder_text_field"
+//change language
+#define kNotificationLanguagechanged                                @"notification_language_changed"
+//network notification
+#define kNotificationNetwork                                        @"network notification"
+
+#pragma mark - REACHABILITY NETWORK
+
+//check network available
+#define kNetworkAvailable                                           @"internet avaiable"
+//network is wwan
+#define kNetworkWWan                                                @"network wwan"
 
 #define IS_IOS7 floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1
 #define IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)

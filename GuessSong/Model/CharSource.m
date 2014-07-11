@@ -26,7 +26,7 @@
         [self.layer setBorderColor:[[UIColor clearColor] CGColor]];
         
         [button setTitle:character forState:UIControlStateNormal];
-        [button.titleLabel setFont:[UIFont fontWithName:@"ArialRoundedMTBold" size:26]];
+        [button.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:26]];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(charClick:) forControlEvents:UIControlEventTouchUpInside];
     }

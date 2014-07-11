@@ -7,7 +7,23 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GADBannerView.h"
+#import <iAd/iAd.h>
+#import <GameKit/GameKit.h>
+#import "GADInterstitial.h"
+#import "GameCenterManager.h"
 
-@interface StartViewController : UIViewController
+@interface StartViewController : UIViewController <GADBannerViewDelegate, GKGameCenterControllerDelegate, GameCenterManagerDelegate, GADInterstitialDelegate>
+{
+    //AdMob
+    GADBannerView *bannerView_;
+    
+    ADBannerView *adView;
+    BOOL bannerIsVisible;
+    GADInterstitial *interstitial_;
+    BOOL bannerShown;
+}
+
+@property (nonatomic, retain) GameCenterManager *gameCenterManager;
 
 @end

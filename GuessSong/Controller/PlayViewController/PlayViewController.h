@@ -12,9 +12,13 @@
 #import "CharSquare.h"
 #import "CharSource.h"
 #import "Helper.h"
+#import "AppDelegate.h"
+#import <Social/Social.h>
 #import "CharacterGenerator.h"
 
 @interface PlayViewController : UIViewController <CharSourceDelegate, CharSquarelegate>
+
+@property (nonatomic, retain) NSManagedObjectContext * context;
 
 // Player to play song
 @property (nonatomic, retain) AVPlayer              *songPlayer;

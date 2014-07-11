@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="14A261i" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="UserInfo" representedClassName="UserInfo" syncable="YES">
+        <attribute name="coins" optional="YES" attributeType="Integer 32" minValueString="0" defaultValueString="0" syncable="YES"/>
+        <attribute name="level" optional="YES" attributeType="Integer 16" minValueString="1" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="UserInfo" positionX="-3942" positionY="-3789" width="155" height="73"/>
+    </elements>
+</model>
