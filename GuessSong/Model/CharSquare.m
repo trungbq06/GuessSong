@@ -7,7 +7,7 @@
 //
 
 #import "CharSquare.h"
-
+#import "UIColor+Expand.h"
 
 @implementation CharSquare
 
@@ -18,17 +18,17 @@
         _character = @"";
         _charBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         
-        [self setBackgroundColor:[UIColor whiteColor]];
+        [self setBackgroundColor:[UIColor colorFromHex:@"#363636"]];
         [self addSubview:_charBtn];
         
         // Setup view
-        [self.layer setCornerRadius:3];
+        [self.layer setCornerRadius:4];
         [self.layer setBorderWidth:1.0f];
-        [self.layer setBorderColor:[[UIColor grayColor] CGColor]];
+        [self.layer setBorderColor:[[UIColor clearColor] CGColor]];
         
         NSLog(@"Title %@", character);
-        [_charBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
-        [_charBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [_charBtn.titleLabel setFont:[UIFont fontWithName:@"ArialRoundedMTBold" size:22]];
+        [_charBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_charBtn addTarget:self action:@selector(charClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     
@@ -37,11 +37,13 @@
 
 - (IBAction) charClick:(id)sender
 {
-    _character = @"";
-    [_charBtn setTitle:_character forState:UIControlStateNormal];
-    
-    if ([_delegate respondsToSelector:@selector(charSquareClicked:)]) {
-        [_delegate charSquareClicked:self];
+    if (!_isHint) {
+        _character = @"";
+        [_charBtn setTitle:_character forState:UIControlStateNormal];
+        
+        if ([_delegate respondsToSelector:@selector(charSquareClicked:)]) {
+            [_delegate charSquareClicked:self];
+        }
     }
 }
 
@@ -50,6 +52,24 @@
     _character = character;
     
     [_charBtn setTitle:character forState:UIControlStateNormal];
+}
+
+- (void) colorFail
+{
+    if (!_isHint)
+        [_charBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+}
+
+- (void) resetColor
+{
+    if (!_isHint)
+        [_charBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
+- (void) showHint
+{
+    _isHint = TRUE;
+    [_charBtn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
 }
 
 @end

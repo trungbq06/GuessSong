@@ -31,5 +31,9 @@
 
 - (IBAction)playSong:(id)sender;
 - (IBAction)btnBackClick:(id)sender;
+- (IBAction)showHint:(id)sender;
+- (IBAction)deleteChar:(id)sender;
+- (IBAction)skipLevel:(id)sender;
+- (IBAction)shareFB:(id)sender;
 
 @end

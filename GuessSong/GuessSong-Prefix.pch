@@ -15,15 +15,17 @@
     #import <Foundation/Foundation.h>
 #endif
 
-#define MY_BANNER_UNIT_ID @"a14ea3b8e9182df"
+#define MY_BANNER_UNIT_ID @"ca-app-pub-3108667850339338/3316573652"
+#define MY_BANNER_INTERSITIAL_UNIT_ID @"ca-app-pub-3108667850339338/7746773252"
 #define LEADER_BOARD_IDENTIFIER @"com.dragon.relaxing"
-#define WIDTH             30
-#define CHAR_SPACING      1
-#define LINE_SPACING      45
+#define WIDTH             25
+#define CHAR_SPACING      3
+#define LINE_SPACING      30
 #define OFFSETY           300
-#define SOURCE_CHAR_WIDTH 40
+#define SOURCE_CHAR_WIDTH 30
 #define SOURCE_VIEW_WIDTH 250
-#define SOURCE_OFFSET_Y   450
+#define SOURCE_OFFSET_Y   420
+#define SOURCE_LINE_SPACING 35
 
 #define IS_IOS7 floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1
 #define IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)

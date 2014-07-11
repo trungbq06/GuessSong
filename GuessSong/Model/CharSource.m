@@ -21,13 +21,12 @@
         [self addSubview:button];
         
         // Setup view
-        [self.layer setCornerRadius:3];
+        [self.layer setCornerRadius:4];
         [self.layer setBorderWidth:1.0f];
-        [self.layer setBorderColor:[[UIColor grayColor] CGColor]];
+        [self.layer setBorderColor:[[UIColor clearColor] CGColor]];
         
-        NSLog(@"Title %@", character);
         [button setTitle:character forState:UIControlStateNormal];
-        [button.titleLabel setFont:[UIFont boldSystemFontOfSize:15]];
+        [button.titleLabel setFont:[UIFont fontWithName:@"ArialRoundedMTBold" size:26]];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button addTarget:self action:@selector(charClick:) forControlEvents:UIControlEventTouchUpInside];
     }

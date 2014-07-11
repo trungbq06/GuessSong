@@ -26,6 +26,11 @@
 @property (nonatomic, weak) id<CharSquarelegate>    delegate;
 // Current this character position
 @property (nonatomic, assign) int                   iCharPos;
+@property (nonatomic, assign) BOOL                  isHint;
+
+- (void) colorFail;
+- (void) resetColor;
+- (void) showHint;
 
 @end
 

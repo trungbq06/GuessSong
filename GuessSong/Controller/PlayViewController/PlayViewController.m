@@ -30,7 +30,7 @@
 {
     [super viewDidLoad];
     
-    [self.view setBackgroundColor:[UIColor colorFromHex:@"#2E8CC7"]];
+    [self.view setBackgroundColor:[UIColor colorFromHex:@"#24A3BD"]];
     
     // Init array object
     _charSquareArray = [[NSMutableArray alloc] initWithCapacity:0];
@@ -38,7 +38,18 @@
     
     _charGenerator = [[CharacterGenerator alloc] init];
     
-    [self generateNewQuiz:@"You belong"];
+    [self generateNewQuiz:@"Take me to your heart"];
+    
+    /*
+    for (NSString *family in [UIFont familyNames])
+    {
+        NSLog(@"%@", family);
+        for (NSString *font in [UIFont fontNamesForFamilyName:family])
+        {
+            NSLog(@"\t%@", font);
+        }
+    }
+     */
 }
 
 - (void) generateNewQuiz:(NSString*) quizName
@@ -86,13 +97,14 @@
     // Calculate total needed source character
     int totalChar = [_charGenerator.songChar count];
     int totalRow = ceil((float)(totalChar * SOURCE_CHAR_WIDTH) / SOURCE_VIEW_WIDTH);
-    int nTotalChar = floor((float)(totalRow * SOURCE_VIEW_WIDTH / SOURCE_CHAR_WIDTH));
+    int nTotalChar = (float)(totalRow * (floor)(SOURCE_VIEW_WIDTH / SOURCE_CHAR_WIDTH));
     
     NSMutableArray *_sourceChar = [[NSMutableArray alloc] initWithArray:_charGenerator.songChar];
+    int charPerRow = nTotalChar / totalRow;
     
     // Need how many more character ???
     for (int i = 0;i< nTotalChar - totalChar;i++) {
-        [_sourceChar addObject:[self randomChar]];
+        [_sourceChar addObject:[self randomChar:_sourceChar]];
     }
     
     [_sourceChar shuffle];
@@ -100,10 +112,9 @@
     CGRect appFrame = [[UIScreen mainScreen] bounds];
     
     // Draw source character
-    int charPerRow = nTotalChar / totalRow;
     for (int i = 0;i < totalRow;i++) {
         offsetX = (appFrame.size.width - SOURCE_VIEW_WIDTH) / 2;
-        offsetY = SOURCE_OFFSET_Y + i * LINE_SPACING;
+        offsetY = SOURCE_OFFSET_Y + i * SOURCE_LINE_SPACING;
         for (int j = 0;j < charPerRow;j++) {
             iChar = i * charPerRow + j;
             
@@ -165,6 +176,22 @@
         [self congratulation];
     else {
         [self sorry];
+        
+        [self solveFailed];
+    }
+}
+
+- (void) solveFailed
+{
+    for (CharSquare *_char in _charSquareArray) {
+        [_char colorFail];
+    }
+}
+
+- (void) resetColor
+{
+    for (CharSquare *_char in _charSquareArray) {
+        [_char resetColor];
     }
 }
 
@@ -181,23 +208,114 @@
     [alertView show];
 }
 
+#pragma mark - ACTION IMPLEMENTATION
+- (IBAction)showHint:(id)sender
+{
+    [self showCharHint];
+}
+
+- (void) showCharHint
+{
+    int iChar = arc4random() % [_charSquareArray count];
+    
+    CharSquare *_char = [_charSquareArray objectAtIndex:iChar];
+    NSString *_currChar = [_charGenerator.songChar objectAtIndex:iChar];
+    
+    if (_charGenerator.remainingChar < [_charGenerator.songChar count]) {
+        if (!_char.isHint) {
+            [self chooseSource:_currChar];
+            
+            if ([_char.character isEqualToString:@""]) {
+                _charGenerator.remainingChar++;
+                [_char setCharacter:_currChar];
+            } else {
+                if (![_char.character isEqualToString:_currChar]) {
+                    [_char.charSource setHidden:NO];
+                    [_char setCharacter:_currChar];
+                }
+            }
+            [_char showHint];
+            
+            if (_charGenerator.remainingChar == [_charGenerator.songChar count]) {
+                [self solving];
+            }
+        } else {
+            [self showCharHint];
+        }
+    }
+}
+
+- (void) chooseSource:(NSString*)_char
+{
+    for (CharSquare *_source in _charSourceArray) {
+        if ([_source.character isEqualToString:_char] && ![_source isHidden]) {
+            [_source removeFromSuperview];
+            [_charSourceArray removeObject:_source];
+            break;
+        }
+    }
+}
+
+- (IBAction)deleteChar:(id)sender
+{
+    for (int i = 0;i < [_charSourceArray count];i++) {
+        CharSource *_source = [_charSourceArray objectAtIndex:i];
+        if (![_charGenerator.songChar containsObject:_source.character] && ![_source.character isEqualToString:@""]) {
+            [_source removeFromSuperview];
+            [_source setCharacter:@""];
+            [_charSourceArray removeObject:_source];
+            break;
+        }
+    }
+}
+
+- (IBAction)skipLevel:(id)sender
+{
+    
+}
+
+- (IBAction)shareFB:(id)sender
+{
+    
+}
+
 #pragma mark - CHAR SQUARE DELEGATE
 - (void) charSquareClicked:(CharSquare *)square
 {
     if (square.charSource) {
         _charGenerator.remainingChar--;
         [square.charSource setHidden:NO];
+        
+        // Animate the source
+        [square.charSource setAlpha:0.0];
+        [UIView animateWithDuration:0.5
+                              delay:0.0
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^ {
+                             [square.charSource setAlpha:1.0];
+                         }
+                         completion:nil];
+        
         [square setCharSource:nil];
         
         if (square.iCharPos < _charGenerator.currPos) {
             _charGenerator.currPos = square.iCharPos;
         }
+        
+        if (_charGenerator.remainingChar + 1 == [_charGenerator.songChar count]) {
+            [self resetColor];
+        }
     }
 }
 
-- (NSString*) randomChar
+- (NSString*) randomChar:(NSMutableArray*)_sourceChar
 {
-    NSArray *_char = [[NSArray alloc] initWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"X", @"Y", nil];
+    NSMutableArray *_char = [[NSMutableArray alloc] initWithObjects:@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"X", @"Y", nil];
+    
+    for (int i = 0;i < [_sourceChar count];i++) {
+        NSString *_cChar = [_sourceChar objectAtIndex:i];
+        [_char removeObject:_cChar];
+    }
     
     int random = rand() % [_char count];
     return [_char objectAtIndex:random];
