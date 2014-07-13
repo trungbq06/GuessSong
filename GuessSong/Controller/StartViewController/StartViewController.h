@@ -12,6 +12,7 @@
 #import <GameKit/GameKit.h>
 #import "GADInterstitial.h"
 #import "GameCenterManager.h"
+#import "PlayViewController.h"
 
 @interface StartViewController : UIViewController <GADBannerViewDelegate, GKGameCenterControllerDelegate, GameCenterManagerDelegate, GADInterstitialDelegate>
 {
@@ -25,5 +26,6 @@
 }
 
 @property (nonatomic, retain) GameCenterManager *gameCenterManager;
+- (IBAction)btnPlayClick:(id)sender;
 
 @end

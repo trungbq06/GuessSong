@@ -15,24 +15,44 @@
 #import "AppDelegate.h"
 #import <Social/Social.h>
 #import "CharacterGenerator.h"
+#import "JingRoundView.h"
+#import "UIImageView+AFNetworking.h"
+#import <MediaPlayer/MPMoviePlayerController.h>
+#import "QuizModel.h"
 
-@interface PlayViewController : UIViewController <CharSourceDelegate, CharSquarelegate>
+@interface PlayViewController : UIViewController <CharSourceDelegate, CharSquarelegate, UIAlertViewDelegate, JingRoundViewDelegate>
 
 @property (nonatomic, retain) NSManagedObjectContext * context;
 
 // Player to play song
-@property (nonatomic, retain) AVPlayer              *songPlayer;
+@property (nonatomic, strong) AVPlayer              *songPlayer;
 // Check if song is playing
 @property (nonatomic, assign) BOOL                  isPlaying;
 // Play button
-@property (weak, nonatomic) IBOutlet UIButton       *playBtn;
+@property (strong, nonatomic) UIButton              *playBtn;
 // Char genrator object
 @property (nonatomic, retain) CharacterGenerator    *charGenerator;
 // Char allow user to input
 @property (nonatomic, retain) NSMutableArray        *charSquareArray;
 // Source char allow user to select from
 @property (nonatomic, retain) NSMutableArray        *charSourceArray;
+// Data of the quiz
+@property (nonatomic, retain) NSMutableArray        *quizData;
+// Current quiz
+@property (nonatomic, retain) QuizModel             *quiz;
+// Current quiz index
+@property (nonatomic, assign) int                   idxQuiz;
+@property (nonatomic, assign) int                   currLevel;
+@property (nonatomic, assign) int                   currCoins;
+@property (weak, nonatomic) IBOutlet UILabel        *lbLevel;
+@property (weak, nonatomic) IBOutlet UIButton       *btnCoins;
+@property (weak, nonatomic) IBOutlet JingRoundView  *playingRound;
+@property (weak, nonatomic) IBOutlet UIView         *congrateView;
+@property (weak, nonatomic) IBOutlet UIButton       *btnNext;
+@property (weak, nonatomic) IBOutlet UILabel        *lblGotCoins;
 
+- (IBAction)gotoNextGame:(id)sender;
+- (IBAction)btnCoinsClick:(id)sender;
 - (IBAction)playSong:(id)sender;
 - (IBAction)btnBackClick:(id)sender;
 - (IBAction)showHint:(id)sender;

@@ -21,7 +21,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="y3m-lQ-apM" kind="push" id="bFo-Gz-9mF"/>
+                                    <action selector="btnPlayClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="d6m-Tt-4iD"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZTf-Cc-k97">
@@ -73,7 +73,7 @@
         <!--Play View Controller-->
         <scene sceneID="9FV-hg-gb7">
             <objects>
-                <viewController id="y3m-lQ-apM" customClass="PlayViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PlayViewController" id="y3m-lQ-apM" customClass="PlayViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bOE-ia-UvN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -109,24 +109,17 @@
                                         <state key="normal" title="100">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="btnCoinsClick:" destination="y3m-lQ-apM" eventType="touchUpInside" id="evc-zC-sc9"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.40000000596046448" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dRJ-Lr-gv8">
-                                <rect key="frame" x="100" y="117" width="120" height="120"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="play.png">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="playSong:" destination="y3m-lQ-apM" eventType="touchUpInside" id="TzX-pM-WIz"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="4WI-T8-sud">
-                                <rect key="frame" x="63" y="363" width="39" height="30"/>
+                                <rect key="frame" x="109" y="363" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Show">
+                                <state key="normal" backgroundImage="edit.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -134,9 +127,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="wu4-4i-f51">
-                                <rect key="frame" x="121" y="363" width="44" height="30"/>
+                                <rect key="frame" x="141" y="363" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Delete">
+                                <state key="normal" backgroundImage="delete.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -144,9 +137,9 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="R1t-ll-cgD">
-                                <rect key="frame" x="182" y="363" width="31" height="30"/>
+                                <rect key="frame" x="174" y="363" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Skip">
+                                <state key="normal" backgroundImage="skip.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -154,22 +147,65 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lh8-QV-q8J">
-                                <rect key="frame" x="228" y="363" width="30" height="30"/>
+                                <rect key="frame" x="208" y="363" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="FB">
+                                <state key="normal" backgroundImage="fb.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="shareFB:" destination="y3m-lQ-apM" eventType="touchUpInside" id="5AD-2h-2QS"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="zJb-sa-UIp" customClass="JingRoundView">
+                                <rect key="frame" x="80" y="86" width="160" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                            <view hidden="YES" contentMode="scaleToFill" id="k38-ro-K12">
+                                <rect key="frame" x="45" y="157" width="230" height="158"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You made it" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1gY-XP-4jc">
+                                        <rect key="frame" x="70" y="26" width="91" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You got 5 coins" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NNH-qV-BP0">
+                                        <rect key="frame" x="56" y="65" width="119" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HKH-W2-Ihx">
+                                        <rect key="frame" x="73" y="101" width="84" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.12549020349979401" green="0.63921570777893066" blue="0.090196080505847931" alpha="1" colorSpace="deviceRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <state key="normal" title="Next">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="gotoNextGame:" destination="y3m-lQ-apM" eventType="touchUpInside" id="Pl6-by-LHv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="8DX-qi-hT8"/>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
-                        <outlet property="playBtn" destination="dRJ-Lr-gv8" id="x2x-yd-TiU"/>
+                        <outlet property="btnCoins" destination="zXZ-13-EJ4" id="9PA-Nh-B9J"/>
+                        <outlet property="btnNext" destination="HKH-W2-Ihx" id="wfX-Nx-1Yf"/>
+                        <outlet property="congrateView" destination="k38-ro-K12" id="hZV-Eh-hxD"/>
+                        <outlet property="lbLevel" destination="BCw-6A-DWb" id="Cgj-9o-qKI"/>
+                        <outlet property="lblGotCoins" destination="NNH-qV-BP0" id="Kz5-mj-es2"/>
+                        <outlet property="playingRound" destination="zJb-sa-UIp" id="OF1-Ch-SOM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dOi-oC-GaS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -180,7 +216,10 @@
     <resources>
         <image name="back.png" width="32" height="32"/>
         <image name="coin.png" width="512" height="512"/>
-        <image name="play.png" width="253" height="253"/>
+        <image name="delete.png" width="128" height="128"/>
+        <image name="edit.png" width="128" height="128"/>
+        <image name="fb.png" width="96" height="96"/>
+        <image name="skip.png" width="64" height="64"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

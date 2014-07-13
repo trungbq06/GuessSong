@@ -11,10 +11,11 @@
 #import "NSMutableArray+Shuffle.h"
 #import <AVFoundation/AVPlayer.h>
 #import <FacebookSDK/FacebookSDK.h>
+#import "AFNetworkingSynchronousSingleton.h"
 #import "CDSingleton.h"
 #import "CDModel.h"
-#import "CDInsert.h"
 #import "UserInfo.h"
+#import "DataParser.h"
 
 @interface PlayViewController ()
 
@@ -42,27 +43,63 @@
     
     [self.view setBackgroundColor:[UIColor colorFromHex:@"#24A3BD"]];
     
-    // Init context management
-    _context = [[NSManagedObjectContext alloc] init];
-    [_context setPersistentStoreCoordinator:[[CDSingleton sharedCDSingleton] getPersistentStore]];
-    [_context setMergePolicy:NSErrorMergePolicy];
+    [_congrateView.layer setCornerRadius:10];
+    [_congrateView.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [_congrateView.layer setBorderWidth:5];
+    [_btnNext.layer setCornerRadius:5];
+    [_btnNext.layer setBorderWidth:2];
+    [_btnNext.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     
-    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:@"0", @"coins", @"1", @"level", nil];
-    NSArray *_data = [[NSArray alloc] initWithObjects:_uInfo, nil];
+    _playingRound.delegate = self;
+    _playingRound.roundImage = [UIImage imageNamed:@"girl"];
+    _playingRound.rotationDuration = 8.0;
+    _playingRound.isPlay = NO;
     
-    CDInsert *_cdInsert = [[CDInsert alloc] initWithData:_data tableName:@"UserInfo" context:_context success:^(CDInsert *operation, id responseObject) {
-        
-    } failure:^(CDInsert *operation, NSError *error) {
-        
+    CGPoint center = CGPointMake(_playingRound.frame.origin.x + _playingRound.frame.size.width / 2.0, _playingRound.frame.origin.y + _playingRound.frame.size.height / 2.0);
+    
+    UIImage *stateImage;
+    if (_isPlaying) {
+        stateImage = [UIImage imageNamed:@"pause"];
+    }else{
+        stateImage = [UIImage imageNamed:@"start"];
+    }
+    
+    _playBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, stateImage.size.width, stateImage.size.height)];
+    [_playBtn setCenter:center];
+    [_playBtn setBackgroundImage:stateImage forState:UIControlStateNormal];
+    [_playBtn addTarget:self action:@selector(playSong:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_playBtn];
+//    [self.view sendSubviewToBack:_playBtn];
+    
+    CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
+    
+    CDModel* _cdModel = [[CDModel alloc] init];
+    _cdModel.entityName = @"UserInfo";
+    
+    // Load coins and level from local database
+    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
+//        NSLog(@"%@", responseObject);
+        for (UserInfo *_userInfo in responseObject) {
+            NSLog(@"Current coins: %@", _userInfo.coins);
+            [_btnCoins setTitle:[NSString stringWithFormat:@"%@", _userInfo.coins] forState:UIControlStateNormal];
+        }
+    } failure:^(CDLoad *operation, NSError *error) {
+        NSLog(@"Error %@", error);
     }];
+    
+    /*
+    [_cdSingleton deleteWithData:_cdModel success:^(CDDelete *operation, id responseObject) {
+        NSLog(@"Deleted");
+    } failure:^(CDDelete *operation, NSError *error) {
+        NSLog(@"Delete Error");
+    }];
+     */
     
     // Init array object
     _charSquareArray = [[NSMutableArray alloc] initWithCapacity:0];
     _charSourceArray = [[NSMutableArray alloc] initWithCapacity:0];
     
     _charGenerator = [[CharacterGenerator alloc] init];
-    
-    [self generateNewQuiz:@"Take me to your heart"];
     
     /*
     for (NSString *family in [UIFont familyNames])
@@ -74,6 +111,83 @@
         }
     }
      */
+    
+    // Load data for the first time
+    if (!_quizData) {
+        NSDictionary *_parameter = [[NSDictionary alloc] initWithObjectsAndKeys:@"", @"", nil];
+        [[AFNetworkingSynchronousSingleton sharedClient] getPath:@"http://topapp.us/quiz/latest" parameters:_parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            _quizData = [DataParser parseQuiz:responseObject];
+            // Initiate quiz data
+            _quiz = [_quizData objectAtIndex:0];
+            
+            [self generateGame];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error fetching data from server");
+        }];
+    } else {
+        // Initiate quiz data
+        _quiz = [_quizData objectAtIndex:_idxQuiz];
+        
+        [self generateGame];
+    }
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    _isPlaying = TRUE;
+    [self playSong];
+}
+
+#pragma mark - JINGROUND DELEGATE
+- (void) playStatusUpdate:(BOOL)playState
+{
+    _isPlaying = playState;
+    
+    [self playSong];
+}
+
+#pragma mark - NEXT GAME
+- (void) nextGame
+{
+    _idxQuiz++;
+    if (_idxQuiz < [_quizData count]) {
+        PlayViewController *_playController = [self.storyboard instantiateViewControllerWithIdentifier:@"PlayViewController"];
+        [_playController setIdxQuiz:_idxQuiz];
+        [_playController setQuizData:_quizData];
+        [_playController setCurrLevel:_currLevel + 1];
+        
+        if ([_charGenerator isSolved])
+            _currCoins += _quiz.coins;
+        
+        [_playController setCurrCoins:_currCoins];
+        
+        [self.navigationController pushViewController:_playController animated:YES];
+    }
+}
+
+- (void) generateGame
+{
+    if (_quiz) {
+        [self generateNewQuiz:_quiz.qResult];
+    }
+}
+
+- (void) updateCoins:(int) coins
+{
+    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:coins], @"coins", [NSNumber numberWithInt:1], @"level", nil];
+    CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
+    
+    CDModel* _cdModel = [[CDModel alloc] init];
+    _cdModel.entityName = @"UserInfo";
+    
+    // Update to database
+    [_cdSingleton updateWithData:_cdModel newData:_uInfo success:^(CDUpdate *operation, id responseObject) {
+        NSLog(@"Updated success");
+    } failure:^(CDUpdate *operation, NSError *error) {
+        NSLog(@"Update error");
+    }];
 }
 
 - (void) generateNewQuiz:(NSString*) quizName
@@ -81,6 +195,10 @@
     [_charSquareArray removeAllObjects];
     
     [_charGenerator setSongName:quizName];
+    
+    [_playingRound.roundImageView setImageWithURL:[NSURL URLWithString:[_quiz.qSource objectForKey:@"thumbnail"]]];
+    
+    [_lbLevel setText:[NSString stringWithFormat:@"%d", _currLevel]];
     
     int iChar = 0;
     int iLength = 0;
@@ -110,6 +228,7 @@
             _char.delegate = self;
             
             [self.view addSubview:_char];
+            [self.view sendSubviewToBack:_char];
             offsetX += WIDTH + CHAR_SPACING;
             
             [_charSquareArray addObject:_char];
@@ -150,6 +269,7 @@
             _char.delegate = self;
             
             [self.view addSubview:_char];
+            [self.view sendSubviewToBack:_char];
             
             offsetX += SOURCE_CHAR_WIDTH + CHAR_SPACING;
             [_charSourceArray addObject:_char];
@@ -256,11 +376,30 @@
     }
 }
 
+#pragma mark - UIALERTVIEW DELEGATE
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1000) {
+        if (buttonIndex == 0) {
+            [self nextGame];
+        }
+    }
+}
+
 #pragma mark - CONGRATULATION
 - (BOOL) congratulation
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Good Job" message:@"You got it" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alertView show];
+    CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
+    UIView *_dimBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, appFrame.size.width, appFrame.size.height)];
+    [_dimBg setBackgroundColor:[UIColor blackColor]];
+    [_dimBg setAlpha:0.6];
+    
+    [self.view addSubview:_dimBg];
+    [self.view bringSubviewToFront:_congrateView];
+    
+    [_lblGotCoins setText:[NSString stringWithFormat:@"You got %d coins", _quiz.coins]];
+    
+    [_congrateView setHidden:NO];
     
     return TRUE;
 }
@@ -359,7 +498,7 @@
 
 - (IBAction)skipLevel:(id)sender
 {
-    
+    [self nextGame];
 }
 
 - (IBAction)shareFB:(id)sender
@@ -463,6 +602,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+#pragma mark - GOTO NEXT GAME
+- (IBAction)gotoNextGame:(id)sender {
+    [self.view bringSubviewToFront:_congrateView];
+    [self nextGame];
+}
+
+- (IBAction)btnCoinsClick:(id)sender {
+    
+}
+
 - (IBAction)playSong:(id)sender
 {
     [self playSong];
@@ -473,23 +622,27 @@
 {
     if (!_isPlaying) {
         _isPlaying = TRUE;
-        [_playBtn setBackgroundImage:[UIImage imageNamed:@"stop"] forState:UIControlStateNormal];
+        [_playingRound setIsPlay:_isPlaying];
+        [_playBtn setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
         
-        NSString *playString = @"http://210.211.99.70/teenpro.vn/files/song/2012/08/07/5ba44f26374a8bcd6aca3eaed9d00d18.mp3";
-        
-        //Converts songURL into a playable NSURL
-        NSURL *playURL = [NSURL URLWithString:playString];
+        if (!_songPlayer) {
+            NSString *playString = [_quiz.qSource objectForKey:@"preview_url"];
+            
+            //Converts songURL into a playable NSURL
+            NSURL *playURL = [NSURL URLWithString:playString];
 
-        AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:playURL];
+            AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:playURL];
 
-        _songPlayer = [AVPlayer playerWithPlayerItem:playerItem];
-        // Subscribe to the AVPlayerItem's DidPlayToEndTime notification.
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:_songPlayer];
+            _songPlayer = [AVPlayer playerWithPlayerItem:playerItem];
+            // Subscribe to the AVPlayerItem's DidPlayToEndTime notification.
+            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
+        }
         
         [_songPlayer play];
     } else {
         _isPlaying = FALSE;
-        [_playBtn setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+        [_playingRound setIsPlay:_isPlaying];
+        [_playBtn setBackgroundImage:[UIImage imageNamed:@"start"] forState:UIControlStateNormal];
         
         [_songPlayer pause];
     }
@@ -498,7 +651,11 @@
 #pragma mark - NOTIFICATION FINISH PLAYING
 - (void) itemDidFinishPlaying:(NSNotification*) notification
 {
-    [_playBtn setBackgroundImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+    [_playBtn setBackgroundImage:[UIImage imageNamed:@"start"] forState:UIControlStateNormal];
+    
+    [_playingRound setIsPlay:NO];
+    _isPlaying = FALSE;
+    [_songPlayer pause];
 }
 
 - (BOOL)prefersStatusBarHidden {

@@ -9,6 +9,9 @@
 #import "StartViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "AppDelegate.h"
+#import "CDSingleton.h"
+#import "CDCommon.h"
+#import "CDModel.h"
 
 @interface StartViewController ()
 
@@ -27,6 +30,28 @@
     } else {
         // The current device does not support Game Center.
     }
+    
+    // Insert new record to database
+    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:START_COINS], @"coins", [NSNumber numberWithInt:1], @"level", nil];
+    NSArray *_data = [[NSArray alloc] initWithObjects:_uInfo, nil];
+    
+    CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
+    
+    CDModel* _cdModel = [[CDModel alloc] init];
+    _cdModel.entityName = @"UserInfo";
+    
+    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
+//        NSLog(@"%@", responseObject);
+        if ([responseObject count] == 0) {
+            [_cdSingleton insertWithData:_data tableName:@"UserInfo" success:^(CDInsert *operation, id responseObject) {
+                NSLog(@"Inserted succesfully!");
+            } failure:^(CDInsert *operation, NSError *error) {
+                
+            }];
+        }
+    } failure:^(CDLoad *operation, NSError *error) {
+        NSLog(@"Error %@", error);
+    }];
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     if (!appDelegate.session.isOpen) {
@@ -180,4 +205,11 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)btnPlayClick:(id)sender {
+    PlayViewController *_playController = [self.storyboard instantiateViewControllerWithIdentifier:@"PlayViewController"];
+    [_playController setIdxQuiz:0];
+    [_playController setCurrLevel:1];
+    
+    [self.navigationController pushViewController:_playController animated:YES];
+}
 @end

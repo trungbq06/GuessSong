@@ -21,14 +21,15 @@
 #define WIDTH             25
 #define CHAR_SPACING      3
 #define LINE_SPACING      30
-#define OFFSETY           300
-#define SOURCE_CHAR_WIDTH 30
+#define OFFSETY           280
+#define SOURCE_CHAR_WIDTH 35
 #define SOURCE_VIEW_WIDTH 250
 #define SOURCE_OFFSET_Y   420
-#define SOURCE_LINE_SPACING 35
+#define SOURCE_LINE_SPACING 40
 #define FONT_FAMILY         @"ArialRoundedMTBold"
 #define PLAY_ROUND          @"play_round"
 #define APPSTORE_URL        @"http://topapp.us"
+#define START_COINS         100
 
 //risign text field
 #define kNotificationResignTextField                                @"resign_first_responder_text_field"
