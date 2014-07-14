@@ -15,6 +15,7 @@
 #import "CDSingleton.h"
 #import "CDModel.h"
 #import "UserInfo.h"
+#import "SVProgressHUD.h"
 #import "DataParser.h"
 
 @interface PlayViewController ()
@@ -43,9 +44,6 @@
     
     [self.view setBackgroundColor:[UIColor colorFromHex:@"#24A3BD"]];
     
-    [_congrateView.layer setCornerRadius:10];
-    [_congrateView.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-    [_congrateView.layer setBorderWidth:5];
     [_btnNext.layer setCornerRadius:5];
     [_btnNext.layer setBorderWidth:2];
     [_btnNext.layer setBorderColor:[[UIColor whiteColor] CGColor]];
@@ -114,8 +112,10 @@
     
     // Load data for the first time
     if (!_quizData) {
+        [SVProgressHUD showWithStatus:@"Loading ..." maskType:SVProgressHUDMaskTypeGradient];
         NSDictionary *_parameter = [[NSDictionary alloc] initWithObjectsAndKeys:@"", @"", nil];
         [[AFNetworkingSynchronousSingleton sharedClient] getPath:@"http://topapp.us/quiz/latest" parameters:_parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [SVProgressHUD dismiss];
             _quizData = [DataParser parseQuiz:responseObject];
             // Initiate quiz data
             _quiz = [_quizData objectAtIndex:0];
@@ -125,6 +125,8 @@
             NSLog(@"Error fetching data from server");
         }];
     } else {
+        [SVProgressHUD dismiss];
+        
         // Initiate quiz data
         _quiz = [_quizData objectAtIndex:_idxQuiz];
         
@@ -389,17 +391,12 @@
 #pragma mark - CONGRATULATION
 - (BOOL) congratulation
 {
-    CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
-    UIView *_dimBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, appFrame.size.width, appFrame.size.height)];
-    [_dimBg setBackgroundColor:[UIColor blackColor]];
-    [_dimBg setAlpha:0.6];
-    
-    [self.view addSubview:_dimBg];
-    [self.view bringSubviewToFront:_congrateView];
-    
-    [_lblGotCoins setText:[NSString stringWithFormat:@"You got %d coins", _quiz.coins]];
-    
-    [_congrateView setHidden:NO];
+//    CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
+//    UIView *_dimBg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, appFrame.size.width, appFrame.size.height)];
+//    [_dimBg setBackgroundColor:[UIColor blackColor]];
+//    [_dimBg setAlpha:0.6];
+//    
+//    [self.view addSubview:_dimBg];
     
     return TRUE;
 }
@@ -604,7 +601,6 @@
 
 #pragma mark - GOTO NEXT GAME
 - (IBAction)gotoNextGame:(id)sender {
-    [self.view bringSubviewToFront:_congrateView];
     [self nextGame];
 }
 

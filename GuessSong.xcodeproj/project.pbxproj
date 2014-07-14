@@ -21,6 +21,7 @@
 		3791E18819704A1F0043E691 /* GameCenterManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3791E18719704A1F0043E691 /* GameCenterManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		379F3D61196F140000864C24 /* NSMutableArray+Shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F3D60196F140000864C24 /* NSMutableArray+Shuffle.m */; };
 		379F3D64196F344C00864C24 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F3D63196F344C00864C24 /* Helper.m */; };
+		379F4D5E1973E54700A09A03 /* SolvedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F4D5D1973E54700A09A03 /* SolvedViewController.m */; };
 		37C0C962197066A300392051 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C0C961197066A300392051 /* FacebookSDK.framework */; };
 		37C0C96B1970877D00392051 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37C0C9691970877D00392051 /* Model.xcdatamodeld */; };
 		37C0C99F19708E0A00392051 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C0C96E19708E0A00392051 /* AFHTTPClient.m */; };
@@ -139,6 +140,8 @@
 		379F3D60196F140000864C24 /* NSMutableArray+Shuffle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableArray+Shuffle.m"; sourceTree = "<group>"; };
 		379F3D62196F344C00864C24 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		379F3D63196F344C00864C24 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
+		379F4D5C1973E54700A09A03 /* SolvedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SolvedViewController.h; sourceTree = "<group>"; };
+		379F4D5D1973E54700A09A03 /* SolvedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SolvedViewController.m; sourceTree = "<group>"; };
 		37C0C961197066A300392051 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		37C0C96A1970877D00392051 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		37C0C96D19708E0A00392051 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -343,6 +346,15 @@
 				3791E18719704A1F0043E691 /* GameCenterManager.m */,
 			);
 			path = GameCenterManager;
+			sourceTree = "<group>";
+		};
+		379F4D5B1973E53300A09A03 /* SolvedViewController */ = {
+			isa = PBXGroup;
+			children = (
+				379F4D5C1973E54700A09A03 /* SolvedViewController.h */,
+				379F4D5D1973E54700A09A03 /* SolvedViewController.m */,
+			);
+			path = SolvedViewController;
 			sourceTree = "<group>";
 		};
 		37C0C96C19708E0A00392051 /* AFNetworking */ = {
@@ -631,6 +643,7 @@
 		67776D0D1969D6BD002D27BB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				379F4D5B1973E53300A09A03 /* SolvedViewController */,
 				67776D131969D708002D27BB /* StartViewController */,
 				67776D171969D71C002D27BB /* PlayViewController */,
 			);
@@ -825,6 +838,7 @@
 				6701009E1969D04A001D8926 /* AppDelegate.m in Sources */,
 				37C0C9A119708E0A00392051 /* AFImageRequestOperation.m in Sources */,
 				670445CD197128D700BB9FFA /* AFNetworkingSingleton.m in Sources */,
+				379F4D5E1973E54700A09A03 /* SolvedViewController.m in Sources */,
 				6747C24C197216540048705E /* DataParser.m in Sources */,
 				37C0C9A319708E0A00392051 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				37C0C9A019708E0A00392051 /* AFHTTPRequestOperation.m in Sources */,

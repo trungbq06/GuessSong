@@ -47,7 +47,6 @@
 @property (weak, nonatomic) IBOutlet UILabel        *lbLevel;
 @property (weak, nonatomic) IBOutlet UIButton       *btnCoins;
 @property (weak, nonatomic) IBOutlet JingRoundView  *playingRound;
-@property (weak, nonatomic) IBOutlet UIView         *congrateView;
 @property (weak, nonatomic) IBOutlet UIButton       *btnNext;
 @property (weak, nonatomic) IBOutlet UILabel        *lblGotCoins;
 
