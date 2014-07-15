@@ -22,6 +22,7 @@
 		379F3D61196F140000864C24 /* NSMutableArray+Shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F3D60196F140000864C24 /* NSMutableArray+Shuffle.m */; };
 		379F3D64196F344C00864C24 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F3D63196F344C00864C24 /* Helper.m */; };
 		379F4D5E1973E54700A09A03 /* SolvedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F4D5D1973E54700A09A03 /* SolvedViewController.m */; };
+		37B3D7F81974FAC100210F2C /* PurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B3D7F71974FAC100210F2C /* PurchaseViewController.m */; };
 		37C0C962197066A300392051 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C0C961197066A300392051 /* FacebookSDK.framework */; };
 		37C0C96B1970877D00392051 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37C0C9691970877D00392051 /* Model.xcdatamodeld */; };
 		37C0C99F19708E0A00392051 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C0C96E19708E0A00392051 /* AFHTTPClient.m */; };
@@ -142,6 +143,8 @@
 		379F3D63196F344C00864C24 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		379F4D5C1973E54700A09A03 /* SolvedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SolvedViewController.h; sourceTree = "<group>"; };
 		379F4D5D1973E54700A09A03 /* SolvedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SolvedViewController.m; sourceTree = "<group>"; };
+		37B3D7F61974FAC100210F2C /* PurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseViewController.h; sourceTree = "<group>"; };
+		37B3D7F71974FAC100210F2C /* PurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseViewController.m; sourceTree = "<group>"; };
 		37C0C961197066A300392051 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		37C0C96A1970877D00392051 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		37C0C96D19708E0A00392051 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -355,6 +358,15 @@
 				379F4D5D1973E54700A09A03 /* SolvedViewController.m */,
 			);
 			path = SolvedViewController;
+			sourceTree = "<group>";
+		};
+		37B3D7F51974FAAC00210F2C /* PurchaseViewController */ = {
+			isa = PBXGroup;
+			children = (
+				37B3D7F61974FAC100210F2C /* PurchaseViewController.h */,
+				37B3D7F71974FAC100210F2C /* PurchaseViewController.m */,
+			);
+			path = PurchaseViewController;
 			sourceTree = "<group>";
 		};
 		37C0C96C19708E0A00392051 /* AFNetworking */ = {
@@ -643,6 +655,7 @@
 		67776D0D1969D6BD002D27BB /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				37B3D7F51974FAAC00210F2C /* PurchaseViewController */,
 				379F4D5B1973E53300A09A03 /* SolvedViewController */,
 				67776D131969D708002D27BB /* StartViewController */,
 				67776D171969D71C002D27BB /* PlayViewController */,
@@ -844,6 +857,7 @@
 				37C0C9A019708E0A00392051 /* AFHTTPRequestOperation.m in Sources */,
 				379F3D61196F140000864C24 /* NSMutableArray+Shuffle.m in Sources */,
 				67351E2C196B7AB300A922B0 /* CharacterGenerator.m in Sources */,
+				37B3D7F81974FAC100210F2C /* PurchaseViewController.m in Sources */,
 				673EB0C7196CCFFE0090E0FB /* CharSource.m in Sources */,
 				6701009A1969D04A001D8926 /* main.m in Sources */,
 				670445CE197128D700BB9FFA /* AFNetworkingSynchronousSingleton.m in Sources */,

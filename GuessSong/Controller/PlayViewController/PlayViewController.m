@@ -605,7 +605,9 @@
 }
 
 - (IBAction)btnCoinsClick:(id)sender {
+    PurchaseViewController *_purchaseController = [self.storyboard instantiateViewControllerWithIdentifier:@"PurchaseViewController"];
     
+    [self presentViewController:_purchaseController animated:YES completion:nil];
 }
 
 - (IBAction)playSong:(id)sender
