@@ -28,8 +28,9 @@
 #define SOURCE_LINE_SPACING 40
 #define FONT_FAMILY         @"ArialRoundedMTBold"
 #define PLAY_ROUND          @"play_round"
-#define APPSTORE_URL        @"http://topapp.us"
 #define START_COINS         100
+#define kServerURL          @"http://topapp.us/"
+#define COUNTRY_CODE        @"vn"
 
 //risign text field
 #define kNotificationResignTextField                                @"resign_first_responder_text_field"
@@ -47,3 +48,7 @@
 
 #define IS_IOS7 floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1
 #define IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+
+#define kNotifyDidChangeCoins       @"coins_changed"
+#define kCoins                      @"coins"
+

@@ -30,7 +30,7 @@
             _quiz.order = [[category objectForKey:@"sort"] intValue];
             _quiz.country = [category objectForKey:@"country"];
             _quiz.genre = [category objectForKey:@"genre"];
-            _quiz.coins = [[category objectForKey:@"coins"] intValue];
+            _quiz.coins = [[category objectForKey:kCoins] intValue];
             
             [cats addObject:_quiz];
         }

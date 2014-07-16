@@ -23,6 +23,17 @@
 {
     [super viewDidLoad];
     
+    /* This push local notification
+    UILocalNotification* localNotification = [[UILocalNotification alloc] init];
+    localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:10];
+    localNotification.alertBody = @"Your alert message";
+    localNotification.alertBody = @"I missed you !";
+    localNotification.timeZone = [NSTimeZone defaultTimeZone];
+    localNotification.applicationIconBadgeNumber = [[UIApplication sharedApplication] applicationIconBadgeNumber] + 1;
+
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
+    */
+    
     if ([GameCenterManager isGameCenterAvailable]) {
         _gameCenterManager = [[GameCenterManager alloc] init];
         [_gameCenterManager setDelegate:self];
@@ -32,7 +43,7 @@
     }
     
     // Insert new record to database
-    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:START_COINS], @"coins", [NSNumber numberWithInt:1], @"level", nil];
+    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:START_COINS], kCoins, [NSNumber numberWithInt:1], @"level", nil];
     NSArray *_data = [[NSArray alloc] initWithObjects:_uInfo, nil];
     
     CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
@@ -41,7 +52,7 @@
     _cdModel.entityName = @"UserInfo";
     
     [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
-//        NSLog(@"%@", responseObject);
+        NSLog(@"%@", responseObject);
         if ([responseObject count] == 0) {
             [_cdSingleton insertWithData:_data tableName:@"UserInfo" success:^(CDInsert *operation, id responseObject) {
                 NSLog(@"Inserted succesfully!");
@@ -53,7 +64,7 @@
         NSLog(@"Error %@", error);
     }];
     
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *appDelegate = (AppDelegate*) [[UIApplication sharedApplication]delegate];
     if (!appDelegate.session.isOpen) {
         // create a fresh session object
         appDelegate.session = [[FBSession alloc] init];

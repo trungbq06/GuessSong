@@ -37,6 +37,8 @@
 {
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeCoins:) name:kNotifyDidChangeCoins object:nil];
+    
     int playRound = [[[NSUserDefaults standardUserDefaults] objectForKey:PLAY_ROUND] intValue];
     playRound++;
     
@@ -113,8 +115,8 @@
     // Load data for the first time
     if (!_quizData) {
         [SVProgressHUD showWithStatus:@"Loading ..." maskType:SVProgressHUDMaskTypeGradient];
-        NSDictionary *_parameter = [[NSDictionary alloc] initWithObjectsAndKeys:@"", @"", nil];
-        [[AFNetworkingSynchronousSingleton sharedClient] getPath:@"http://topapp.us/quiz/latest" parameters:_parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *_parameter = [[NSDictionary alloc] initWithObjectsAndKeys:COUNTRY_CODE, @"country", nil];
+        [[AFNetworkingSynchronousSingleton sharedClient] getPath:[NSString stringWithFormat:@"%@%@", kServerURL, @"quiz/latest"] parameters:_parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [SVProgressHUD dismiss];
             _quizData = [DataParser parseQuiz:responseObject];
             // Initiate quiz data
@@ -122,7 +124,10 @@
             
             [self generateGame];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error fetching data from server");
+            NSLog(@"Error fetching data from server %@", error);
+            [SVProgressHUD dismiss];
+            
+            [self.navigationController popToRootViewControllerAnimated:YES];
         }];
     } else {
         [SVProgressHUD dismiss];
@@ -140,6 +145,14 @@
     
     _isPlaying = TRUE;
     [self playSong];
+}
+
+#pragma mark - DID CHANGE COINS
+- (void) didChangeCoins:(NSNotification*) _notification
+{
+    NSDictionary *_newCoins = _notification.userInfo;
+    
+    [[_btnCoins titleLabel] setText:[NSString stringWithFormat:@"%d", [[_newCoins objectForKey:kCoins] intValue]]];
 }
 
 #pragma mark - JINGROUND DELEGATE
@@ -178,7 +191,7 @@
 
 - (void) updateCoins:(int) coins
 {
-    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:coins], @"coins", [NSNumber numberWithInt:1], @"level", nil];
+    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:coins], kCoins, [NSNumber numberWithInt:1], @"level", nil];
     CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
     
     CDModel* _cdModel = [[CDModel alloc] init];
@@ -512,7 +525,7 @@
 //        [appDelegate.session closeAndClearTokenInformation];
         
         FBShareDialogParams *params = [[FBShareDialogParams alloc] init];
-        params.link = [NSURL URLWithString:APPSTORE_URL];
+        params.link = [NSURL URLWithString:kServerURL];
         params.picture = [NSURL URLWithString:@"https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xpa1/t1.0-9/10513289_10202084649312804_5356930935114971960_n.jpg"];
         params.name = @"Guess The Song";
         params.caption = @"Can you guess these song ?";
@@ -606,7 +619,7 @@
 
 - (IBAction)btnCoinsClick:(id)sender {
     PurchaseViewController *_purchaseController = [self.storyboard instantiateViewControllerWithIdentifier:@"PurchaseViewController"];
-    
+
     [self presentViewController:_purchaseController animated:YES completion:nil];
 }
 

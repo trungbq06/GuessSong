@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <StoreKit/StoreKit.h>
 
-@interface PurchaseViewController : UIViewController <SKProductsRequestDelegate, SKPaymentTransactionObserver>
+@interface PurchaseViewController : UIViewController <SKProductsRequestDelegate, SKPaymentTransactionObserver, UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, retain) UITableView       *tableView;
 @property (nonatomic, strong) IBOutlet UIButton *btnDone;
 
 - (IBAction)btnDoneClick:(id)sender;
