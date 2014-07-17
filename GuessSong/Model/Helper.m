@@ -32,4 +32,32 @@
     return FALSE;
 }
 
++ (void) updateCoins:(int) newCoins
+{
+    CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
+    
+    CDModel* _cdModel = [[CDModel alloc] init];
+    _cdModel.entityName = @"UserInfo";
+    
+    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
+        NSLog(@"%@", responseObject);
+        UserInfo *uInfo = (UserInfo*) [responseObject objectAtIndex:0];
+        
+        NSNumber *_newCoins = [NSNumber numberWithInt:([uInfo.coins intValue] + newCoins)];
+        NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:_newCoins, kCoins, nil];
+        
+        [_cdSingleton updateWithData:_cdModel newData:_uInfo success:^(CDUpdate *operation, id responseObject) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyDidChangeCoins object:nil userInfo:_uInfo];
+            
+            dispatch_async(dispatch_get_main_queue(),^{
+//                [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyDidChangeCoins object:nil userInfo:_uInfo];
+            });
+        } failure:^(CDUpdate *operation, NSError *error) {
+            
+        }];
+    } failure:^(CDLoad *operation, NSError *error) {
+        NSLog(@"Error %@", error);
+    }];
+}
+
 @end

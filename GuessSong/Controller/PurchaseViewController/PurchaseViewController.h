@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Helper.h"
 #import <StoreKit/StoreKit.h>
 
 @interface PurchaseViewController : UIViewController <SKProductsRequestDelegate, SKPaymentTransactionObserver, UITableViewDataSource, UITableViewDelegate>

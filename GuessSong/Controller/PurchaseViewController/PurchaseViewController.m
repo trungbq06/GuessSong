@@ -7,6 +7,7 @@
 //
 
 #import "PurchaseViewController.h"
+#import "SVProgressHUD.h"
 #import "AFNetworkingSynchronousSingleton.h"
 
 #define kRemoveAdsProductIdentifier @"com.dragon.GuessSongApp"
@@ -42,13 +43,16 @@
     [self.view addSubview:_tableView];
     
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
+    
+    [SVProgressHUD showWithStatus:@"Loading ..." maskType:SVProgressHUDMaskTypeBlack];
 
     [[AFNetworkingSynchronousSingleton sharedClient] getPath:[NSString stringWithFormat:@"%@%@", kServerURL, @"quiz/products"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [SVProgressHUD dismiss];
         [self validateProductIdentifiers:[responseObject objectForKey:@"identifiers"]];
         
         _coins = [responseObject objectForKey:@"coins"];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
+        [SVProgressHUD dismiss];
     }];
 }
 
@@ -113,7 +117,8 @@
 #pragma mark - DONE CLICK
 - (IBAction)btnDoneClick:(id)sender
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - BUY CLICK
@@ -173,19 +178,29 @@
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue updatedTransactions:(NSArray *)transactions{
+    [SVProgressHUD dismiss];
     for(SKPaymentTransaction *transaction in transactions){
+//        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+        
         switch (transaction.transactionState){
-            case SKPaymentTransactionStatePurchasing: NSLog(@"Transaction state -> Purchasing");
+            case SKPaymentTransactionStatePurchasing:
+                NSLog(@"Transaction state -> Purchasing");
                 //called when the user is in the process of purchasing, do not add any of your own code here.
+                [SVProgressHUD showWithStatus:@"Processing ..." maskType:SVProgressHUDMaskTypeBlack];
                 break;
-            case SKPaymentTransactionStatePurchased:
+            case SKPaymentTransactionStatePurchased: {
                 //this is called when the user has successfully purchased the package (Cha-Ching!)
-//                NSNumber *_addCoins = [_coins objectForKey:transaction.payment.productIdentifier];
-                [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyDidChangeCoins object:nil userInfo:nil];
+                NSNumber *_addCoins = [_coins objectForKey:transaction.payment.productIdentifier];
                 
+                [Helper updateCoins:[_addCoins intValue]];
+                
+                [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"You purchased %d coins !", [_addCoins intValue]]];
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+                [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
                 NSLog(@"Transaction state -> Purchased");
+                
                 break;
+            }
             case SKPaymentTransactionStateRestored:
                 NSLog(@"Transaction state -> Restored");
                 //add the same code as you did from SKPaymentTransactionStatePurchased here
@@ -201,6 +216,11 @@
                 break;
         }
     }
+}
+
+- (void) dismissViewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

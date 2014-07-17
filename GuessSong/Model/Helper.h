@@ -7,9 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CDCommon.h"
+#import "CDModel.h"
+#import "UserInfo.h"
+#import "CDSingleton.h"
 
 @interface Helper : NSObject
 
 + (BOOL) isNotNull:(id) object;
++ (void) updateCoins:(int) newCoins;
 
 @end

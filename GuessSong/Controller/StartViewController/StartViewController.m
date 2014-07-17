@@ -8,6 +8,7 @@
 
 #import "StartViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
+#import "AFNetworkingSynchronousSingleton.h"
 #import "AppDelegate.h"
 #import "CDSingleton.h"
 #import "CDCommon.h"
@@ -82,6 +83,18 @@
             }];
         }
     }
+    
+    [[AFNetworkingSynchronousSingleton sharedClient] getPath:@"http://apple.com" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if ([error code] != -1016) {
+            NSString *_message = [error localizedDescription];
+            
+            UIAlertView *_alert = [[UIAlertView alloc] initWithTitle:@"Network Problem" message:_message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            _alert.tag = 1002;
+            [_alert show];
+        }
+    }];
 }
 
 - (void) viewDidAppear:(BOOL)animated

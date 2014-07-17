@@ -125,9 +125,14 @@
             [self generateGame];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error fetching data from server %@", error);
-            [SVProgressHUD dismiss];
             
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            NSString *_message = [error localizedDescription];
+            
+            UIAlertView *_alert = [[UIAlertView alloc] initWithTitle:@"Network Problem" message:_message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            _alert.tag = 1002;
+            [_alert show];
+            
+            [SVProgressHUD dismiss];
         }];
     } else {
         [SVProgressHUD dismiss];
@@ -153,6 +158,8 @@
     NSDictionary *_newCoins = _notification.userInfo;
     
     [[_btnCoins titleLabel] setText:[NSString stringWithFormat:@"%d", [[_newCoins objectForKey:kCoins] intValue]]];
+    
+    [self setCurrCoins:(_currCoins + [[_newCoins objectForKey:kCoins] intValue])];
 }
 
 #pragma mark - JINGROUND DELEGATE
@@ -398,6 +405,8 @@
         if (buttonIndex == 0) {
             [self nextGame];
         }
+    } else if (alertView.tag == 1002) {
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 
@@ -620,7 +629,8 @@
 - (IBAction)btnCoinsClick:(id)sender {
     PurchaseViewController *_purchaseController = [self.storyboard instantiateViewControllerWithIdentifier:@"PurchaseViewController"];
 
-    [self presentViewController:_purchaseController animated:YES completion:nil];
+//    [self presentViewController:_purchaseController animated:YES completion:nil];
+    [self.navigationController pushViewController:_purchaseController animated:YES];
 }
 
 - (IBAction)playSong:(id)sender
