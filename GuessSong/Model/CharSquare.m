@@ -26,7 +26,6 @@
         [self.layer setBorderWidth:1.0f];
         [self.layer setBorderColor:[[UIColor clearColor] CGColor]];
         
-        NSLog(@"Title %@", character);
         [_charBtn.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:22]];
         [_charBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_charBtn addTarget:self action:@selector(charClick:) forControlEvents:UIControlEventTouchUpInside];

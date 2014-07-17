@@ -55,6 +55,9 @@
 		37C0C9CF19709BED00392051 /* AppUserDefault.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C0C9CD19709BED00392051 /* AppUserDefault.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		37C0C9D119709D5E00392051 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C0C9D019709D5E00392051 /* libsqlite3.0.dylib */; };
 		37C0C9D819709E8A00392051 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C0C9D719709E8A00392051 /* UserInfo.m */; };
+		37C398AE1977D52D00B42556 /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C398AB1977D52D00B42556 /* MJPopupBackgroundView.m */; };
+		37C398AF1977D52D00B42556 /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C398AD1977D52D00B42556 /* UIViewController+MJPopupViewController.m */; };
+		37C398B31977DC3000B42556 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C398B21977DC3000B42556 /* UIViewController+CWPopup.m */; };
 		6701008E1969D049001D8926 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6701008D1969D049001D8926 /* Foundation.framework */; };
 		670100901969D049001D8926 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6701008F1969D049001D8926 /* CoreGraphics.framework */; };
 		670100921969D049001D8926 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670100911969D049001D8926 /* UIKit.framework */; };
@@ -208,6 +211,12 @@
 		37C0C9D019709D5E00392051 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		37C0C9D619709E8A00392051 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		37C0C9D719709E8A00392051 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		37C398AA1977D52D00B42556 /* MJPopupBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPopupBackgroundView.h; sourceTree = "<group>"; };
+		37C398AB1977D52D00B42556 /* MJPopupBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJPopupBackgroundView.m; sourceTree = "<group>"; };
+		37C398AC1977D52D00B42556 /* UIViewController+MJPopupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+MJPopupViewController.h"; sourceTree = "<group>"; };
+		37C398AD1977D52D00B42556 /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
+		37C398B11977DC3000B42556 /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWPopup.h"; sourceTree = "<group>"; };
+		37C398B21977DC3000B42556 /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWPopup.m"; sourceTree = "<group>"; };
 		6701008A1969D049001D8926 /* GuessSong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessSong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6701008D1969D049001D8926 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6701008F1969D049001D8926 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -327,6 +336,8 @@
 		3791E160197049990043E691 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				37C398B01977DC3000B42556 /* CWPopup */,
+				37C398A91977D52D00B42556 /* MJPopup */,
 				371A068319768042002789EF /* IAppHelper */,
 				670917151972A73D001A6CBD /* JingRound */,
 				6747C249197216540048705E /* DataParser */,
@@ -499,6 +510,26 @@
 				37C0C9D719709E8A00392051 /* UserInfo.m */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		37C398A91977D52D00B42556 /* MJPopup */ = {
+			isa = PBXGroup;
+			children = (
+				37C398AA1977D52D00B42556 /* MJPopupBackgroundView.h */,
+				37C398AB1977D52D00B42556 /* MJPopupBackgroundView.m */,
+				37C398AC1977D52D00B42556 /* UIViewController+MJPopupViewController.h */,
+				37C398AD1977D52D00B42556 /* UIViewController+MJPopupViewController.m */,
+			);
+			path = MJPopup;
+			sourceTree = "<group>";
+		};
+		37C398B01977DC3000B42556 /* CWPopup */ = {
+			isa = PBXGroup;
+			children = (
+				37C398B11977DC3000B42556 /* UIViewController+CWPopup.h */,
+				37C398B21977DC3000B42556 /* UIViewController+CWPopup.m */,
+			);
+			path = CWPopup;
 			sourceTree = "<group>";
 		};
 		670100811969D049001D8926 = {
@@ -873,8 +904,10 @@
 				37C0C9A519708E0A00392051 /* AFURLConnectionOperation.m in Sources */,
 				6788AACB196CB55B00E2F3DC /* CharSquare.m in Sources */,
 				37C0C9AB19708E0A00392051 /* CDLoad.m in Sources */,
+				37C398AF1977D52D00B42556 /* UIViewController+MJPopupViewController.m in Sources */,
 				37C0C99F19708E0A00392051 /* AFHTTPClient.m in Sources */,
 				6701009E1969D04A001D8926 /* AppDelegate.m in Sources */,
+				37C398B31977DC3000B42556 /* UIViewController+CWPopup.m in Sources */,
 				37C0C9A119708E0A00392051 /* AFImageRequestOperation.m in Sources */,
 				670445CD197128D700BB9FFA /* AFNetworkingSingleton.m in Sources */,
 				379F4D5E1973E54700A09A03 /* SolvedViewController.m in Sources */,
@@ -897,6 +930,7 @@
 				37C0C9A219708E0A00392051 /* AFJSONRequestOperation.m in Sources */,
 				37C0C9AC19708E0A00392051 /* CDModel.m in Sources */,
 				37C0C9D819709E8A00392051 /* UserInfo.m in Sources */,
+				37C398AE1977D52D00B42556 /* MJPopupBackgroundView.m in Sources */,
 				37C0C9CE19709BED00392051 /* AppCommon.m in Sources */,
 				37C0C9B119708E0A00392051 /* FMDatabaseQueue.m in Sources */,
 				37C0C9A719708E0A00392051 /* UIImageView+AFNetworking.m in Sources */,

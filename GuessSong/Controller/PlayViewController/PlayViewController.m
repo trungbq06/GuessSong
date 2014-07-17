@@ -17,6 +17,7 @@
 #import "UserInfo.h"
 #import "SVProgressHUD.h"
 #import "DataParser.h"
+#import "UIViewController+CWPopup.h"
 
 @interface PlayViewController ()
 
@@ -38,6 +39,7 @@
     [super viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeCoins:) name:kNotifyDidChangeCoins object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didClickDone:) name:kDoneClick object:nil];
     
     int playRound = [[[NSUserDefaults standardUserDefaults] objectForKey:PLAY_ROUND] intValue];
     playRound++;
@@ -157,9 +159,22 @@
 {
     NSDictionary *_newCoins = _notification.userInfo;
     
-    [[_btnCoins titleLabel] setText:[NSString stringWithFormat:@"%d", [[_newCoins objectForKey:kCoins] intValue]]];
+    [_btnCoins setTitle:[NSString stringWithFormat:@"%d", [[_newCoins objectForKey:kCoins] intValue]] forState:UIControlStateNormal];
     
     [self setCurrCoins:(_currCoins + [[_newCoins objectForKey:kCoins] intValue])];
+}
+
+- (void) didClickDone:(NSNotification*) _notification
+{
+    [self dismissPopup];
+}
+
+- (void)dismissPopup {
+    if (self.popupViewController != nil) {
+        [self dismissPopupViewControllerAnimated:YES completion:^{
+            NSLog(@"popup view dismissed");
+        }];
+    }
 }
 
 #pragma mark - JINGROUND DELEGATE
@@ -284,7 +299,7 @@
             iChar = i * charPerRow + j;
             
             NSString *character = [_sourceChar objectAtIndex:iChar];
-            NSLog(@"%d: %@", iChar, character);
+//            NSLog(@"%d: %@", iChar, character);
             
             CGRect frame = CGRectMake(offsetX, offsetY, SOURCE_CHAR_WIDTH, SOURCE_CHAR_WIDTH);
             CharSource *_char = [[CharSource alloc] initWithChar:character andFrame:frame];
@@ -629,8 +644,9 @@
 - (IBAction)btnCoinsClick:(id)sender {
     PurchaseViewController *_purchaseController = [self.storyboard instantiateViewControllerWithIdentifier:@"PurchaseViewController"];
 
-//    [self presentViewController:_purchaseController animated:YES completion:nil];
-    [self.navigationController pushViewController:_purchaseController animated:YES];
+    [self presentPopupViewController:_purchaseController animated:YES completion:^{
+        
+    }];
 }
 
 - (IBAction)playSong:(id)sender

@@ -51,4 +51,9 @@
 
 #define kNotifyDidChangeCoins       @"coins_changed"
 #define kCoins                      @"coins"
+#define kDoneClick                  @"done_click"
+
+
+
+
 

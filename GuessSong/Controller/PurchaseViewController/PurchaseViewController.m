@@ -8,6 +8,7 @@
 
 #import "PurchaseViewController.h"
 #import "SVProgressHUD.h"
+#import "UIViewController+CWPopup.h"
 #import "AFNetworkingSynchronousSingleton.h"
 
 #define kRemoveAdsProductIdentifier @"com.dragon.GuessSongApp"
@@ -35,9 +36,7 @@
 {
     [super viewDidLoad];
     
-    CGRect appFrame = [[UIScreen mainScreen] applicationFrame];
-    
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, appFrame.size.width, appFrame.size.height - 100)];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
@@ -47,7 +46,6 @@
     [SVProgressHUD showWithStatus:@"Loading ..." maskType:SVProgressHUDMaskTypeBlack];
 
     [[AFNetworkingSynchronousSingleton sharedClient] getPath:[NSString stringWithFormat:@"%@%@", kServerURL, @"quiz/products"] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [SVProgressHUD dismiss];
         [self validateProductIdentifiers:[responseObject objectForKey:@"identifiers"]];
         
         _coins = [responseObject objectForKey:@"coins"];
@@ -71,6 +69,8 @@
     _products = response.products;
     
     [self displayStoreUI]; // Custom method
+    
+    [SVProgressHUD dismiss];
 }
 
 - (void) displayStoreUI
@@ -87,7 +87,7 @@
 #pragma mark - UITABLEVIEW DELEGATE
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100.0f;
+    return 50.0f;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -117,8 +117,7 @@
 #pragma mark - DONE CLICK
 - (IBAction)btnDoneClick:(id)sender
 {
-//    [self dismissViewControllerAnimated:YES completion:nil];
-    [self.navigationController popViewControllerAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDoneClick object:nil];
 }
 
 #pragma mark - BUY CLICK

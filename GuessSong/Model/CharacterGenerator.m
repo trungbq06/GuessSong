@@ -71,7 +71,6 @@
     for (int position=0; position < [_songName length]; position++) {
         unichar ch = [_songName characterAtIndex:position];
         
-        NSLog(@"%C", ch);
         if (ch) {
             NSString *_char = [NSString stringWithFormat:@"%c", ch];
             if (![_char isEqualToString:@" "]) {
