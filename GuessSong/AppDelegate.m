@@ -32,9 +32,14 @@
     if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
         // iOS 7
         [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+        
+        [[UINavigationBar appearance] setBarTintColor:[UIColor greenColor]];
     } else {
         // iOS 6
         [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationSlide];
+        
+        [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+        [[UINavigationBar appearance] setBackgroundColor:[UIColor greenColor]];
     }
     
     //-----------PUSHWOOSH PART-----------

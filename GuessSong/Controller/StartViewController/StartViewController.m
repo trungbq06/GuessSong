@@ -9,6 +9,7 @@
 #import "StartViewController.h"
 #import <FacebookSDK/FacebookSDK.h>
 #import "AFNetworkingSynchronousSingleton.h"
+#import "UIViewController+CWPopup.h"
 #import "AppDelegate.h"
 #import "CDSingleton.h"
 #import "CDCommon.h"
@@ -60,6 +61,17 @@
             } failure:^(CDInsert *operation, NSError *error) {
                 
             }];
+        }
+    } failure:^(CDLoad *operation, NSError *error) {
+        NSLog(@"Error %@", error);
+    }];
+    
+    // Load coins and level from local database
+    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
+        //        NSLog(@"%@", responseObject);
+        for (UserInfo *_userInfo in responseObject) {
+            NSLog(@"Current coins: %@", _userInfo.coins);
+            [_btnCoins setTitle:[NSString stringWithFormat:@"%@", _userInfo.coins] forState:UIControlStateNormal];
         }
     } failure:^(CDLoad *operation, NSError *error) {
         NSLog(@"Error %@", error);
@@ -132,6 +144,15 @@
         [interstitial_ setDelegate:self];
         [interstitial_ loadRequest:[GADRequest request]];
     }
+}
+
+#pragma mark - COINS CLICK
+- (IBAction)btnCoinsClick:(id)sender {
+    PurchaseViewController *_purchaseController = [self.storyboard instantiateViewControllerWithIdentifier:@"PurchaseViewController"];
+    
+    [self presentPopupViewController:_purchaseController animated:YES completion:^{
+        
+    }];
 }
 
 #pragma mark GameCenterDelegateProtocol Methods

@@ -45,11 +45,44 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
+                            <view appearanceType="aqua" contentMode="scaleToFill" id="4VX-mS-gwP">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qSA-VQ-Vad">
+                                        <rect key="frame" x="142" y="6" width="36" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coin.png" id="gZU-3M-wQT">
+                                        <rect key="frame" x="236" y="1" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Utj-rv-h93">
+                                        <rect key="frame" x="238" y="0.0" width="77" height="34"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <state key="normal" title="10000">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnCoinsClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="a52-e9-mV7"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="WLn-xz-iQP"/>
                     <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="btnCoins" destination="Utj-rv-h93" id="Tkr-gY-8Ol"/>
+                        <outlet property="lbLevel" destination="qSA-VQ-Vad" id="YXT-OO-6bh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
@@ -95,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAN-Tk-5rF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="90" y="148"/>
+            <point key="canvasLocation" x="-858" y="-16"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Kqb-Kc-sFB">
@@ -152,13 +185,14 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="250" height="400"/>
                     <connections>
                         <outlet property="btnDone" destination="JCN-U6-Sxg" id="u7A-T8-XX4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K0K-cZ-ib0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-823" y="-57"/>
+            <point key="canvasLocation" x="-601" y="-38"/>
         </scene>
         <!--Play View Controller-->
         <scene sceneID="9FV-hg-gb7">
@@ -169,7 +203,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="bQU-i1-dof">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="35"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BCw-6A-DWb">

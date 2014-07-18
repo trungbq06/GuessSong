@@ -26,6 +26,9 @@
 }
 
 @property (nonatomic, retain) GameCenterManager *gameCenterManager;
+@property (weak, nonatomic) IBOutlet UILabel        *lbLevel;
+@property (weak, nonatomic) IBOutlet UIButton       *btnCoins;
+
 - (IBAction)btnPlayClick:(id)sender;
 
 @end
