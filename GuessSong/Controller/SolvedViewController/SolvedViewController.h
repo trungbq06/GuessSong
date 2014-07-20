@@ -10,4 +10,18 @@
 
 @interface SolvedViewController : UIViewController
 
+@property (nonatomic, retain) NSString              *result;
+@property (nonatomic, assign) int                   coins;
+@property (weak, nonatomic) IBOutlet UILabel        *guessedWord;
+
+// Data of the quiz
+@property (nonatomic, retain) NSMutableArray        *quizData;
+// Current quiz index
+@property (nonatomic, assign) int                   idxQuiz;
+@property (nonatomic, assign) int                   currLevel;
+@property (nonatomic, assign) int                   currCoins;
+
+- (IBAction)btnNextClick:(id)sender;
+
+
 @end

@@ -50,6 +50,11 @@
 @property (weak, nonatomic) IBOutlet JingRoundView  *playingRound;
 @property (weak, nonatomic) IBOutlet UIButton       *btnNext;
 @property (weak, nonatomic) IBOutlet UILabel        *lblGotCoins;
+@property (nonatomic, weak) IBOutlet UIView         *navigationBar;
+
+@property (weak, nonatomic) IBOutlet UIButton *btnFacebook;
+@property (weak, nonatomic) IBOutlet UIButton *btnShow;
+@property (weak, nonatomic) IBOutlet UIButton *btnDelete;
 
 - (IBAction)gotoNextGame:(id)sender;
 - (IBAction)btnCoinsClick:(id)sender;

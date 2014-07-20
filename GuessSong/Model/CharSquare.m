@@ -19,6 +19,7 @@
         _charBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         
         [self setBackgroundColor:[UIColor colorFromHex:@"#363636"]];
+        [self setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"char_bg"]]];
         [self addSubview:_charBtn];
         
         // Setup view

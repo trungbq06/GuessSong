@@ -7,6 +7,7 @@
 //
 
 #import "SolvedViewController.h"
+#import "PlayViewController.h"
 
 @interface SolvedViewController ()
 
@@ -26,7 +27,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -35,15 +37,25 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void) setResult:(NSString *)result
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    _result = result;
+    
+    [_guessedWord setText:_result];
 }
-*/
+
+- (IBAction)btnNextClick:(id)sender
+{
+    PlayViewController *_playController = [self.storyboard instantiateViewControllerWithIdentifier:@"PlayViewController"];
+    [_playController setIdxQuiz:_idxQuiz];
+    [_playController setQuizData:_quizData];
+    [_playController setCurrLevel:_currLevel + 1];
+    
+    [Helper updateNewCoins:_currCoins success:^{
+        [_playController setCurrCoins:_currCoins];
+        
+        [self.navigationController pushViewController:_playController animated:YES];
+    }];
+}
 
 @end

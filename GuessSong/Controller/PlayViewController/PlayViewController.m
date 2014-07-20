@@ -18,6 +18,7 @@
 #import "SVProgressHUD.h"
 #import "DataParser.h"
 #import "UIViewController+CWPopup.h"
+#import "SolvedViewController.h"
 
 @interface PlayViewController ()
 
@@ -38,6 +39,9 @@
 {
     [super viewDidLoad];
     
+    [_navigationBar setBackgroundColor:[UIColor colorFromHex:@"#C73889"]];
+    [_navigationBar setFrame:CGRectMake(0, 0, _navigationBar.frame.size.width, 40)];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeCoins:) name:kNotifyDidChangeCoins object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didClickDone:) name:kDoneClick object:nil];
     
@@ -48,14 +52,14 @@
     
     [self.view setBackgroundColor:[UIColor colorFromHex:@"#24A3BD"]];
     
-    [_btnNext.layer setCornerRadius:5];
-    [_btnNext.layer setBorderWidth:2];
-    [_btnNext.layer setBorderColor:[[UIColor whiteColor] CGColor]];
-    
     _playingRound.delegate = self;
     _playingRound.roundImage = [UIImage imageNamed:@"girl"];
     _playingRound.rotationDuration = 8.0;
     _playingRound.isPlay = NO;
+    
+    if (!IS_IPHONE_5) {
+        [_playingRound setFrame:CGRectMake(_playingRound.frame.origin.x, _playingRound.frame.origin.y - 30, _playingRound.frame.size.width, _playingRound.frame.size.height)];
+    }
     
     CGPoint center = CGPointMake(_playingRound.frame.origin.x + _playingRound.frame.size.width / 2.0, _playingRound.frame.origin.y + _playingRound.frame.size.height / 2.0);
     
@@ -83,7 +87,11 @@
 //        NSLog(@"%@", responseObject);
         for (UserInfo *_userInfo in responseObject) {
             NSLog(@"Current coins: %@", _userInfo.coins);
+            _currCoins = [_userInfo.coins intValue];
             [_btnCoins setTitle:[NSString stringWithFormat:@"%@", _userInfo.coins] forState:UIControlStateNormal];
+            [_lbLevel setText:[NSString stringWithFormat:@"%@", _userInfo.level]];
+            _currLevel = [_userInfo.level intValue];
+            _idxQuiz = [_userInfo.level intValue] - 1;
         }
     } failure:^(CDLoad *operation, NSError *error) {
         NSLog(@"Error %@", error);
@@ -122,7 +130,7 @@
             [SVProgressHUD dismiss];
             _quizData = [DataParser parseQuiz:responseObject];
             // Initiate quiz data
-            _quiz = [_quizData objectAtIndex:0];
+            _quiz = [_quizData objectAtIndex:_idxQuiz];
             
             [self generateGame];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -144,6 +152,17 @@
         
         [self generateGame];
     }
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    NSString *bgImage = [[NSUserDefaults standardUserDefaults] objectForKey:kBackgroundImage];
+    if (!bgImage)
+        bgImage = @"background";
+    
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:bgImage]]];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -197,10 +216,13 @@
         
         if ([_charGenerator isSolved])
             _currCoins += _quiz.coins;
-        
-        [_playController setCurrCoins:_currCoins];
-        
-        [self.navigationController pushViewController:_playController animated:YES];
+        [Helper updateNewCoins:_currCoins success:^{
+            [Helper updateLevel:_currLevel + 1 success:^{
+                [_playController setCurrCoins:_currCoins];
+                
+                [self.navigationController pushViewController:_playController animated:YES];
+            }];
+        }];
     }
 }
 
@@ -242,6 +264,20 @@
     int startX = 0;
     int offsetX = 0;
     int offsetY = OFFSETY;
+    int sOffsetY = SOURCE_OFFSET_Y;
+
+    if (!IS_IPHONE_5) {
+        offsetY -= 50;
+        sOffsetY -= 60;
+        int decrease = 45;
+        
+        [_btnFacebook setFrame:CGRectMake(_btnFacebook.frame.origin.x, _btnFacebook.frame.origin.y - decrease, _btnFacebook.frame.size.width, _btnFacebook.frame.size.height)];
+        [_btnShow setFrame:CGRectMake(_btnShow.frame.origin.x, _btnShow.frame.origin.y - decrease, _btnShow.frame.size.width, _btnShow.frame.size.height)];
+        [_btnDelete setFrame:CGRectMake(_btnDelete.frame.origin.x, _btnDelete.frame.origin.y - decrease, _btnDelete.frame.size.width, _btnDelete.frame.size.height)];
+        [_btnNext setFrame:CGRectMake(_btnNext.frame.origin.x, _btnNext.frame.origin.y - decrease, _btnNext.frame.size.width, _btnNext.frame.size.height)];
+    }
+    
+    offsetY += (sOffsetY - offsetY) / 2 - ([_charGenerator.wordOffset count] * WIDTH/2);
     
     for (int line = 1;line <= [_charGenerator.wordOffset count];line++) {
         NSString *wordStr = [_charGenerator.wordOffset objectForKey:[NSNumber numberWithInt:line]];
@@ -294,7 +330,7 @@
     // Draw source character
     for (int i = 0;i < totalRow;i++) {
         offsetX = (appFrame.size.width - SOURCE_VIEW_WIDTH) / 2;
-        offsetY = SOURCE_OFFSET_Y + i * SOURCE_LINE_SPACING;
+        offsetY = sOffsetY + i * SOURCE_LINE_SPACING;
         for (int j = 0;j < charPerRow;j++) {
             iChar = i * charPerRow + j;
             
@@ -422,6 +458,20 @@
         }
     } else if (alertView.tag == 1002) {
         [self.navigationController popToRootViewControllerAnimated:YES];
+    } else if (alertView.tag == kShowHintAlert && buttonIndex == 1) {
+        [self showCharHint];
+        
+        [_btnCoins setTitle:[NSString stringWithFormat:@"%d", _currCoins] forState:UIControlStateNormal];
+    } else if (alertView.tag == kDeleteAlert && buttonIndex == 1) {
+        [self deleteWrongChar];
+        
+        [_btnCoins setTitle:[NSString stringWithFormat:@"%d", _currCoins] forState:UIControlStateNormal];
+    } else if (alertView.tag == kSkipAlert && buttonIndex == 1) {
+        _currCoins -= kSkipCoins;
+        
+        [self nextGame];
+        
+        [_btnCoins setTitle:[NSString stringWithFormat:@"%d", _currCoins] forState:UIControlStateNormal];
     }
 }
 
@@ -434,6 +484,18 @@
 //    [_dimBg setAlpha:0.6];
 //    
 //    [self.view addSubview:_dimBg];
+    
+    SolvedViewController *_solvedController = [self.storyboard instantiateViewControllerWithIdentifier:@"SolvedViewController"];
+    [_solvedController setResult:_quiz.qResult];
+    
+    [_solvedController setIdxQuiz:_idxQuiz];
+    [_solvedController setCurrCoins:_currCoins];
+    [_solvedController setQuizData:_quizData];
+    [_solvedController setCurrLevel:_currLevel];
+    
+    [Helper updateLevel:_currLevel + 1 success:^{
+        [self presentPopupViewController:_solvedController animated:YES completion:nil];
+    }];
     
     return TRUE;
 }
@@ -449,11 +511,20 @@
 #pragma mark - ACTION IMPLEMENTATION
 - (IBAction)showHint:(id)sender
 {
-    [self showCharHint];
+    if ([self checkCoins:kShowCoins]) {
+        UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Correct character", @"Correct character") message:NSLocalizedString(@"Do you want to reveal a character for 15 coins", @"") delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        _alertView.tag = kShowHintAlert;
+        [_alertView setDelegate:self];
+        [_alertView show];
+    }
 }
 
 - (void) showCharHint
 {
+    _currCoins -= kShowCoins;
+    
+    [Helper updateNewCoins:_currCoins success:nil];
+    
     int iChar = arc4random() % [_charSquareArray count];
     
     CharSquare *_char = [_charSquareArray objectAtIndex:iChar];
@@ -501,7 +572,20 @@
 
 - (IBAction)deleteChar:(id)sender
 {
+    if ([self checkCoins:kDeleteCoins]) {
+        UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove character", @"Remove character") message:NSLocalizedString(@"Do you want to delete a wrong character for 10 coins", @"") delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        _alertView.tag = kDeleteAlert;
+        [_alertView setDelegate:self];
+        [_alertView show];
+    }
+}
+
+- (void) deleteWrongChar
+{
     BOOL removed = FALSE;
+    _currCoins -= kDeleteCoins;
+    [Helper updateNewCoins:_currCoins success:nil];
+    
     for (int i = 0;i < [_charSourceArray count];i++) {
         CharSource *_source = [_charSourceArray objectAtIndex:i];
         if (![_charGenerator.songChar containsObject:_source.character] && ![_source.character isEqualToString:@""]) {
@@ -524,7 +608,7 @@
                 removed = TRUE;
                 break;
             } else {
-//                NSLog(@"CHAR %@", _square.character);
+                //                NSLog(@"CHAR %@", _square.character);
             }
         }
     }
@@ -532,7 +616,23 @@
 
 - (IBAction)skipLevel:(id)sender
 {
-    [self nextGame];
+    if ([self checkCoins:kSkipCoins]) {
+        UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Skip Level", @"Skip Level") message:NSLocalizedString(@"Do you want to skip this level for 30 coins", @"") delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        _alertView.tag = kSkipAlert;
+        [_alertView setDelegate:self];
+        [_alertView show];
+    }
+}
+
+- (BOOL) checkCoins:(int) _neededCoins
+{
+    if (_currCoins < _neededCoins) {
+        [self buyCoins];
+        
+        return FALSE;
+    }
+    
+    return TRUE;
 }
 
 - (IBAction)shareFB:(id)sender
@@ -633,7 +733,7 @@
 
 - (IBAction)btnBackClick:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 #pragma mark - GOTO NEXT GAME
@@ -642,8 +742,13 @@
 }
 
 - (IBAction)btnCoinsClick:(id)sender {
-    PurchaseViewController *_purchaseController = [self.storyboard instantiateViewControllerWithIdentifier:@"PurchaseViewController"];
+    [self buyCoins];
+}
 
+- (void) buyCoins
+{
+    PurchaseViewController *_purchaseController = [self.storyboard instantiateViewControllerWithIdentifier:@"PurchaseViewController"];
+    
     [self presentPopupViewController:_purchaseController animated:YES completion:^{
         
     }];

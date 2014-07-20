@@ -18,10 +18,10 @@
 #define MY_BANNER_UNIT_ID @"ca-app-pub-3108667850339338/3316573652"
 #define MY_BANNER_INTERSITIAL_UNIT_ID @"ca-app-pub-3108667850339338/7746773252"
 #define LEADER_BOARD_IDENTIFIER @"com.dragon.relaxing"
-#define WIDTH             25
+#define WIDTH             28
 #define CHAR_SPACING      3
-#define LINE_SPACING      30
-#define OFFSETY           280
+#define LINE_SPACING      32
+#define OFFSETY           320
 #define SOURCE_CHAR_WIDTH 35
 #define SOURCE_VIEW_WIDTH 250
 #define SOURCE_OFFSET_Y   420
@@ -48,12 +48,19 @@
 
 #define IS_IOS7 floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1
 #define IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
+#define IS_IPHONE ( [ [ [UIDevice currentDevice] model ] isEqualToString:@"iPhone"] )
+#define IS_WIDE_SCREEN ( fabs ( (double) [[UIScreen mainScreen] bounds].size.height - (double)568 ) < DBL_EPSILON)
+#define IS_IPHONE_5 ( IS_IPHONE && IS_WIDE_SCREEN )
 
 #define kNotifyDidChangeCoins       @"coins_changed"
 #define kCoins                      @"coins"
+#define kLevel                      @"level"
 #define kDoneClick                  @"done_click"
-
-
-
-
+#define kBackgroundImage            @"background_image"
+#define kShowHintAlert              1005
+#define kDeleteAlert                1006
+#define kDeleteCoins                10
+#define kShowCoins                  15
+#define kSkipCoins                  30
+#define kSkipAlert                  1007
 

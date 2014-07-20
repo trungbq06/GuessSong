@@ -18,6 +18,7 @@
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         
         [self setBackgroundColor:[UIColor whiteColor]];
+        [self setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"source_bg"]]];
         [self addSubview:button];
         
         // Setup view

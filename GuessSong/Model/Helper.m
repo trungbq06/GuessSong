@@ -32,6 +32,57 @@
     return FALSE;
 }
 
++ (void) updateLevel:(int)newLevel success:(void (^)())_success
+{
+    CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
+    
+    CDModel* _cdModel = [[CDModel alloc] init];
+    _cdModel.entityName = @"UserInfo";
+    
+    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
+        NSNumber *_newLevel = [NSNumber numberWithInt:newLevel];
+        NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:_newLevel, kLevel, nil];
+        
+        [_cdSingleton updateWithData:_cdModel newData:_uInfo success:^(CDUpdate *operation, id responseObject) {
+            if (_success)
+                _success();
+            
+            dispatch_async(dispatch_get_main_queue(),^{
+            });
+        } failure:^(CDUpdate *operation, NSError *error) {
+            
+        }];
+    } failure:^(CDLoad *operation, NSError *error) {
+        NSLog(@"Error %@", error);
+    }];
+}
+
++ (void) updateNewCoins:(int)newCoins success:(void (^)())_success
+{
+    CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
+    
+    CDModel* _cdModel = [[CDModel alloc] init];
+    _cdModel.entityName = @"UserInfo";
+    
+    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
+        NSNumber *_newCoins = [NSNumber numberWithInt:newCoins];
+        NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:_newCoins, kCoins, nil];
+        
+        [_cdSingleton updateWithData:_cdModel newData:_uInfo success:^(CDUpdate *operation, id responseObject) {
+//            [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyDidChangeCoins object:nil userInfo:_uInfo];
+            if (_success)
+                _success();
+            
+            dispatch_async(dispatch_get_main_queue(),^{
+            });
+        } failure:^(CDUpdate *operation, NSError *error) {
+            
+        }];
+    } failure:^(CDLoad *operation, NSError *error) {
+        NSLog(@"Error %@", error);
+    }];
+}
+
 + (void) updateCoins:(int) newCoins
 {
     CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];

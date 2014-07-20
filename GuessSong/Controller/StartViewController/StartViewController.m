@@ -10,10 +10,12 @@
 #import <FacebookSDK/FacebookSDK.h>
 #import "AFNetworkingSynchronousSingleton.h"
 #import "UIViewController+CWPopup.h"
+#import "ChangeBgViewController.h"
 #import "AppDelegate.h"
 #import "CDSingleton.h"
 #import "CDCommon.h"
 #import "CDModel.h"
+#import "UIColor+Expand.h"
 
 @interface StartViewController ()
 
@@ -36,6 +38,13 @@
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     */
     
+    [_navigationBar setBackgroundColor:[UIColor colorFromHex:@"#C73889"]];
+    
+    [_navigationBar setFrame:CGRectMake(0, 0, _navigationBar.frame.size.width, 40)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeCoins:) name:kNotifyDidChangeCoins object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didClickDone:) name:kDoneClick object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didClickDone:) name:@"clicked_done" object:nil];
     if ([GameCenterManager isGameCenterAvailable]) {
         _gameCenterManager = [[GameCenterManager alloc] init];
         [_gameCenterManager setDelegate:self];
@@ -43,39 +52,6 @@
     } else {
         // The current device does not support Game Center.
     }
-    
-    // Insert new record to database
-    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:START_COINS], kCoins, [NSNumber numberWithInt:1], @"level", nil];
-    NSArray *_data = [[NSArray alloc] initWithObjects:_uInfo, nil];
-    
-    CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
-    
-    CDModel* _cdModel = [[CDModel alloc] init];
-    _cdModel.entityName = @"UserInfo";
-    
-    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
-        if ([responseObject count] == 0) {
-            [_cdSingleton insertWithData:_data tableName:@"UserInfo" success:^(CDInsert *operation, id responseObject) {
-                NSLog(@"Inserted succesfully!");
-            } failure:^(CDInsert *operation, NSError *error) {
-                
-            }];
-        }
-    } failure:^(CDLoad *operation, NSError *error) {
-        NSLog(@"Error %@", error);
-    }];
-    
-    // Load coins and level from local database
-    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
-        //        NSLog(@"%@", responseObject);
-        for (UserInfo *_userInfo in responseObject) {
-            NSLog(@"Current coins: %@", _userInfo.coins);
-            [_btnCoins setTitle:[NSString stringWithFormat:@"%@", _userInfo.coins] forState:UIControlStateNormal];
-        }
-    } failure:^(CDLoad *operation, NSError *error) {
-        NSLog(@"Error %@", error);
-    }];
     
     AppDelegate *appDelegate = (AppDelegate*) [[UIApplication sharedApplication]delegate];
     if (!appDelegate.session.isOpen) {
@@ -119,6 +95,85 @@
     else {
         [self performSelectorOnMainThread:@selector(loadBanner) withObject:nil waitUntilDone:NO];
     }
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [self reloadBgImage];
+    
+    // Insert new record to database
+    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:START_COINS], kCoins, [NSNumber numberWithInt:1], @"level", nil];
+    NSArray *_data = [[NSArray alloc] initWithObjects:_uInfo, nil];
+    
+    CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
+    
+    CDModel* _cdModel = [[CDModel alloc] init];
+    _cdModel.entityName = @"UserInfo";
+    
+    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
+        NSLog(@"%@", responseObject);
+        if ([responseObject count] == 0) {
+            [_cdSingleton insertWithData:_data tableName:@"UserInfo" success:^(CDInsert *operation, id responseObject) {
+                NSLog(@"Inserted succesfully!");
+            } failure:^(CDInsert *operation, NSError *error) {
+                
+            }];
+        }
+    } failure:^(CDLoad *operation, NSError *error) {
+        NSLog(@"Error %@", error);
+    }];
+    
+    // Load coins and level from local database
+    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
+        //        NSLog(@"%@", responseObject);
+        for (UserInfo *_userInfo in responseObject) {
+            NSLog(@"Current coins: %@", _userInfo.coins);
+            NSLog(@"Current level: %@", _userInfo.level);
+            [_btnCoins setTitle:[NSString stringWithFormat:@"%@", _userInfo.coins] forState:UIControlStateNormal];
+            [_lbLevel setText:[NSString stringWithFormat:@"%@", _userInfo.level]];
+        }
+    } failure:^(CDLoad *operation, NSError *error) {
+        NSLog(@"Error %@", error);
+    }];
+}
+
+- (void) reloadBgImage
+{
+    NSString *bgImage = [[NSUserDefaults standardUserDefaults] objectForKey:kBackgroundImage];
+    if (!bgImage)
+        bgImage = @"background";
+    
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:bgImage]]];
+}
+
+#pragma mark - COINS CHANGED
+- (void) didChangeCoins:(NSNotification*)_notification
+{
+    NSDictionary *_newCoins = _notification.userInfo;
+    
+    [_btnCoins setTitle:[NSString stringWithFormat:@"%d", [[_newCoins objectForKey:kCoins] intValue]] forState:UIControlStateNormal];
+}
+
+#pragma mark - CHANGE BG
+- (IBAction)changeBg:(id)sender
+{
+    ChangeBgViewController *_changeBg = [[ChangeBgViewController alloc] init];
+    [_changeBg.view setFrame:CGRectMake(20, 50, 280, 400)];
+    
+    [self presentPopupViewController:_changeBg animated:YES completion:nil];
+}
+
+- (void) didClickDone:(NSNotification*) _notification
+{
+    if (self.popupViewController != nil) {
+        [self dismissPopupViewControllerAnimated:YES completion:^{
+            NSLog(@"popup view dismissed");
+        }];
+    }
+    
+    [self reloadBgImage];
 }
 
 #pragma mark - LOAD BANNER

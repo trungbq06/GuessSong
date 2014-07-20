@@ -16,7 +16,6 @@
 
 @implementation JingRoundView
 
-
 -(id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
