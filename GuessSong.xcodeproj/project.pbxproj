@@ -125,6 +125,7 @@
 		670917251972AB04001A6CBD /* girl.png in Resources */ = {isa = PBXBuildFile; fileRef = 670917241972AB04001A6CBD /* girl.png */; };
 		670917291972C27E001A6CBD /* edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 670917271972C27E001A6CBD /* edit.png */; };
 		6709172B1972C31B001A6CBD /* fb.png in Resources */ = {isa = PBXBuildFile; fileRef = 6709172A1972C31B001A6CBD /* fb.png */; };
+		670A7C84197C7E6700FED4A8 /* cd.png in Resources */ = {isa = PBXBuildFile; fileRef = 670A7C83197C7E6700FED4A8 /* cd.png */; };
 		67351E2C196B7AB300A922B0 /* CharacterGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 67351E2B196B7AB300A922B0 /* CharacterGenerator.m */; };
 		673598BF1969DAEE00E35E60 /* PlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 673598BE1969DAEE00E35E60 /* PlayViewController.m */; };
 		673EB0C7196CCFFE0090E0FB /* CharSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 673EB0C6196CCFFE0090E0FB /* CharSource.m */; };
@@ -343,6 +344,7 @@
 		670917241972AB04001A6CBD /* girl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = girl.png; sourceTree = "<group>"; };
 		670917271972C27E001A6CBD /* edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit.png; sourceTree = "<group>"; };
 		6709172A1972C31B001A6CBD /* fb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fb.png; sourceTree = "<group>"; };
+		670A7C83197C7E6700FED4A8 /* cd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cd.png; sourceTree = "<group>"; };
 		67351E2A196B7AB300A922B0 /* CharacterGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CharacterGenerator.h; sourceTree = "<group>"; };
 		67351E2B196B7AB300A922B0 /* CharacterGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CharacterGenerator.m; sourceTree = "<group>"; };
 		673598BD1969DAEE00E35E60 /* PlayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayViewController.h; sourceTree = "<group>"; };
@@ -854,6 +856,7 @@
 		67633A44196B6A1000475535 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				670A7C83197C7E6700FED4A8 /* cd.png */,
 				6703DF50197B20E10080768F /* product */,
 				6709172A1972C31B001A6CBD /* fb.png */,
 				670917271972C27E001A6CBD /* edit.png */,
@@ -1021,6 +1024,7 @@
 				6703DF81197B20E10080768F /* background_4@2x.png in Resources */,
 				6703DF8A197B20E10080768F /* char_bg.png in Resources */,
 				67EC61DF197B5404000CB4B4 /* background_13@2x.png in Resources */,
+				670A7C84197C7E6700FED4A8 /* cd.png in Resources */,
 				6709171B1972A73D001A6CBD /* pause.png in Resources */,
 				6703DF9D197B20E10080768F /* volume_off.png in Resources */,
 				6703DF8B197B20E10080768F /* char_bg@2x.png in Resources */,

@@ -309,7 +309,7 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" id="zJb-sa-UIp" customClass="JingRoundView">
-                                <rect key="frame" x="80" y="86" width="160" height="160"/>
+                                <rect key="frame" x="70" y="75" width="180" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
