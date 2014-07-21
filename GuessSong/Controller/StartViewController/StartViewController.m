@@ -11,6 +11,7 @@
 #import "AFNetworkingSynchronousSingleton.h"
 #import "UIViewController+CWPopup.h"
 #import "ChangeBgViewController.h"
+#import "MoreAppViewController.h"
 #import "AppDelegate.h"
 #import "CDSingleton.h"
 #import "CDCommon.h"
@@ -146,6 +147,49 @@
         bgImage = @"background";
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:bgImage]]];
+}
+
+#pragma mark - MORE APP
+- (void)moreApp:(id)sender
+{
+//    NSString *str = @"https://itunes.apple.com/search?term=Trung%20Bui&entity=software&attribute=softwareDeveloper";
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+//    
+//    [[NSUserDefaults standardUserDefaults] setObject:@1 forKey:RATED_APP];
+    
+    MoreAppViewController *_moreViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MoreAppViewController"];
+    
+    [self presentPopupViewController:_moreViewController animated:YES completion:nil];
+}
+
+#pragma mark - RATE APP
+- (IBAction)share:(id)sender
+{
+    NSString *message = [NSString stringWithFormat:@"OMG! This is fantastic game! How can you defeat me on this game http://itunes.apple.com/app/id892274452"];
+    NSArray *postItems = @[message];
+    
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc]
+                                            initWithActivityItems:postItems
+                                            applicationActivities:nil];
+    
+    [self presentViewController:activityVC animated:YES completion:nil];
+}
+
+- (IBAction)rate:(id)sender
+{
+    [self rateApp];
+}
+
+- (void) rateApp
+{
+    NSString *str = @"itms-apps://itunes.apple.com/app/id892274452";
+    if (IS_IOS7 == 0) {
+        str = @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=id892274452";
+    }
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@1 forKey:RATED_APP];
 }
 
 #pragma mark - COINS CHANGED

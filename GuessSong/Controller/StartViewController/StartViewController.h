@@ -32,5 +32,8 @@
 
 - (IBAction)btnPlayClick:(id)sender;
 - (IBAction)changeBg:(id)sender;
+- (IBAction)share:(id)sender;
+- (IBAction)rate:(id)sender;
+- (IBAction)moreApp:(id)sender;
 
 @end

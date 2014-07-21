@@ -53,7 +53,7 @@
     [self.view setBackgroundColor:[UIColor colorFromHex:@"#24A3BD"]];
     
     _playingRound.delegate = self;
-    _playingRound.roundImage = [UIImage imageNamed:@"girl"];
+    _playingRound.roundImage = [UIImage imageNamed:@"cd_rom1"];
     _playingRound.rotationDuration = 8.0;
     _playingRound.isPlay = NO;
     
@@ -255,7 +255,7 @@
     
     [_charGenerator setSongName:quizName];
     
-    [_playingRound.roundImageView setImageWithURL:[NSURL URLWithString:[_quiz.qSource objectForKey:@"thumbnail"]]];
+//    [_playingRound.roundImageView setImageWithURL:[NSURL URLWithString:[_quiz.qSource objectForKey:@"thumbnail"]]];
     
     [_lbLevel setText:[NSString stringWithFormat:@"%d", _currLevel]];
     
@@ -265,7 +265,8 @@
     int offsetX = 0;
     int offsetY = OFFSETY;
     int sOffsetY = SOURCE_OFFSET_Y;
-
+    NSLog(@"%d - %d - %@", IS_IPHONE, IS_WIDE_SCREEN, [ [UIDevice currentDevice] model ]);
+    
     if (!IS_IPHONE_5) {
         offsetY -= 50;
         sOffsetY -= 60;

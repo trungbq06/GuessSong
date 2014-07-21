@@ -9,6 +9,7 @@
 #import "PurchaseViewController.h"
 #import "SVProgressHUD.h"
 #import "UIViewController+CWPopup.h"
+#import "PurchaseTableViewCell.h"
 #import "AFNetworkingSynchronousSingleton.h"
 
 #define kRemoveAdsProductIdentifier @"com.dragon.GuessSongApp"
@@ -36,9 +37,12 @@
 {
     [super viewDidLoad];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 50, self.view.frame.size.width, self.view.frame.size.height)];
+    [_tableView registerNib:[UINib nibWithNibName:@"PurchaseTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"PurchaseTableViewCell"];
+    
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.scrollEnabled = NO;
     [self.view addSubview:_tableView];
     
     [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
@@ -97,10 +101,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    PurchaseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PurchaseTableViewCell"];
+    
+    if (cell == nil) {
+        cell = [[[NSBundle mainBundle] loadNibNamed:@"PurchaseTableViewCell" owner:nil options:nil] objectAtIndex:0];
+    }
     
     SKProduct * product = (SKProduct *) _products[indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@ - %@", product.localizedTitle, product.price];
+    cell.pTitle.text = [NSString stringWithFormat:@"%@", product.localizedTitle];
+    [cell.pCoins setText:[NSString stringWithFormat:@"$ %@", product.price]];
     
     return cell;
 }

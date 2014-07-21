@@ -48,7 +48,7 @@
 
 #define IS_IOS7 floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_6_1
 #define IS_IPAD ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad)
-#define IS_IPHONE ( [ [ [UIDevice currentDevice] model ] isEqualToString:@"iPhone"] )
+#define IS_IPHONE ( [ [ [UIDevice currentDevice] model ] rangeOfString:@"iPhone"].location != NSNotFound )
 #define IS_WIDE_SCREEN ( fabs ( (double) [[UIScreen mainScreen] bounds].size.height - (double)568 ) < DBL_EPSILON)
 #define IS_IPHONE_5 ( IS_IPHONE && IS_WIDE_SCREEN )
 
@@ -63,4 +63,5 @@
 #define kShowCoins                  15
 #define kSkipCoins                  30
 #define kSkipAlert                  1007
+#define RATED_APP                   @"rated_app"
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ooQ-NS-e46">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A261i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ooQ-NS-e46">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -41,9 +41,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Utj-rv-h93">
-                                        <rect key="frame" x="234" y="3" width="80" height="34"/>
+                                        <rect key="frame" x="234" y="5" width="80" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
                                         <state key="normal" title="10000"/>
                                         <connections>
                                             <action selector="btnCoinsClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="a52-e9-mV7"/>
@@ -65,6 +65,9 @@
                                 <state key="normal" backgroundImage="facebook.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="share:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Tze-al-uiF"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aBq-L1-O1I">
                                 <rect key="frame" x="169" y="353" width="32" height="32"/>
@@ -74,6 +77,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="rate:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Afc-7V-j33"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="BGz-VJ-iv7">
                                 <rect key="frame" x="216" y="353" width="32" height="32"/>
@@ -83,6 +89,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="moreApp:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="n7h-bq-K1D"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Iez-u5-8Pf">
                                 <rect key="frame" x="21" y="43" width="80" height="30"/>
@@ -167,6 +176,32 @@
             </objects>
             <point key="canvasLocation" x="-1024" y="-106"/>
         </scene>
+        <!--More App View Controller-->
+        <scene sceneID="ubT-BW-Jbz">
+            <objects>
+                <viewController storyboardIdentifier="MoreAppViewController" id="tAr-vg-oDS" customClass="MoreAppViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eYh-Hz-EPH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Ced-eI-yf4">
+                                <rect key="frame" x="126" y="40" width="68" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="More App">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="changeBg:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="SLN-vK-H7q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lfa-eI-Qex" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-742" y="-18"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Kqb-Kc-sFB">
             <objects>
@@ -180,14 +215,14 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="28c-0H-osK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-508" y="-16"/>
+            <point key="canvasLocation" x="-502" y="-16"/>
         </scene>
         <!--Purchase View Controller-->
         <scene sceneID="UbO-Hz-Tck">
             <objects>
                 <viewController storyboardIdentifier="PurchaseViewController" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="thB-GV-Vaj" customClass="PurchaseViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gzE-P6-vvg">
-                        <rect key="frame" x="0.0" y="0.0" width="250" height="400"/>
+                        <rect key="frame" x="0.0" y="0.0" width="280" height="300"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500 coins" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NRs-1X-wib">
@@ -208,9 +243,10 @@
                                 </connections>
                             </button>
                             <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JCN-U6-Sxg">
-                                <rect key="frame" x="25" y="14" width="37" height="30"/>
+                                <rect key="frame" x="94" y="259" width="92" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Done">
+                                <state key="normal" title="Back" backgroundImage="play_btn.png">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -222,14 +258,14 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="250" height="400"/>
+                    <size key="freeformSize" width="280" height="300"/>
                     <connections>
                         <outlet property="btnDone" destination="JCN-U6-Sxg" id="u7A-T8-XX4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K0K-cZ-ib0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-646" y="-29"/>
+            <point key="canvasLocation" x="-352" y="-106"/>
         </scene>
         <!--Play View Controller-->
         <scene sceneID="9FV-hg-gb7">
@@ -265,9 +301,9 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="zXZ-13-EJ4">
-                                        <rect key="frame" x="235" y="3" width="80" height="34"/>
+                                        <rect key="frame" x="235" y="5" width="80" height="34"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <fontDescription key="fontDescription" name="Helvetica-Bold" family="Helvetica" pointSize="16"/>
                                         <state key="normal" title="10000">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
