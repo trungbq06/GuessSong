@@ -12,7 +12,9 @@
 
 @property (nonatomic, retain) NSString              *result;
 @property (nonatomic, assign) int                   coins;
-@property (weak, nonatomic) IBOutlet UILabel        *guessedWord;
+@property (strong, nonatomic) IBOutlet UILabel      *guessedWord;
+@property (strong, nonatomic) IBOutlet UILabel      *lblCoins;
+@property (strong, nonatomic) IBOutlet UIButton     *btnNext;
 
 // Data of the quiz
 @property (nonatomic, retain) NSMutableArray        *quizData;

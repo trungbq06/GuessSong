@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>794C921C-9B1A-49CA-87E4-6885A41D9646</string>
+	<string>AF57D11B-684D-45A3-B116-A057E054E6AC</string>
 	<key>IDESourceControlProjectName</key>
 	<string>GuessSong</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,11 +14,11 @@
 		<string>https://github.com/trungbq06/GuessSong.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>GuessSong.xcodeproj/project.xcworkspace</string>
+	<string>GuessSong.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>A7827FE4-4A6F-4CF3-812D-79DB5766A6AB</key>
-		<string>../..</string>
+		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/trungbq06/GuessSong.git</string>

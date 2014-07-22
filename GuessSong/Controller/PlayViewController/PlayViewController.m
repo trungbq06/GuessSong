@@ -488,6 +488,7 @@
     
     SolvedViewController *_solvedController = [self.storyboard instantiateViewControllerWithIdentifier:@"SolvedViewController"];
     [_solvedController setResult:_quiz.qResult];
+    [_solvedController setCoins:_quiz.coins];
     
     [_solvedController setIdxQuiz:_idxQuiz];
     [_solvedController setCurrCoins:_currCoins];

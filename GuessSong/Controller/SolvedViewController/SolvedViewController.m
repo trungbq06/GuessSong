@@ -31,6 +31,25 @@
     [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    [_guessedWord setText:_result];
+    [_lblCoins setText:[NSString stringWithFormat:@"You got %d coins", _coins]];
+    
+    if (_currLevel == [_quizData count] - 1) {
+        [_btnNext setHidden:YES];
+        
+        CGRect frame = [[UIScreen mainScreen] applicationFrame];
+        NSString *finish = @"Amazing! You finished all level! We will update new data soon. Please come back later!";
+        UILabel *lbFinish = [[UILabel alloc] initWithFrame:CGRectMake(0, 300, frame.size.width, frame.size.height)];
+        [lbFinish setText:finish];
+        
+        [self.view addSubview:lbFinish];
+    }
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -40,22 +59,22 @@
 - (void) setResult:(NSString *)result
 {
     _result = result;
-    
-    [_guessedWord setText:_result];
 }
 
 - (IBAction)btnNextClick:(id)sender
 {
-    PlayViewController *_playController = [self.storyboard instantiateViewControllerWithIdentifier:@"PlayViewController"];
-    [_playController setIdxQuiz:_idxQuiz];
-    [_playController setQuizData:_quizData];
-    [_playController setCurrLevel:_currLevel + 1];
-    
-    [Helper updateNewCoins:_currCoins success:^{
-        [_playController setCurrCoins:_currCoins];
+    if (_currLevel < [_quizData count]) {
+        PlayViewController *_playController = [self.storyboard instantiateViewControllerWithIdentifier:@"PlayViewController"];
+        [_playController setIdxQuiz:_idxQuiz];
+        [_playController setQuizData:_quizData];
+        [_playController setCurrLevel:_currLevel + 1];
         
-        [self.navigationController pushViewController:_playController animated:YES];
-    }];
+        [Helper updateNewCoins:_currCoins success:^{
+            [_playController setCurrCoins:_currCoins];
+            
+            [self.navigationController pushViewController:_playController animated:YES];
+        }];
+    }
 }
 
 @end

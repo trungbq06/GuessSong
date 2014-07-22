@@ -96,6 +96,14 @@
     else {
         [self performSelectorOnMainThread:@selector(loadBanner) withObject:nil waitUntilDone:NO];
     }
+//    
+//    POPSpringAnimation *positionAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+//    positionAnimation.velocity = @2000;
+//    positionAnimation.springBounciness = 20;
+//    [positionAnimation setCompletionBlock:^(POPAnimation *animation, BOOL finished) {
+//        self.button.userInteractionEnabled = YES;
+//    }];
+//    [self.button.layer pop_addAnimation:positionAnimation forKey:@"positionAnimation"];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -152,14 +160,9 @@
 #pragma mark - MORE APP
 - (void)moreApp:(id)sender
 {
-//    NSString *str = @"https://itunes.apple.com/search?term=Trung%20Bui&entity=software&attribute=softwareDeveloper";
-//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
-//    
-//    [[NSUserDefaults standardUserDefaults] setObject:@1 forKey:RATED_APP];
-    
     MoreAppViewController *_moreViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MoreAppViewController"];
     
-    [self presentPopupViewController:_moreViewController animated:YES completion:nil];
+    [self presentViewController:_moreViewController animated:YES completion:nil];
 }
 
 #pragma mark - RATE APP
