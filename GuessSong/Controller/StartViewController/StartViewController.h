@@ -29,6 +29,7 @@
 @property (weak, nonatomic) IBOutlet UILabel        *lbLevel;
 @property (weak, nonatomic) IBOutlet UIButton       *btnCoins;
 @property (nonatomic, strong) IBOutlet UIView       *navigationBar;
+@property (nonatomic, strong) IBOutlet UIButton     *btnPlay;
 
 - (IBAction)btnPlayClick:(id)sender;
 - (IBAction)changeBg:(id)sender;

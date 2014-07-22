@@ -230,6 +230,7 @@
 {
     if (_quiz) {
         [self generateNewQuiz:_quiz.qResult];
+        NSLog(@"RESULT: %@", _quiz.qResult);
     }
 }
 

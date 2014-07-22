@@ -8,6 +8,7 @@
 
 #import "SolvedViewController.h"
 #import "PlayViewController.h"
+#import <POP/POP.h>
 
 @interface SolvedViewController ()
 
@@ -36,6 +37,7 @@
     [super viewWillAppear:animated];
     
     [_guessedWord setText:_result];
+    [_guessedWord setHidden:YES];
     [_lblCoins setText:[NSString stringWithFormat:@"You got %d coins", _coins]];
     
     if (_currLevel == [_quizData count] - 1) {
@@ -48,6 +50,26 @@
         
         [self.view addSubview:lbFinish];
     }
+}
+
+- (void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self animation];
+}
+
+- (void) animation
+{
+    [_guessedWord setHidden:NO];
+    POPSpringAnimation *positionAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    positionAnimation.velocity = @2000;
+    positionAnimation.springBounciness = 10;
+    CGRect normalFrame = _guessedWord.frame;
+    [positionAnimation setCompletionBlock:^(POPAnimation *animation, BOOL finished) {
+        [_guessedWord setFrame:normalFrame];
+    }];
+    [_guessedWord pop_addAnimation:positionAnimation forKey:@"positionAnimation"];
 }
 
 - (void)didReceiveMemoryWarning

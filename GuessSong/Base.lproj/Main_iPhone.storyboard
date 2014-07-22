@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ooQ-NS-e46">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A261i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="ooQ-NS-e46">
     <dependencies>
         <deployment defaultVersion="1536" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -114,6 +114,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="btnCoins" destination="Utj-rv-h93" id="Tkr-gY-8Ol"/>
+                        <outlet property="btnPlay" destination="bXe-x5-ir4" id="v0m-n6-Jma"/>
                         <outlet property="lbLevel" destination="qSA-VQ-Vad" id="YXT-OO-6bh"/>
                         <outlet property="navigationBar" destination="4VX-mS-gwP" id="xsm-cy-uF6"/>
                     </connections>

@@ -17,6 +17,7 @@
 #import "CDCommon.h"
 #import "CDModel.h"
 #import "UIColor+Expand.h"
+#import <POP/POP.h>
 
 @interface StartViewController ()
 
@@ -96,14 +97,34 @@
     else {
         [self performSelectorOnMainThread:@selector(loadBanner) withObject:nil waitUntilDone:NO];
     }
-//    
-//    POPSpringAnimation *positionAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
-//    positionAnimation.velocity = @2000;
-//    positionAnimation.springBounciness = 20;
-//    [positionAnimation setCompletionBlock:^(POPAnimation *animation, BOOL finished) {
-//        self.button.userInteractionEnabled = YES;
-//    }];
-//    [self.button.layer pop_addAnimation:positionAnimation forKey:@"positionAnimation"];
+    
+    [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(animation) userInfo:nil repeats:YES];
+}
+
+- (void) animation
+{
+    /*
+    POPSpringAnimation *basicAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerPositionX];
+    basicAnimation.velocity = @1000;
+    basicAnimation.springBounciness = 20;
+    basicAnimation.springSpeed = 10;
+    [basicAnimation setCompletionBlock:^(POPAnimation *animation, BOOL finished) {
+        [_btnPlay setFrame:normalFrame];
+    }];
+     */
+    POPSpringAnimation *basicAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+//    basicAnimation.property = [POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+    basicAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0f, 1.0f)];
+    basicAnimation.fromValue =[NSValue valueWithCGSize:CGSizeMake(1.2f, 1.2f)];
+    basicAnimation.springSpeed = 10;
+    basicAnimation.springBounciness = 10;
+    
+    [basicAnimation setCompletionBlock:^(POPAnimation *animation, BOOL finished) {
+//        [_btnPlay setFrame:normalFrame];
+//        [_btnPlay.titleLabel setFont:[UIFont fontWithName:@"Verdana-Bold" size:30]];
+    }];
+    
+    [_btnPlay.layer pop_addAnimation:basicAnimation forKey:@"positionAnimation"];
 }
 
 - (void) viewWillAppear:(BOOL)animated

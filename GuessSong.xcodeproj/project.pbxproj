@@ -67,6 +67,7 @@
 		37C398AE1977D52D00B42556 /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C398AB1977D52D00B42556 /* MJPopupBackgroundView.m */; };
 		37C398AF1977D52D00B42556 /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C398AD1977D52D00B42556 /* UIViewController+MJPopupViewController.m */; };
 		37C398B31977DC3000B42556 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C398B21977DC3000B42556 /* UIViewController+CWPopup.m */; };
+		5111F03D5F4A404F9F82A4F3 /* libPods-GuessSong.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BE69ED250B940D4B4055B75 /* libPods-GuessSong.a */; };
 		6701008E1969D049001D8926 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6701008D1969D049001D8926 /* Foundation.framework */; };
 		670100901969D049001D8926 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6701008F1969D049001D8926 /* CoreGraphics.framework */; };
 		670100921969D049001D8926 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 670100911969D049001D8926 /* UIKit.framework */; };
@@ -174,6 +175,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0F89B3106DCB44629ADD0687 /* Pods-GuessSong.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessSong.xcconfig"; path = "Pods/Pods-GuessSong.xcconfig"; sourceTree = "<group>"; };
 		371A0681197616F6002789EF /* Pushwoosh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pushwoosh.framework; sourceTree = "<group>"; };
 		371A068419768042002789EF /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
 		371A068519768042002789EF /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
@@ -398,6 +400,7 @@
 		67EC61CC197B5356000CB4B4 /* btn_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_bg@2x.png"; sourceTree = "<group>"; };
 		67F78363197212FB002FE362 /* QuizModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuizModel.h; sourceTree = "<group>"; };
 		67F78364197212FB002FE362 /* QuizModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuizModel.m; sourceTree = "<group>"; };
+		6BE69ED250B940D4B4055B75 /* libPods-GuessSong.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-GuessSong.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -423,6 +426,7 @@
 				37C0C962197066A300392051 /* FacebookSDK.framework in Frameworks */,
 				3791E170197049990043E691 /* libGoogleAdMobAds.a in Frameworks */,
 				3791E179197049C20043E691 /* AdSupport.framework in Frameworks */,
+				5111F03D5F4A404F9F82A4F3 /* libPods-GuessSong.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +669,7 @@
 				670100B51969D04A001D8926 /* GuessSongTests */,
 				6701008C1969D049001D8926 /* Frameworks */,
 				6701008B1969D049001D8926 /* Products */,
+				0F89B3106DCB44629ADD0687 /* Pods-GuessSong.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -698,6 +703,7 @@
 				6701008F1969D049001D8926 /* CoreGraphics.framework */,
 				670100911969D049001D8926 /* UIKit.framework */,
 				670100AF1969D04A001D8926 /* XCTest.framework */,
+				6BE69ED250B940D4B4055B75 /* libPods-GuessSong.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -972,9 +978,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 670100BF1969D04A001D8926 /* Build configuration list for PBXNativeTarget "GuessSong" */;
 			buildPhases = (
+				E89682A1A3AC454FA6317395 /* Check Pods Manifest.lock */,
 				670100861969D049001D8926 /* Sources */,
 				670100871969D049001D8926 /* Frameworks */,
 				670100881969D049001D8926 /* Resources */,
+				A76855DF0515477FB9BFA72A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1133,6 +1141,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A76855DF0515477FB9BFA72A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-GuessSong-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E89682A1A3AC454FA6317395 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		670100861969D049001D8926 /* Sources */ = {
@@ -1325,6 +1366,7 @@
 		};
 		670100C01969D04A001D8926 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F89B3106DCB44629ADD0687 /* Pods-GuessSong.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1344,7 +1386,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/GuessSong/Library/GoogleMobileAdsSdk",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -1353,6 +1395,7 @@
 		};
 		670100C11969D04A001D8926 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F89B3106DCB44629ADD0687 /* Pods-GuessSong.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -1372,7 +1415,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/GuessSong/Library/GoogleMobileAdsSdk",
 				);
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
