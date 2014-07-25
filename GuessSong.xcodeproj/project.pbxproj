@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		371327BE19826F57002F59D6 /* finish_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 371327BC19826F57002F59D6 /* finish_bg.png */; };
+		371327BF19826F57002F59D6 /* finish_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 371327BD19826F57002F59D6 /* finish_bg@2x.png */; };
+		371327C219826FAD002F59D6 /* Beach_background_01.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 371327C019826FAD002F59D6 /* Beach_background_01.jpg */; };
+		371327C319826FAD002F59D6 /* vista-cute-baby-wallpapers_17904_1280x800.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 371327C119826FAD002F59D6 /* vista-cute-baby-wallpapers_17904_1280x800.jpg */; };
 		371A0682197616F6002789EF /* Pushwoosh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371A0681197616F6002789EF /* Pushwoosh.framework */; };
 		371A068819768042002789EF /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 371A068519768042002789EF /* IAPHelper.m */; };
 		371A068919768042002789EF /* RageIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 371A068719768042002789EF /* RageIAPHelper.m */; };
@@ -176,6 +180,10 @@
 
 /* Begin PBXFileReference section */
 		0F89B3106DCB44629ADD0687 /* Pods-GuessSong.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuessSong.xcconfig"; path = "Pods/Pods-GuessSong.xcconfig"; sourceTree = "<group>"; };
+		371327BC19826F57002F59D6 /* finish_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = finish_bg.png; sourceTree = "<group>"; };
+		371327BD19826F57002F59D6 /* finish_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "finish_bg@2x.png"; sourceTree = "<group>"; };
+		371327C019826FAD002F59D6 /* Beach_background_01.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Beach_background_01.jpg; sourceTree = "<group>"; };
+		371327C119826FAD002F59D6 /* vista-cute-baby-wallpapers_17904_1280x800.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "vista-cute-baby-wallpapers_17904_1280x800.jpg"; sourceTree = "<group>"; };
 		371A0681197616F6002789EF /* Pushwoosh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Pushwoosh.framework; sourceTree = "<group>"; };
 		371A068419768042002789EF /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
 		371A068519768042002789EF /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
@@ -760,6 +768,10 @@
 		6703DF50197B20E10080768F /* product */ = {
 			isa = PBXGroup;
 			children = (
+				371327C019826FAD002F59D6 /* Beach_background_01.jpg */,
+				371327C119826FAD002F59D6 /* vista-cute-baby-wallpapers_17904_1280x800.jpg */,
+				371327BC19826F57002F59D6 /* finish_bg.png */,
+				371327BD19826F57002F59D6 /* finish_bg@2x.png */,
 				6703A52E197DC7DC0094104B /* background_2@2x.jpg */,
 				6703A52F197DC7DC0094104B /* background_9@2x.png */,
 				6703A530197DC7DC0094104B /* background_10@2x.png */,
@@ -1087,9 +1099,11 @@
 				373406D4197CE47700E6C17B /* cd_rom2.png in Resources */,
 				6703DF9B197B20E10080768F /* volume.png in Resources */,
 				67EC61CD197B5356000CB4B4 /* btn_bg.png in Resources */,
+				371327BF19826F57002F59D6 /* finish_bg@2x.png in Resources */,
 				6703DF93197B20E10080768F /* like@2x.png in Resources */,
 				6703DF90197B20E10080768F /* facebook.png in Resources */,
 				6703A53A197DC7DD0094104B /* background_11@2x.png in Resources */,
+				371327C219826FAD002F59D6 /* Beach_background_01.jpg in Resources */,
 				6703DF7D197B20E10080768F /* background_1@2x.png in Resources */,
 				373406D3197CE47700E6C17B /* cd_rom1.png in Resources */,
 				67633A54196B77FB00475535 /* stop.png in Resources */,
@@ -1117,10 +1131,12 @@
 				670917251972AB04001A6CBD /* girl.png in Resources */,
 				6703DF7E197B20E10080768F /* background_3.png in Resources */,
 				670917221972A8B4001A6CBD /* pause.png in Resources */,
+				371327C319826FAD002F59D6 /* vista-cute-baby-wallpapers_17904_1280x800.jpg in Resources */,
 				6703DF80197B20E10080768F /* background_4.png in Resources */,
 				6703DF99197B20E10080768F /* source_bg@2x.png in Resources */,
 				6703DF78197B20E10080768F /* back.png in Resources */,
 				6703DF79197B20E10080768F /* back@2x.png in Resources */,
+				371327BE19826F57002F59D6 /* finish_bg.png in Resources */,
 				6703A538197DC7DD0094104B /* background_9@2x.png in Resources */,
 				6703DF8C197B20E10080768F /* coins.png in Resources */,
 				6703DF9C197B20E10080768F /* volume@2x.png in Resources */,
