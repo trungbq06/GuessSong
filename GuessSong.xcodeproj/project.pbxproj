@@ -14,6 +14,7 @@
 		371A0682197616F6002789EF /* Pushwoosh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 371A0681197616F6002789EF /* Pushwoosh.framework */; };
 		371A068819768042002789EF /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 371A068519768042002789EF /* IAPHelper.m */; };
 		371A068919768042002789EF /* RageIAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 371A068719768042002789EF /* RageIAPHelper.m */; };
+		372A28EF198660E5001D49D5 /* MTLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 372A28EE198660E5001D49D5 /* MTLabel.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		373406D3197CE47700E6C17B /* cd_rom1.png in Resources */ = {isa = PBXBuildFile; fileRef = 373406CF197CE47700E6C17B /* cd_rom1.png */; };
 		373406D4197CE47700E6C17B /* cd_rom2.png in Resources */ = {isa = PBXBuildFile; fileRef = 373406D0197CE47700E6C17B /* cd_rom2.png */; };
 		373406D5197CE47700E6C17B /* cd_rom3.png in Resources */ = {isa = PBXBuildFile; fileRef = 373406D1197CE47700E6C17B /* cd_rom3.png */; };
@@ -189,6 +190,8 @@
 		371A068519768042002789EF /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
 		371A068619768042002789EF /* RageIAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RageIAPHelper.h; sourceTree = "<group>"; };
 		371A068719768042002789EF /* RageIAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RageIAPHelper.m; sourceTree = "<group>"; };
+		372A28ED198660E5001D49D5 /* MTLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLabel.h; sourceTree = "<group>"; };
+		372A28EE198660E5001D49D5 /* MTLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLabel.m; sourceTree = "<group>"; };
 		373406CF197CE47700E6C17B /* cd_rom1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cd_rom1.png; sourceTree = "<group>"; };
 		373406D0197CE47700E6C17B /* cd_rom2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cd_rom2.png; sourceTree = "<group>"; };
 		373406D1197CE47700E6C17B /* cd_rom3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cd_rom3.png; sourceTree = "<group>"; };
@@ -462,6 +465,15 @@
 			path = IAppHelper;
 			sourceTree = "<group>";
 		};
+		372A28EC198660E5001D49D5 /* MTLabel */ = {
+			isa = PBXGroup;
+			children = (
+				372A28ED198660E5001D49D5 /* MTLabel.h */,
+				372A28EE198660E5001D49D5 /* MTLabel.m */,
+			);
+			path = MTLabel;
+			sourceTree = "<group>";
+		};
 		3756DA31197D2D3C0064465E /* MoreAppViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,6 +486,7 @@
 		3791E160197049990043E691 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				372A28EC198660E5001D49D5 /* MTLabel */,
 				37C398B01977DC3000B42556 /* CWPopup */,
 				37C398A91977D52D00B42556 /* MJPopup */,
 				371A068319768042002789EF /* IAppHelper */,
@@ -1241,6 +1254,7 @@
 				37C0C9A619708E0A00392051 /* AFXMLRequestOperation.m in Sources */,
 				37C0C9B319708E0A00392051 /* Reachability.m in Sources */,
 				3791E18819704A1F0043E691 /* GameCenterManager.m in Sources */,
+				372A28EF198660E5001D49D5 /* MTLabel.m in Sources */,
 				670445CF197128D700BB9FFA /* SQLiteSingleton.m in Sources */,
 				37C0C9A219708E0A00392051 /* AFJSONRequestOperation.m in Sources */,
 				37C0C9AC19708E0A00392051 /* CDModel.m in Sources */,

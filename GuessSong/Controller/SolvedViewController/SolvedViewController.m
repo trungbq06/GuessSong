@@ -8,6 +8,7 @@
 
 #import "SolvedViewController.h"
 #import "PlayViewController.h"
+#import <QuartzCore/QuartzCore.h>
 #import <POP/POP.h>
 
 @interface SolvedViewController ()
@@ -29,7 +30,11 @@
 {
     [super viewDidLoad];
     
-//    [self.view setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]];
+    _guessedWord.delegate = self;
+    [_guessedWord setLineHeight:18];
+    [_guessedWord setFontColor:[UIColor whiteColor]];
+    [_guessedWord setFont:[UIFont fontWithName:@"GeezaPro-Bold" size:25.0]];
+    [_guessedWord setTextAlignment:MTLabelTextAlignmentCenter];
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"finish_bg"]]];
 }
@@ -39,8 +44,13 @@
     [super viewWillAppear:animated];
     
     [_guessedWord setText:_result];
+    [_guessedWord setText:@"Co khi nao ta xa nhau roi hoi nguoi oi"];
     [_guessedWord setHidden:YES];
-    [_lblCoins setText:[NSString stringWithFormat:@"You got %d coins", _coins]];
+    [_lblCoins setText:[NSString stringWithFormat:@"%d", _coins]];
+    
+    [_btnNext.layer setCornerRadius:10];
+    [_btnNext.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+    [_btnNext.layer setBorderWidth:3];
     
     if (_currLevel == [_quizData count] - 1) {
         [_btnNext setHidden:YES];

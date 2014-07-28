@@ -7,12 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MTLabel.h"
 
-@interface SolvedViewController : UIViewController
+@interface SolvedViewController : UIViewController <MTLabelDelegate>
 
 @property (nonatomic, retain) NSString              *result;
 @property (nonatomic, assign) int                   coins;
-@property (strong, nonatomic) IBOutlet UILabel      *guessedWord;
+@property (strong, nonatomic) IBOutlet MTLabel      *guessedWord;
 @property (strong, nonatomic) IBOutlet UILabel      *lblCoins;
 @property (strong, nonatomic) IBOutlet UIButton     *btnNext;
 
