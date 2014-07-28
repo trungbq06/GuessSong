@@ -44,7 +44,7 @@
     [super viewWillAppear:animated];
     
     [_guessedWord setText:_result];
-    [_guessedWord setText:@"Co khi nao ta xa nhau roi hoi nguoi oi"];
+//    [_guessedWord setText:@"Co khi nao ta xa nhau roi hoi nguoi oi"];
     [_guessedWord setHidden:YES];
     [_lblCoins setText:[NSString stringWithFormat:@"%d", _coins]];
     

@@ -115,7 +115,7 @@
     POPSpringAnimation *basicAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
 //    basicAnimation.property = [POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
     basicAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0f, 1.0f)];
-    basicAnimation.fromValue =[NSValue valueWithCGSize:CGSizeMake(1.2f, 1.2f)];
+    basicAnimation.fromValue =[NSValue valueWithCGSize:CGSizeMake(1.1f, 1.1f)];
     basicAnimation.springSpeed = 10;
     basicAnimation.springBounciness = 10;
     
