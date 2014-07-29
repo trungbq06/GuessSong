@@ -29,5 +29,6 @@
 // Genre
 @property (nonatomic, retain) NSString      *genre;
 @property (nonatomic, assign) int           coins;
+@property (nonatomic, retain) NSString      *itunesURL;
 
 @end

@@ -35,14 +35,14 @@
     [_lblFinish setLineHeight:18];
     [_lblFinish setFontColor:[UIColor colorFromHex:@"#11C214"]];
     [_lblFinish setFontHighlightColor:[UIColor clearColor]];
-    [_lblFinish setFont:[UIFont fontWithName:@"Avenir" size:25.0]];
+    [_lblFinish setFont:[UIFont fontWithName:@"Noteworthy" size:25.0]];
     [_lblFinish setTextAlignment:MTLabelTextAlignmentCenter];
     
     _guessedWord.delegate = self;
     [_guessedWord setLineHeight:18];
     [_guessedWord setFontColor:[UIColor colorFromHex:@"#11C214"]];
     [_guessedWord setFontHighlightColor:[UIColor clearColor]];
-    [_guessedWord setFont:[UIFont fontWithName:@"Avenir-Heavy" size:32.0]];
+    [_guessedWord setFont:[UIFont fontWithName:@"Noteworthy-Bold" size:32.0]];
     [_guessedWord setTextAlignment:MTLabelTextAlignmentCenter];
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"finish_bg"]]];
@@ -71,6 +71,7 @@
     [self animateCoin];
     
     if (_currLevel == [_quizData count]) {
+        [_btnDownload setHidden:YES];
         [_lblCoins setHidden:YES];
         [_imgCoins setHidden:YES];
         [_guessedWord setHidden:YES];
@@ -102,7 +103,7 @@
         [_tUpdate invalidate];
         
         POPSpringAnimation *basicAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-        //    basicAnimation.property = [POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+//        basicAnimation.property = [POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
         basicAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0f, 1.0f)];
         basicAnimation.fromValue =[NSValue valueWithCGSize:CGSizeMake(1.4f, 1.4f)];
         basicAnimation.springSpeed = 20;
@@ -134,6 +135,11 @@
 - (void) setResult:(NSString *)result
 {
     _result = result;
+}
+
+- (IBAction)btnDownloadClick:(id)sender
+{
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_currQuiz.itunesURL]];
 }
 
 - (IBAction)btnNextClick:(id)sender

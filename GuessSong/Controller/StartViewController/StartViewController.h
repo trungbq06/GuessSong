@@ -25,6 +25,7 @@
     BOOL bannerShown;
 }
 
+@property (nonatomic, retain) AVAudioPlayer         *audioPlayer;
 @property (nonatomic, retain) GameCenterManager     *gameCenterManager;
 @property (weak, nonatomic) IBOutlet UILabel        *lbLevel;
 @property (weak, nonatomic) IBOutlet UIButton       *btnCoins;

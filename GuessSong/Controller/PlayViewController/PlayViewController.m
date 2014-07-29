@@ -87,6 +87,7 @@
 //        NSLog(@"%@", responseObject);
         for (UserInfo *_userInfo in responseObject) {
             NSLog(@"Current coins: %@", _userInfo.coins);
+            _sound = _userInfo.sound;
             _currCoins = [_userInfo.coins intValue];
             [_btnCoins setTitle:[NSString stringWithFormat:@"%@", _userInfo.coins] forState:UIControlStateNormal];
             [_lbLevel setText:[NSString stringWithFormat:@"%@", _userInfo.level]];
@@ -141,6 +142,7 @@
                 [_solvedController setCurrCoins:_currCoins];
                 [_solvedController setQuizData:_quizData];
                 [_solvedController setCurrLevel:_idxQuiz];
+                [_solvedController setCurrQuiz:_quiz];
                 
                 [self presentPopupViewController:_solvedController animated:YES completion:nil];
             }
@@ -506,6 +508,7 @@
     [_solvedController setCurrCoins:_currCoins];
     [_solvedController setQuizData:_quizData];
     [_solvedController setCurrLevel:_currLevel];
+    [_solvedController setCurrQuiz:_quiz];
     
     [Helper updateLevel:_currLevel + 1 success:^{
         [self presentPopupViewController:_solvedController animated:YES completion:nil];

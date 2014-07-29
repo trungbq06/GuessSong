@@ -29,6 +29,11 @@
 {
     [super viewDidLoad];
     
+    NSURL *playURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"cool_music" ofType:@"mp3"]];
+    NSError *error;
+    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL error:&error];
+    _audioPlayer.numberOfLoops = -1;
+    
     /* This push local notification
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
     localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:10];
@@ -87,9 +92,19 @@
     }];
 }
 
+- (void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    
+    [_audioPlayer pause];
+}
+
 - (void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    if (_sound)
+        [_audioPlayer play];
     
     int playRound = [[[NSUserDefaults standardUserDefaults] objectForKey:PLAY_ROUND] intValue];
     if (playRound % 5 == 0 && playRound > 0)
@@ -297,6 +312,11 @@
     [_btnVolume setBackgroundImage:_img forState:UIControlStateNormal];
     
     [Helper updateSound:_sound success:nil];
+    
+    if (_sound)
+        [_audioPlayer play];
+    else
+        [_audioPlayer stop];
 }
 
 #pragma mark GameCenterDelegateProtocol Methods

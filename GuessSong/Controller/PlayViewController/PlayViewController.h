@@ -55,6 +55,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnFacebook;
 @property (weak, nonatomic) IBOutlet UIButton *btnShow;
 @property (weak, nonatomic) IBOutlet UIButton *btnDelete;
+@property (nonatomic, assign) BOOL            sound;
 
 - (IBAction)gotoNextGame:(id)sender;
 - (IBAction)btnCoinsClick:(id)sender;

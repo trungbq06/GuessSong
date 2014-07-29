@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Trung Bui. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 #import "CharSource.h"
 
@@ -27,6 +28,7 @@
 // Current this character position
 @property (nonatomic, assign) int                   iCharPos;
 @property (nonatomic, assign) BOOL                  isHint;
+@property (nonatomic, retain) AVAudioPlayer         *audioPlayer;
 
 - (void) colorFail;
 - (void) resetColor;

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QuizModel.h"
 #import "MTLabel.h"
 
 @interface SolvedViewController : UIViewController <MTLabelDelegate>
@@ -18,9 +19,11 @@
 @property (strong, nonatomic) IBOutlet MTLabel      *lblFinish;
 @property (strong, nonatomic) IBOutlet UILabel      *lblGuessed;
 @property (strong, nonatomic) IBOutlet UIButton     *btnNext;
+@property (strong, nonatomic) IBOutlet UIButton     *btnDownload;
 @property (strong, nonatomic) IBOutlet UIImageView  *imgCoins;
 @property (nonatomic, assign) int                   startCoin;
 @property (nonatomic, strong) NSTimer               *tUpdate;
+@property (nonatomic, retain) QuizModel             *currQuiz;
 
 // Data of the quiz
 @property (nonatomic, retain) NSMutableArray        *quizData;
@@ -30,6 +33,6 @@
 @property (nonatomic, assign) int                   currCoins;
 
 - (IBAction)btnNextClick:(id)sender;
-
+- (IBAction)btnDownloadClick:(id)sender;
 
 @end

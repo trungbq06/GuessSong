@@ -31,6 +31,7 @@
             _quiz.country = [category objectForKey:@"country"];
             _quiz.genre = [category objectForKey:@"genre"];
             _quiz.coins = [[category objectForKey:kCoins] intValue];
+            _quiz.itunesURL = [[category objectForKey:@"source"] objectForKey:@"itunes_url"];
             
             [cats addObject:_quiz];
         }

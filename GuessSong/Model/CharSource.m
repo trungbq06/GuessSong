@@ -18,7 +18,7 @@
         UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, frame.size.height)];
         
         [self setBackgroundColor:[UIColor whiteColor]];
-        [self setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"source_bg"]]];
+//        [self setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"source_bg"]]];
         [self addSubview:button];
         
         // Setup view
@@ -29,7 +29,13 @@
         [button setTitle:character forState:UIControlStateNormal];
         [button.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:26]];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"source_bg"] forState:UIControlStateNormal];
+        [button setBackgroundImage:[UIImage imageNamed:@"source_bg_active"] forState:UIControlStateHighlighted];
         [button addTarget:self action:@selector(charClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        NSURL *playURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"click_on" ofType:@"mp3"]];
+        NSError *error;
+        _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL error:&error];
     }
     
     return self;
@@ -37,6 +43,7 @@
 
 - (IBAction) charClick:(id)sender
 {
+    [_audioPlayer play];
     if ([_delegate respondsToSelector:@selector(charSourceClicked:)]) {
         [_delegate charSourceClicked:self];
     }

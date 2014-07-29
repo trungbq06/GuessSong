@@ -4,6 +4,7 @@
 //  Copyright (c) 2014 Trung Bui. All rights reserved.
 //
 
+#import <AVFoundation/AVFoundation.h>
 #import <UIKit/UIKit.h>
 
 @protocol CharSourceDelegate;
@@ -14,6 +15,7 @@
 
 @property (nonatomic, weak) id<CharSourceDelegate>  delegate;
 @property (nonatomic, retain) NSString              *character;
+@property (nonatomic, retain) AVAudioPlayer         *audioPlayer;
 
 @end
 

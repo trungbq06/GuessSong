@@ -149,7 +149,7 @@ int totalApps = 0;
 }
 
 -(void)goSearch {
-    [SVProgressHUD showWithStatus:@"Loading ..."];
+    [SVProgressHUD showWithStatus:@"Loading ..." maskType:SVProgressHUDMaskTypeBlack];
     NSString *str = [NSString stringWithFormat:@"https://itunes.apple.com/search?term=%@&entity=software&attribute=softwareDeveloper", @"trung bui"];
     
     str = [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];

@@ -124,11 +124,7 @@
         NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:newSound], kSound, nil];
         
         [_cdSingleton updateWithData:_cdModel newData:_uInfo success:^(CDUpdate *operation, id responseObject) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyDidChangeCoins object:nil userInfo:_uInfo];
             
-            dispatch_async(dispatch_get_main_queue(),^{
-                //                [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyDidChangeCoins object:nil userInfo:_uInfo];
-            });
         } failure:^(CDUpdate *operation, NSError *error) {
             
         }];
