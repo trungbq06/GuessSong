@@ -129,10 +129,21 @@
         [[AFNetworkingSynchronousSingleton sharedClient] getPath:[NSString stringWithFormat:@"%@%@", kServerURL, @"quiz/latest"] parameters:_parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [SVProgressHUD dismiss];
             _quizData = [DataParser parseQuiz:responseObject];
-            // Initiate quiz data
-            _quiz = [_quizData objectAtIndex:_idxQuiz];
+            if (_idxQuiz < [_quizData count]) {
+                // Initiate quiz data
+                _quiz = [_quizData objectAtIndex:_idxQuiz];
             
-            [self generateGame];
+                [self generateGame];
+            } else {
+                SolvedViewController *_solvedController = [self.storyboard instantiateViewControllerWithIdentifier:@"SolvedViewController"];
+                
+                [_solvedController setIdxQuiz:_idxQuiz];
+                [_solvedController setCurrCoins:_currCoins];
+                [_solvedController setQuizData:_quizData];
+                [_solvedController setCurrLevel:_idxQuiz];
+                
+                [self presentPopupViewController:_solvedController animated:YES completion:nil];
+            }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error fetching data from server %@", error);
             

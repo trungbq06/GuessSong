@@ -18,5 +18,6 @@
 + (void) updateCoins:(int) newCoins;
 + (void) updateNewCoins:(int) newCoins success:(void (^)())_success;
 + (void) updateLevel:(int) newLevel success:(void (^)())_success;
++ (void) updateSound:(BOOL) newSound success:(void (^)())_success;
 
 @end

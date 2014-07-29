@@ -111,4 +111,30 @@
     }];
 }
 
++ (void) updateSound:(BOOL)newSound success:(void (^)())_success
+{
+    CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
+    
+    CDModel* _cdModel = [[CDModel alloc] init];
+    _cdModel.entityName = @"UserInfo";
+    
+    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
+        NSLog(@"%@", responseObject);
+        
+        NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:newSound], kSound, nil];
+        
+        [_cdSingleton updateWithData:_cdModel newData:_uInfo success:^(CDUpdate *operation, id responseObject) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyDidChangeCoins object:nil userInfo:_uInfo];
+            
+            dispatch_async(dispatch_get_main_queue(),^{
+                //                [[NSNotificationCenter defaultCenter] postNotificationName:kNotifyDidChangeCoins object:nil userInfo:_uInfo];
+            });
+        } failure:^(CDUpdate *operation, NSError *error) {
+            
+        }];
+    } failure:^(CDLoad *operation, NSError *error) {
+        NSLog(@"Error %@", error);
+    }];
+}
+
 @end

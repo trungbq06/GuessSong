@@ -8,7 +8,7 @@
         <!--Start View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="StartViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="StartViewController" id="vXZ-lx-hvc" customClass="StartViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -58,6 +58,9 @@
                                 <state key="normal" backgroundImage="volume.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="btnVolumeClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="6vf-vr-yMh"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gEU-tC-NYj">
                                 <rect key="frame" x="74" y="353" width="32" height="32"/>
@@ -115,6 +118,7 @@
                     <connections>
                         <outlet property="btnCoins" destination="Utj-rv-h93" id="Tkr-gY-8Ol"/>
                         <outlet property="btnPlay" destination="bXe-x5-ir4" id="v0m-n6-Jma"/>
+                        <outlet property="btnVolume" destination="Fal-YO-OIF" id="R1L-K7-b0z"/>
                         <outlet property="lbLevel" destination="qSA-VQ-Vad" id="YXT-OO-6bh"/>
                         <outlet property="navigationBar" destination="4VX-mS-gwP" id="xsm-cy-uF6"/>
                     </connections>
@@ -139,14 +143,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NNH-qV-BP0">
-                                <rect key="frame" x="116" y="271" width="69" height="65"/>
+                                <rect key="frame" x="114" y="329" width="69" height="65"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="40"/>
                                 <color key="textColor" red="1" green="0.66710668103448278" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HKH-W2-Ihx">
-                                <rect key="frame" x="87" y="360" width="147" height="44"/>
+                                <rect key="frame" x="87" y="399" width="147" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.12549020349979401" green="0.63921570777893066" blue="0.090196080505847931" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
@@ -158,22 +162,27 @@
                                     <action selector="btnNextClick:" destination="ky0-eo-gn0" eventType="touchUpInside" id="Eah-We-PhO"/>
                                 </connections>
                             </button>
-                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="coins.png" id="pY7-l4-a2J">
-                                <rect key="frame" x="176" y="293" width="24" height="24"/>
+                            <imageView appearanceType="aqua" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fcoins.png" id="pY7-l4-a2J">
+                                <rect key="frame" x="172" y="347" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <view appearanceType="aqua" contentMode="scaleToFill" id="8zv-EJ-Yc9" customClass="MTLabel">
-                                <rect key="frame" x="12" y="186" width="296" height="78"/>
+                                <rect key="frame" x="12" y="211" width="296" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You guess the song" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1k7-F6-DKd">
-                                <rect key="frame" x="24" y="129" width="272" height="40"/>
+                            <label appearanceType="aqua" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You guess the song" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1k7-F6-DKd">
+                                <rect key="frame" x="24" y="140" width="272" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="AvenirNextCondensed-DemiBold" family="Avenir Next Condensed" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" id="2Jw-AX-Oka" customClass="MTLabel">
+                                <rect key="frame" x="41" y="136" width="238" height="190"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -181,12 +190,15 @@
                     <connections>
                         <outlet property="btnNext" destination="HKH-W2-Ihx" id="OrH-7p-laT"/>
                         <outlet property="guessedWord" destination="8zv-EJ-Yc9" id="V1D-w8-Hb0"/>
+                        <outlet property="imgCoins" destination="pY7-l4-a2J" id="Gum-zc-CwH"/>
                         <outlet property="lblCoins" destination="NNH-qV-BP0" id="bMb-RG-7bU"/>
+                        <outlet property="lblFinish" destination="2Jw-AX-Oka" id="2vY-sI-Gg8"/>
+                        <outlet property="lblGuessed" destination="1k7-F6-DKd" id="tfl-qH-IeB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAN-Tk-5rF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1289" y="-16"/>
+            <point key="canvasLocation" x="-1662" y="-179"/>
         </scene>
         <!--More App View Controller-->
         <scene sceneID="ubT-BW-Jbz">
@@ -237,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lfa-eI-Qex" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-742" y="-18"/>
+            <point key="canvasLocation" x="-1054" y="-37"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Kqb-Kc-sFB">
@@ -252,7 +264,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="28c-0H-osK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-502" y="-16"/>
+            <point key="canvasLocation" x="-577" y="8"/>
         </scene>
         <!--Purchase View Controller-->
         <scene sceneID="UbO-Hz-Tck">
@@ -302,7 +314,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K0K-cZ-ib0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-352" y="-106"/>
+            <point key="canvasLocation" x="603" y="-18"/>
         </scene>
         <!--Play View Controller-->
         <scene sceneID="9FV-hg-gb7">
@@ -427,6 +439,7 @@
         <image name="coins.png" width="24" height="24"/>
         <image name="delete.png" width="32" height="32"/>
         <image name="facebook.png" width="32" height="32"/>
+        <image name="fcoins.png" width="334" height="360"/>
         <image name="nav_split.png" width="320" height="2"/>
         <image name="play_btn.png" width="200" height="65"/>
         <image name="show.png" width="32" height="32"/>

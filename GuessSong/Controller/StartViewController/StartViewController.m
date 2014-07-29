@@ -134,7 +134,7 @@
     [self reloadBgImage];
     
     // Insert new record to database
-    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:START_COINS], kCoins, [NSNumber numberWithInt:1], @"level", nil];
+    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:START_COINS], kCoins, [NSNumber numberWithInt:1], @"level", @FALSE, kSound, nil];
     NSArray *_data = [[NSArray alloc] initWithObjects:_uInfo, nil];
     
     CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
@@ -163,6 +163,14 @@
             NSLog(@"Current level: %@", _userInfo.level);
             [_btnCoins setTitle:[NSString stringWithFormat:@"%@", _userInfo.coins] forState:UIControlStateNormal];
             [_lbLevel setText:[NSString stringWithFormat:@"%@", _userInfo.level]];
+            
+            _sound = _userInfo.sound;
+            
+            if (!_userInfo.sound) {
+                [_btnVolume setBackgroundImage:[UIImage imageNamed:@"volume_off"] forState:UIControlStateNormal];
+            } else {
+                [_btnVolume setBackgroundImage:[UIImage imageNamed:@"volume"] forState:UIControlStateNormal];
+            }
         }
     } failure:^(CDLoad *operation, NSError *error) {
         NSLog(@"Error %@", error);
@@ -276,6 +284,19 @@
     [self presentPopupViewController:_purchaseController animated:YES completion:^{
         
     }];
+}
+
+- (IBAction)btnVolumeClick:(id)sender
+{
+    UIImage *_img = [UIImage imageNamed:@"volume"];
+    if (_sound) {
+        _img = [UIImage imageNamed:@"volume_off"];
+    }
+    _sound = !_sound;
+    
+    [_btnVolume setBackgroundImage:_img forState:UIControlStateNormal];
+    
+    [Helper updateSound:_sound success:nil];
 }
 
 #pragma mark GameCenterDelegateProtocol Methods

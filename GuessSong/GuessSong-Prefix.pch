@@ -64,4 +64,5 @@
 #define kSkipCoins                  30
 #define kSkipAlert                  1007
 #define RATED_APP                   @"rated_app"
+#define kSound                      @"sound"
 

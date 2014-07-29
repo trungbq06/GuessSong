@@ -14,5 +14,6 @@
 
 @property (nonatomic, retain) NSNumber * coins;
 @property (nonatomic, retain) NSNumber * level;
+@property (nonatomic, assign) BOOL       sound;
 
 @end

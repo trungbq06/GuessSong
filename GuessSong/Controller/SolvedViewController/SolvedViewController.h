@@ -15,7 +15,12 @@
 @property (nonatomic, assign) int                   coins;
 @property (strong, nonatomic) IBOutlet MTLabel      *guessedWord;
 @property (strong, nonatomic) IBOutlet UILabel      *lblCoins;
+@property (strong, nonatomic) IBOutlet MTLabel      *lblFinish;
+@property (strong, nonatomic) IBOutlet UILabel      *lblGuessed;
 @property (strong, nonatomic) IBOutlet UIButton     *btnNext;
+@property (strong, nonatomic) IBOutlet UIImageView  *imgCoins;
+@property (nonatomic, assign) int                   startCoin;
+@property (nonatomic, strong) NSTimer               *tUpdate;
 
 // Data of the quiz
 @property (nonatomic, retain) NSMutableArray        *quizData;
