@@ -28,6 +28,10 @@
 
 // Player to play song
 @property (nonatomic, strong) AVPlayer              *songPlayer;
+// Incorrect player
+@property (nonatomic, strong) AVAudioPlayer         *wrongPlayer;
+// Solved player
+@property (nonatomic, strong) AVAudioPlayer         *tadaPlayer;
 // Check if song is playing
 @property (nonatomic, assign) BOOL                  isPlaying;
 // Play button

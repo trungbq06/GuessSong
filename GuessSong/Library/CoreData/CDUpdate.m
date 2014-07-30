@@ -71,7 +71,7 @@
         }
     }
     [context save:&errorMessage];
-    NSLog(@"load data: %@", responseData);
+//    DLog_Low(@"load data: %@", responseData);
 }
 
 #pragma mark - MEMORY MANAGER

@@ -12,8 +12,10 @@
 
 @interface UserInfo : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * coins;
-@property (nonatomic, retain) NSNumber * level;
+@property (nonatomic, retain) NSNumber   *coins;
+@property (nonatomic, retain) NSNumber   *level;
 @property (nonatomic, assign) BOOL       sound;
+@property (nonatomic, retain) NSString   *quizData;
+@property (nonatomic, retain) NSString   *updatedDate;
 
 @end

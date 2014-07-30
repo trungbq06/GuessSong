@@ -31,7 +31,7 @@
         [_charBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_charBtn addTarget:self action:@selector(charClick:) forControlEvents:UIControlEventTouchUpInside];
         
-        NSURL *playURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"click_off" ofType:@"mp3"]];
+        NSURL *playURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"btn_click_off" ofType:@"mp3"]];
         NSError *error;
         _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL error:&error];
     }
@@ -41,10 +41,12 @@
 
 - (IBAction) charClick:(id)sender
 {
-    [_audioPlayer play];
+    if (![_charBtn.titleLabel.text isEqualToString:@""])
+        [_audioPlayer play];
     if (!_isHint) {
         _character = @"";
         [_charBtn setTitle:_character forState:UIControlStateNormal];
+        [_charBtn.titleLabel setText:_character];
         
         if ([_delegate respondsToSelector:@selector(charSquareClicked:)]) {
             [_delegate charSquareClicked:self];
@@ -57,6 +59,7 @@
     _character = character;
     
     [_charBtn setTitle:character forState:UIControlStateNormal];
+    [_charBtn.titleLabel setText:_character];
 }
 
 - (void) colorFail

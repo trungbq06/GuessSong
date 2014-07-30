@@ -46,7 +46,6 @@
 		37B3D7F81974FAC100210F2C /* PurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B3D7F71974FAC100210F2C /* PurchaseViewController.m */; };
 		37B4A99B198753C800E0C5AD /* source_bg_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B4A999198753C800E0C5AD /* source_bg_active.png */; };
 		37B4A99C198753C800E0C5AD /* source_bg_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B4A99A198753C800E0C5AD /* source_bg_active@2x.png */; };
-		37B4A99E1987747D00E0C5AD /* bgmusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37B4A99D1987747D00E0C5AD /* bgmusic.mp3 */; };
 		37B4A9A3198779BC00E0C5AD /* click_off.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37B4A9A1198779BC00E0C5AD /* click_off.mp3 */; };
 		37B4A9A4198779BC00E0C5AD /* click_on.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37B4A9A2198779BC00E0C5AD /* click_on.mp3 */; };
 		37C0C962197066A300392051 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C0C961197066A300392051 /* FacebookSDK.framework */; };
@@ -81,6 +80,11 @@
 		37C398AE1977D52D00B42556 /* MJPopupBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C398AB1977D52D00B42556 /* MJPopupBackgroundView.m */; };
 		37C398AF1977D52D00B42556 /* UIViewController+MJPopupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C398AD1977D52D00B42556 /* UIViewController+MJPopupViewController.m */; };
 		37C398B31977DC3000B42556 /* UIViewController+CWPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C398B21977DC3000B42556 /* UIViewController+CWPopup.m */; };
+		37FD592919888ED100EA6E11 /* memphis_soul.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37FD592819888ED100EA6E11 /* memphis_soul.mp3 */; };
+		37FD592E1988983A00EA6E11 /* btn_click_off.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37FD592C1988983A00EA6E11 /* btn_click_off.mp3 */; };
+		37FD592F1988983A00EA6E11 /* btn_click_on.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37FD592D1988983A00EA6E11 /* btn_click_on.mp3 */; };
+		37FD593119889E8900EA6E11 /* tada.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37FD593019889E8900EA6E11 /* tada.mp3 */; };
+		37FD593319889EEF00EA6E11 /* incorrect_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37FD593219889EEF00EA6E11 /* incorrect_sound.mp3 */; };
 		5111F03D5F4A404F9F82A4F3 /* libPods-GuessSong.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BE69ED250B940D4B4055B75 /* libPods-GuessSong.a */; };
 		6701008E1969D049001D8926 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6701008D1969D049001D8926 /* Foundation.framework */; };
 		670100901969D049001D8926 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6701008F1969D049001D8926 /* CoreGraphics.framework */; };
@@ -253,7 +257,6 @@
 		37B3D7F71974FAC100210F2C /* PurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseViewController.m; sourceTree = "<group>"; };
 		37B4A999198753C800E0C5AD /* source_bg_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = source_bg_active.png; sourceTree = "<group>"; };
 		37B4A99A198753C800E0C5AD /* source_bg_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "source_bg_active@2x.png"; sourceTree = "<group>"; };
-		37B4A99D1987747D00E0C5AD /* bgmusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bgmusic.mp3; sourceTree = "<group>"; };
 		37B4A9A1198779BC00E0C5AD /* click_off.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click_off.mp3; sourceTree = "<group>"; };
 		37B4A9A2198779BC00E0C5AD /* click_on.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click_on.mp3; sourceTree = "<group>"; };
 		37C0C961197066A300392051 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
@@ -317,6 +320,11 @@
 		37C398AD1977D52D00B42556 /* UIViewController+MJPopupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+MJPopupViewController.m"; sourceTree = "<group>"; };
 		37C398B11977DC3000B42556 /* UIViewController+CWPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+CWPopup.h"; sourceTree = "<group>"; };
 		37C398B21977DC3000B42556 /* UIViewController+CWPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CWPopup.m"; sourceTree = "<group>"; };
+		37FD592819888ED100EA6E11 /* memphis_soul.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = memphis_soul.mp3; sourceTree = "<group>"; };
+		37FD592C1988983A00EA6E11 /* btn_click_off.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = btn_click_off.mp3; sourceTree = "<group>"; };
+		37FD592D1988983A00EA6E11 /* btn_click_on.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = btn_click_on.mp3; sourceTree = "<group>"; };
+		37FD593019889E8900EA6E11 /* tada.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tada.mp3; sourceTree = "<group>"; };
+		37FD593219889EEF00EA6E11 /* incorrect_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = incorrect_sound.mp3; sourceTree = "<group>"; };
 		6701008A1969D049001D8926 /* GuessSong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessSong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6701008D1969D049001D8926 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6701008F1969D049001D8926 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -936,11 +944,15 @@
 		67633A44196B6A1000475535 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				37FD593219889EEF00EA6E11 /* incorrect_sound.mp3 */,
+				37FD593019889E8900EA6E11 /* tada.mp3 */,
+				37FD592C1988983A00EA6E11 /* btn_click_off.mp3 */,
+				37FD592D1988983A00EA6E11 /* btn_click_on.mp3 */,
+				37FD592819888ED100EA6E11 /* memphis_soul.mp3 */,
 				37739CD019878C620019F4C2 /* cool_music.mp3 */,
 				37739CCE198784300019F4C2 /* itunes-button.png */,
 				37B4A9A1198779BC00E0C5AD /* click_off.mp3 */,
 				37B4A9A2198779BC00E0C5AD /* click_on.mp3 */,
-				37B4A99D1987747D00E0C5AD /* bgmusic.mp3 */,
 				6704FE5819871126001EF2B2 /* fcoins.png */,
 				373406D7197D15B500E6C17B /* purchase_dolla.png */,
 				373406D8197D15B500E6C17B /* purchase_dolla@2x.png */,
@@ -1109,7 +1121,9 @@
 			files = (
 				6703DF96197B20E10080768F /* show.png in Resources */,
 				670100A41969D04A001D8926 /* Main_iPad.storyboard in Resources */,
+				37FD593319889EEF00EA6E11 /* incorrect_sound.mp3 in Resources */,
 				6704FE56198700C6001EF2B2 /* skip.png in Resources */,
+				37FD592E1988983A00EA6E11 /* btn_click_off.mp3 in Resources */,
 				6703DF95197B20E10080768F /* play_btn@2x.png in Resources */,
 				37739CD51987A4070019F4C2 /* coins_btn@2x.png in Resources */,
 				6703DF98197B20E10080768F /* source_bg.png in Resources */,
@@ -1134,12 +1148,15 @@
 				6703DF88197B20E10080768F /* background_8.png in Resources */,
 				6703DF83197B20E10080768F /* background_5@2x.png in Resources */,
 				6703DF8F197B20E10080768F /* delete@2x.png in Resources */,
+				37FD592919888ED100EA6E11 /* memphis_soul.mp3 in Resources */,
 				3791E171197049990043E691 /* README.txt in Resources */,
 				6703DF7F197B20E10080768F /* background_3@2x.png in Resources */,
+				37FD592F1988983A00EA6E11 /* btn_click_on.mp3 in Resources */,
 				6703DF87197B20E10080768F /* background_7@2x.png in Resources */,
 				37B4A99C198753C800E0C5AD /* source_bg_active@2x.png in Resources */,
 				6703DF7B197B20E10080768F /* background@2x.png in Resources */,
 				6703DF7A197B20E10080768F /* background.png in Resources */,
+				37FD593119889E8900EA6E11 /* tada.mp3 in Resources */,
 				6703A53B197DC7DD0094104B /* background_12@2x.png in Resources */,
 				37739CD119878C620019F4C2 /* cool_music.mp3 in Resources */,
 				6703DF97197B20E10080768F /* show@2x.png in Resources */,
@@ -1159,7 +1176,6 @@
 				6703DF91197B20E10080768F /* facebook@2x.png in Resources */,
 				6703DF84197B20E10080768F /* background_6.png in Resources */,
 				37739CD41987A4070019F4C2 /* coins_btn.png in Resources */,
-				37B4A99E1987747D00E0C5AD /* bgmusic.mp3 in Resources */,
 				67EC61CE197B5356000CB4B4 /* btn_bg@2x.png in Resources */,
 				373406D6197CE47700E6C17B /* cd_rom4.png in Resources */,
 				6703DF9A197B20E10080768F /* Thumbs.db in Resources */,

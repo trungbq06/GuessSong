@@ -33,7 +33,7 @@
         [button setBackgroundImage:[UIImage imageNamed:@"source_bg_active"] forState:UIControlStateHighlighted];
         [button addTarget:self action:@selector(charClick:) forControlEvents:UIControlEventTouchUpInside];
         
-        NSURL *playURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"click_on" ofType:@"mp3"]];
+        NSURL *playURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"btn_click_on" ofType:@"mp3"]];
         NSError *error;
         _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL error:&error];
     }

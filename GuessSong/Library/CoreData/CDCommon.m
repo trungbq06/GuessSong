@@ -41,7 +41,7 @@
     NSPersistentStoreCoordinator* persistentStoreCoordinator = [[[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel] autorelease];
     if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
         
-		NSLog(@"Unresolved error: %@", [error userInfo]);
+		DLog_Med(@"Unresolved error: %@", [error userInfo]);
         return nil;
     }
     
@@ -74,14 +74,14 @@
     (*_persistent) = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:_managedObjectModel];
     if (![(*_persistent) addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
         
-		NSLog(@"Unresolved error: %@", [error userInfo]);
+		DLog_Med(@"Unresolved error: %@", [error userInfo]);
     }
 }
 
 +(void)createManagedObjectContext:(NSManagedObjectContext**)_context withFileStoreName:(NSString*)_fileName
 {
     if (_fileName == (id)[NSNull null]) {
-        NSLog(@"file name is nsnull");
+        DLog_Med(@"file name is nsnull");
         return;
     }
     
@@ -97,7 +97,7 @@
         [(*_context) setPersistentStoreCoordinator:_coordinator];
     }
     
-    NSLog(@"create managed object context success");
+    DLog_Med(@"create managed object context success");
 }
 
 #pragma mark - INSERT ENTITY TO MANAGE OBJECT CONTEXT (ON RAM)
@@ -106,7 +106,7 @@
 {
     [_context lock];
     if (_context == (id)[NSNull null] || _context == nil) {
-        NSLog(@"context nil");
+        DLog_Med(@"context nil");
         return nil;
     }
     
@@ -123,14 +123,14 @@
     [_context lock];
     //return if context null
     if (_context == (id)[NSNull null] || _context == nil) {
-        NSLog(@"context nil");
+        DLog_Med(@"context nil");
         return NO;
     }
     
     NSError *error = nil;
     if (![_context save:&error]) {
         // Handle the error.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        DLog_Med(@"Unresolved error %@, %@", error, [error userInfo]);
         return NO;
     }
     [_context unlock];
@@ -144,7 +144,7 @@
     [_context lock];
     //return if context null
     if (_context == (id)[NSNull null] || _context == nil) {
-        NSLog(@"context nil");
+        DLog_Med(@"context nil");
         return nil;
     }
     
@@ -203,7 +203,7 @@
     [_context lock];
     //return if context null
     if (_context == (id)[NSNull null] || _context == nil) {
-        NSLog(@"context nil");
+        DLog_Med(@"context nil");
         return nil;
     }
     

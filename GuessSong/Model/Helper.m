@@ -53,7 +53,7 @@
             
         }];
     } failure:^(CDLoad *operation, NSError *error) {
-        NSLog(@"Error %@", error);
+        DLog_Low(@"Error %@", error);
     }];
 }
 
@@ -79,7 +79,7 @@
             
         }];
     } failure:^(CDLoad *operation, NSError *error) {
-        NSLog(@"Error %@", error);
+        DLog_Low(@"Error %@", error);
     }];
 }
 
@@ -91,7 +91,7 @@
     _cdModel.entityName = @"UserInfo";
     
     [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
+        DLog_Low(@"%@", responseObject);
         UserInfo *uInfo = (UserInfo*) [responseObject objectAtIndex:0];
         
         NSNumber *_newCoins = [NSNumber numberWithInt:([uInfo.coins intValue] + newCoins)];
@@ -107,7 +107,7 @@
             
         }];
     } failure:^(CDLoad *operation, NSError *error) {
-        NSLog(@"Error %@", error);
+        DLog_Low(@"Error %@", error);
     }];
 }
 
@@ -119,7 +119,7 @@
     _cdModel.entityName = @"UserInfo";
     
     [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
+        DLog_Low(@"%@", responseObject);
         
         NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithBool:newSound], kSound, nil];
         
@@ -129,7 +129,7 @@
             
         }];
     } failure:^(CDLoad *operation, NSError *error) {
-        NSLog(@"Error %@", error);
+        DLog_Low(@"Error %@", error);
     }];
 }
 

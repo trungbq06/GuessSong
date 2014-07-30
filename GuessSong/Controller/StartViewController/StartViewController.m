@@ -29,7 +29,7 @@
 {
     [super viewDidLoad];
     
-    NSURL *playURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"cool_music" ofType:@"mp3"]];
+    NSURL *playURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:BG_MUSIC ofType:@"mp3"]];
     NSError *error;
     _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL error:&error];
     _audioPlayer.numberOfLoops = -1;
@@ -76,7 +76,7 @@
                                                              FBSessionState status,
                                                              NSError *error) {
                 // we recurse here, in order to update buttons and labels
-                NSLog(@"FB Loggedin");
+                DLog_Low(@"FB Loggedin");
             }];
         }
     }
@@ -148,6 +148,8 @@
 {
     [super viewWillAppear:animated];
     
+    _sound = TRUE;
+    
     [self reloadBgImage];
     
     // Insert new record to database
@@ -160,25 +162,25 @@
     _cdModel.entityName = @"UserInfo";
     
     [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
-        NSLog(@"%@", responseObject);
+        DLog_Low(@"%@", responseObject);
         if ([responseObject count] == 0) {
             [_cdSingleton insertWithData:_data tableName:@"UserInfo" success:^(CDInsert *operation, id responseObject) {
-                NSLog(@"Inserted succesfully!");
+                DLog_Low(@"Inserted succesfully!");
             } failure:^(CDInsert *operation, NSError *error) {
                 
             }];
         }
     } failure:^(CDLoad *operation, NSError *error) {
-        NSLog(@"Error %@", error);
+        DLog_Low(@"Error %@", error);
     }];
     
     // Load coins and level from local database
     [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
         //        NSLog(@"%@", responseObject);
         for (UserInfo *_userInfo in responseObject) {
-            NSLog(@"Current coins: %@", _userInfo.coins);
-            NSLog(@"Current level: %@", _userInfo.level);
-            [_btnCoins setTitle:[NSString stringWithFormat:@"%@", _userInfo.coins] forState:UIControlStateNormal];
+            DLog_Low(@"Current coins: %@", _userInfo.coins);
+            DLog_Low(@"Current level: %@", _userInfo.level);
+            [_btnCoins setTitle:[NSString stringWithFormat:@"   %@", _userInfo.coins] forState:UIControlStateNormal];
             [_lbLevel setText:[NSString stringWithFormat:@"%@", _userInfo.level]];
             
             _sound = _userInfo.sound;
@@ -188,11 +190,9 @@
             } else {
                 [_btnVolume setBackgroundImage:[UIImage imageNamed:@"volume"] forState:UIControlStateNormal];
             }
-            
-            [_btnCoins setTitle:@"100000" forState:UIControlStateNormal];
         }
     } failure:^(CDLoad *operation, NSError *error) {
-        NSLog(@"Error %@", error);
+        DLog_Low(@"Error %@", error);
     }];
 }
 
@@ -202,6 +202,7 @@
     if (!bgImage)
         bgImage = @"background";
     
+//    bgImage = [bgImage stringByAppendingString:@".jpg"];
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:bgImage]]];
 }
 
@@ -248,7 +249,7 @@
 {
     NSDictionary *_newCoins = _notification.userInfo;
     
-    [_btnCoins setTitle:[NSString stringWithFormat:@"%d", [[_newCoins objectForKey:kCoins] intValue]] forState:UIControlStateNormal];
+    [_btnCoins setTitle:[NSString stringWithFormat:@"   %d", [[_newCoins objectForKey:kCoins] intValue]] forState:UIControlStateNormal];
 }
 
 #pragma mark - CHANGE BG
@@ -264,7 +265,7 @@
 {
     if (self.popupViewController != nil) {
         [self dismissPopupViewControllerAnimated:YES completion:^{
-            NSLog(@"popup view dismissed");
+            DLog_Low(@"popup view dismissed");
         }];
     }
     
@@ -287,7 +288,7 @@
 - (void) loadIntersial
 {
     if (!bannerShown) {
-        NSLog(@"Loading intersial");
+        DLog_Low(@"Loading intersial");
         
         interstitial_ = [[GADInterstitial alloc] init];
         interstitial_.adUnitID = MY_BANNER_INTERSITIAL_UNIT_ID;
@@ -353,7 +354,7 @@
 {
     if (bannerIsVisible)
     {
-        NSLog(@"Banner Failed To Load");
+        DLog_Low(@"Banner Failed To Load");
         [UIView beginAnimations:@"animateAdBannerOff" context:NULL];
         [UIView commitAnimations];
         bannerIsVisible = NO;

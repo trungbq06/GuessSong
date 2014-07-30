@@ -145,6 +145,7 @@
 - (IBAction)btnNextClick:(id)sender
 {
     if (_currLevel < [_quizData count]) {
+        DLog_Low(@"Curr Quiz %d", _idxQuiz);
         PlayViewController *_playController = [self.storyboard instantiateViewControllerWithIdentifier:@"PlayViewController"];
         [_playController setIdxQuiz:_idxQuiz];
         [_playController setQuizData:_quizData];

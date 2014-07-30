@@ -26,11 +26,14 @@
 #define SOURCE_VIEW_WIDTH 250
 #define SOURCE_OFFSET_Y   420
 #define SOURCE_LINE_SPACING 40
-#define FONT_FAMILY         @"Thonburi-Bold"
+#define FONT_FAMILY         @"Arial-BoldMT"
 #define PLAY_ROUND          @"play_round"
 #define START_COINS         100
 #define kServerURL          @"http://topapp.us/"
 #define COUNTRY_CODE        @"vn"
+#define BG_MUSIC            @"memphis_soul"
+#define KWRONG_MP3          @"incorrect_sound"
+#define kTADA_MP3           @"tada"
 
 //risign text field
 #define kNotificationResignTextField                                @"resign_first_responder_text_field"
@@ -65,4 +68,63 @@
 #define kSkipAlert                  1007
 #define RATED_APP                   @"rated_app"
 #define kSound                      @"sound"
+
+
+#define DEBUG           1
+
+#ifdef DEBUG
+#   define NSLog(...) NSLog(__VA_ARGS__)
+#else
+#   define NSLog(...)
+#endif
+
+#ifdef DEBUG
+#   define DLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define DLog(...)
+#endif
+
+#define ALog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#ifdef DEBUG
+#   define ULog(fmt, ...)  { UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%s\n [Line %d] ", __PRETTY_FUNCTION__, __LINE__] message:[NSString stringWithFormat:fmt, ##__VA_ARGS__]  delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil]; [alert show]; }
+#else
+#   define ULog(...)
+#endif
+
+#define LOG_LEVEL 4
+
+// Define Log function by level. Set LOG_LEVEL to 1 when distribute
+#ifdef DEBUG
+
+#if (LOG_LEVEL >= 4)
+#   define DLog_Low(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define DLog_Low(...)
+#endif
+
+#if (LOG_LEVEL >= 3)
+#   define DLog_Med(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define DLog_Med(...)
+#endif
+
+#if (LOG_LEVEL >= 2)
+#   define DLog_High(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define DLog_High(...)
+#endif
+
+#if (LOG_LEVEL >= 1)
+#   define DLog_Error(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#else
+#   define DLog_Error(...)
+#endif
+
+#else
+#	define DLog_Low(...)
+#	define DLog_Med(...)
+#	define DLog_High(...)
+#	define DLog_Error(...)
+
+#endif
 

@@ -132,16 +132,16 @@
 #pragma mark - BUY CLICK
 - (IBAction)btnBuyClick:(id)sender
 {
-    NSLog(@"User requests to buy $500");
+    DLog_Low(@"User requests to buy $500");
     
     if([SKPaymentQueue canMakePayments]){
-        NSLog(@"User can make payments");
+        DLog_Low(@"User can make payments");
         
         SKProductsRequest *productsRequest = [[SKProductsRequest alloc] initWithProductIdentifiers:[NSSet setWithObject:kRemoveAdsProductIdentifier]];
         productsRequest.delegate = self;
         [productsRequest start];
     } else {
-        NSLog(@"User cannot make payments due to parental controls");
+        DLog_Low(@"User cannot make payments due to parental controls");
         //this is called the user cannot make payments, most likely due to parental controls
     }
 }
@@ -172,11 +172,11 @@
 
 - (void) paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue
 {
-    NSLog(@"received restored transactions: %i", queue.transactions.count);
+    DLog_Low(@"received restored transactions: %i", queue.transactions.count);
     for (SKPaymentTransaction *transaction in queue.transactions)
     {
         if(SKPaymentTransactionStateRestored){
-            NSLog(@"Transaction state -> Restored");
+            DLog_Low(@"Transaction state -> Restored");
             //called when the user successfully restores a purchase
 
             [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
@@ -192,7 +192,7 @@
         
         switch (transaction.transactionState){
             case SKPaymentTransactionStatePurchasing:
-                NSLog(@"Transaction state -> Purchasing");
+                DLog_Low(@"Transaction state -> Purchasing");
                 //called when the user is in the process of purchasing, do not add any of your own code here.
                 [SVProgressHUD showWithStatus:@"Processing ..." maskType:SVProgressHUDMaskTypeBlack];
                 break;
@@ -205,19 +205,19 @@
                 [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"You purchased %d coins !", [_addCoins intValue]]];
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 [[SKPaymentQueue defaultQueue] removeTransactionObserver:self];
-                NSLog(@"Transaction state -> Purchased");
+                DLog_Low(@"Transaction state -> Purchased");
                 
                 break;
             }
             case SKPaymentTransactionStateRestored:
-                NSLog(@"Transaction state -> Restored");
+                DLog_Low(@"Transaction state -> Restored");
                 //add the same code as you did from SKPaymentTransactionStatePurchased here
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
                 break;
             case SKPaymentTransactionStateFailed:
                 //called when the transaction does not finnish
                 if(transaction.error.code != SKErrorPaymentCancelled){
-                    NSLog(@"Transaction state -> Cancelled");
+                    DLog_Low(@"Transaction state -> Cancelled");
                     //the user cancelled the payment ;(
                 }
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];

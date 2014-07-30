@@ -86,16 +86,23 @@
     [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
 //        NSLog(@"%@", responseObject);
         for (UserInfo *_userInfo in responseObject) {
-            NSLog(@"Current coins: %@", _userInfo.coins);
+            DLog_Low(@"Current coins: %@", _userInfo.coins);
             _sound = _userInfo.sound;
             _currCoins = [_userInfo.coins intValue];
-            [_btnCoins setTitle:[NSString stringWithFormat:@"%@", _userInfo.coins] forState:UIControlStateNormal];
+            [_btnCoins setTitle:[NSString stringWithFormat:@"   %@", _userInfo.coins] forState:UIControlStateNormal];
             [_lbLevel setText:[NSString stringWithFormat:@"%@", _userInfo.level]];
             _currLevel = [_userInfo.level intValue];
             _idxQuiz = [_userInfo.level intValue] - 1;
+            
+            DLog_Low(@"Index %d", _idxQuiz);
+            
+            // Initiate quiz data
+            _quiz = [_quizData objectAtIndex:_idxQuiz];
+            
+            [self generateGame];
         }
     } failure:^(CDLoad *operation, NSError *error) {
-        NSLog(@"Error %@", error);
+        DLog_Low(@"Error %@", error);
     }];
     
     /*
@@ -121,7 +128,7 @@
             NSLog(@"\t%@", font);
         }
     }
-     */
+    */
     
     // Load data for the first time
     if (!_quizData) {
@@ -147,7 +154,7 @@
                 [self presentPopupViewController:_solvedController animated:YES completion:nil];
             }
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error fetching data from server %@", error);
+            DLog_Low(@"Error fetching data from server %@", error);
             
             NSString *_message = [error localizedDescription];
             
@@ -159,12 +166,15 @@
         }];
     } else {
         [SVProgressHUD dismiss];
-        
-        // Initiate quiz data
-        _quiz = [_quizData objectAtIndex:_idxQuiz];
-        
-        [self generateGame];
     }
+    
+    NSURL *playURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:KWRONG_MP3 ofType:@"mp3"]];
+
+    _wrongPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL error:nil];
+    
+    NSURL *playURL2 = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:kTADA_MP3 ofType:@"mp3"]];
+
+    _tadaPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL2 error:nil];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -191,7 +201,7 @@
 {
     NSDictionary *_newCoins = _notification.userInfo;
     
-    [_btnCoins setTitle:[NSString stringWithFormat:@"%d", [[_newCoins objectForKey:kCoins] intValue]] forState:UIControlStateNormal];
+    [_btnCoins setTitle:[NSString stringWithFormat:@"   %d", [[_newCoins objectForKey:kCoins] intValue]] forState:UIControlStateNormal];
     
     [self setCurrCoins:(_currCoins + [[_newCoins objectForKey:kCoins] intValue])];
 }
@@ -204,7 +214,7 @@
 - (void)dismissPopup {
     if (self.popupViewController != nil) {
         [self dismissPopupViewControllerAnimated:YES completion:^{
-            NSLog(@"popup view dismissed");
+            DLog_Low(@"popup view dismissed");
         }];
     }
 }
@@ -243,7 +253,7 @@
 {
     if (_quiz) {
         [self generateNewQuiz:_quiz.qResult];
-        NSLog(@"RESULT: %@", _quiz.qResult);
+        DLog_Low(@"RESULT: %@", _quiz.qResult);
     }
 }
 
@@ -257,9 +267,9 @@
     
     // Update to database
     [_cdSingleton updateWithData:_cdModel newData:_uInfo success:^(CDUpdate *operation, id responseObject) {
-        NSLog(@"Updated success");
+        DLog_Low(@"Updated success");
     } failure:^(CDUpdate *operation, NSError *error) {
-        NSLog(@"Update error");
+        DLog_Low(@"Update error");
     }];
 }
 
@@ -279,7 +289,7 @@
     int offsetX = 0;
     int offsetY = OFFSETY;
     int sOffsetY = SOURCE_OFFSET_Y;
-    NSLog(@"%d - %d - %@", IS_IPHONE, IS_WIDE_SCREEN, [ [UIDevice currentDevice] model ]);
+    DLog_Low(@"%d - %d - %@", IS_IPHONE, IS_WIDE_SCREEN, [ [UIDevice currentDevice] model ]);
     
     if (!IS_IPHONE_5) {
         offsetY -= 50;
@@ -392,12 +402,12 @@
         CharSquare *_char = [_charSquareArray objectAtIndex:i];
         if ([_char.character isEqualToString:@""]) {
             _charGenerator.currPos = i;
-            NSLog(@"New POS: %@ - %d", _char.character, i);
+//            DLog_Low(@"New POS: %@ - %d", _char.character, i);
             break;
         }
     }
     
-    NSLog(@"SOURCE %d - ALL %lu", _charGenerator.currPos, (unsigned long)[_charGenerator.songChar count]);
+//    DLog_Low(@"SOURCE %d - ALL %lu", _charGenerator.currPos, (unsigned long)[_charGenerator.songChar count]);
     
     CharSquare *_char = [_charSquareArray objectAtIndex:_charGenerator.currPos];
     
@@ -475,6 +485,8 @@
     for (CharSquare *_char in _charSquareArray) {
         [_char colorFail];
     }
+    
+    [_wrongPlayer play];
 }
 
 - (void) resetColor
@@ -496,17 +508,17 @@
     } else if (alertView.tag == kShowHintAlert && buttonIndex == 1) {
         [self showCharHint];
         
-        [_btnCoins setTitle:[NSString stringWithFormat:@"%d", _currCoins] forState:UIControlStateNormal];
+        [_btnCoins setTitle:[NSString stringWithFormat:@"   %d", _currCoins] forState:UIControlStateNormal];
     } else if (alertView.tag == kDeleteAlert && buttonIndex == 1) {
         [self deleteWrongChar];
         
-        [_btnCoins setTitle:[NSString stringWithFormat:@"%d", _currCoins] forState:UIControlStateNormal];
+        [_btnCoins setTitle:[NSString stringWithFormat:@"   %d", _currCoins] forState:UIControlStateNormal];
     } else if (alertView.tag == kSkipAlert && buttonIndex == 1) {
         _currCoins -= kSkipCoins;
         
         [self nextGame];
         
-        [_btnCoins setTitle:[NSString stringWithFormat:@"%d", _currCoins] forState:UIControlStateNormal];
+        [_btnCoins setTitle:[NSString stringWithFormat:@"   %d", _currCoins] forState:UIControlStateNormal];
     }
 }
 
@@ -519,6 +531,8 @@
 //    [_dimBg setAlpha:0.6];
 //    
 //    [self.view addSubview:_dimBg];
+    
+    [_tadaPlayer play];
     
     SolvedViewController *_solvedController = [self.storyboard instantiateViewControllerWithIdentifier:@"SolvedViewController"];
     [_solvedController setResult:_quiz.qResult];
@@ -645,7 +659,7 @@
                 removed = TRUE;
                 break;
             } else {
-                //                NSLog(@"CHAR %@", _square.character);
+//                NSLog(@"CHAR %@", _square.character);
             }
         }
     }
@@ -695,9 +709,9 @@
          */
         [FBDialogs presentShareDialogWithParams:params clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
             if(error) {
-                NSLog(@"Error: %@", error.description);
+                DLog_Low(@"Error: %@", error.description);
             } else {
-                NSLog(@"Success!");
+                DLog_Low(@"Success!");
             }
         }];
     } else {

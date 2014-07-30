@@ -63,6 +63,8 @@
         application.applicationIconBadgeNumber = 0;
     }
     
+    [[NSUserDefaults standardUserDefaults] setObject:@"background_5" forKey:kBackgroundImage];
+    
     return YES;
 }
 
