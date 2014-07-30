@@ -190,6 +190,36 @@
             } else {
                 [_btnVolume setBackgroundImage:[UIImage imageNamed:@"volume"] forState:UIControlStateNormal];
             }
+            
+            NSDate *updatedDate = _userInfo.updated_date;
+            
+            [SVProgressHUD showWithStatus:@"Loading ..." maskType:SVProgressHUDMaskTypeGradient];
+            [[AFNetworkingSynchronousSingleton sharedClient] getPath:[NSString stringWithFormat:@"%@%@", kServerURL, @""] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                
+                if ([responseObject objectForKey:@"results"]) {
+                    [SVProgressHUD showWithStatus:@"Download data ..." maskType:SVProgressHUDMaskTypeGradient];
+                    NSDictionary *_parameter = [[NSDictionary alloc] initWithObjectsAndKeys:COUNTRY_CODE, @"country", nil];
+                    [[AFNetworkingSynchronousSingleton sharedClient] getPath:[NSString stringWithFormat:@"%@%@", kServerURL, @"quiz/latest"] parameters:_parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                        [SVProgressHUD dismiss];
+                        
+                        // Save to database
+                        NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:START_COINS], kCoins, [NSNumber numberWithInt:1], @"level", @FALSE, kSound, nil];
+                        
+                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                        DLog_Low(@"Error fetching data from server %@", error);
+                        
+                        NSString *_message = [error localizedDescription];
+                        
+                        UIAlertView *_alert = [[UIAlertView alloc] initWithTitle:@"Network Problem" message:_message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                        _alert.tag = 1002;
+                        [_alert show];
+                        
+                        [SVProgressHUD dismiss];
+                    }];
+                }
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                
+            }];
         }
     } failure:^(CDLoad *operation, NSError *error) {
         DLog_Low(@"Error %@", error);

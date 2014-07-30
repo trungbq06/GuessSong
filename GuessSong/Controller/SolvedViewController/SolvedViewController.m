@@ -35,17 +35,19 @@
     [_lblFinish setLineHeight:18];
     [_lblFinish setFontColor:[UIColor colorFromHex:@"#11C214"]];
     [_lblFinish setFontHighlightColor:[UIColor clearColor]];
-    [_lblFinish setFont:[UIFont fontWithName:@"Noteworthy" size:25.0]];
+    [_lblFinish setFont:[UIFont fontWithName:@"MarkerFelt-Wide" size:25.0]];
     [_lblFinish setTextAlignment:MTLabelTextAlignmentCenter];
     
     _guessedWord.delegate = self;
     [_guessedWord setLineHeight:18];
     [_guessedWord setFontColor:[UIColor colorFromHex:@"#11C214"]];
     [_guessedWord setFontHighlightColor:[UIColor clearColor]];
-    [_guessedWord setFont:[UIFont fontWithName:@"Noteworthy-Bold" size:32.0]];
+    [_guessedWord setFont:[UIFont fontWithName:@"MarkerFelt-Thin" size:32.0]];
     [_guessedWord setTextAlignment:MTLabelTextAlignmentCenter];
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"finish_bg"]]];
+    
+    [_lblCongrate setText:NSLocalizedString(@"Congratulations", @"Congratulations")];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -78,7 +80,7 @@
         [_btnNext setTitle:@"OK" forState:UIControlStateNormal];
         
         [_lblGuessed setHidden:YES];
-        
+
         NSString *finish = @"Amazing! You finished all level! We will update new data soon. Please come back later!";
         [_lblFinish setText:finish];
     }
@@ -101,6 +103,7 @@
         [_lblCoins setText:[NSString stringWithFormat:@"%d", ++_startCoin]];
     else {
         [_tUpdate invalidate];
+        [_lblCoins setText:[NSString stringWithFormat:@"+%d", _coins]];
         
         POPSpringAnimation *basicAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
 //        basicAnimation.property = [POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];

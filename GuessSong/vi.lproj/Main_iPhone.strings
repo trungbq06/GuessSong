@@ -1,0 +1,45 @@
+
+/* Class = "IBUILabel"; text = "Congratulations!"; ObjectID = "1gY-XP-4jc"; */
+"1gY-XP-4jc.text" = "Chúc mừng bạn!";
+
+/* Class = "IBUILabel"; text = "You solved the song"; ObjectID = "1k7-F6-DKd"; */
+"1k7-F6-DKd.text" = "You solved the song";
+
+/* Class = "IBUIButton"; normalTitle = "BUY"; ObjectID = "Asn-Up-41I"; */
+"Asn-Up-41I.normalTitle" = "BUY";
+
+/* Class = "IBUILabel"; text = "1"; ObjectID = "BCw-6A-DWb"; */
+"BCw-6A-DWb.text" = "1";
+
+/* Class = "IBUIButton"; normalTitle = "apps"; ObjectID = "BGz-VJ-iv7"; */
+"BGz-VJ-iv7.normalTitle" = "apps";
+
+/* Class = "IBUIButton"; normalTitle = "NEXT"; ObjectID = "HKH-W2-Ihx"; */
+"HKH-W2-Ihx.normalTitle" = "NEXT";
+
+/* Class = "IBUIButton"; normalTitle = "Change BG"; ObjectID = "Iez-u5-8Pf"; */
+"Iez-u5-8Pf.normalTitle" = "Change BG";
+
+/* Class = "IBUIButton"; normalTitle = "Back"; ObjectID = "JCN-U6-Sxg"; */
+"JCN-U6-Sxg.normalTitle" = "Back";
+
+/* Class = "IBUILabel"; text = "+10"; ObjectID = "NNH-qV-BP0"; */
+"NNH-qV-BP0.text" = "+10";
+
+/* Class = "IBUILabel"; text = "500 coins"; ObjectID = "NRs-1X-wib"; */
+"NRs-1X-wib.text" = "500 coins";
+
+/* Class = "IBUIButton"; normalTitle = "    100"; ObjectID = "Utj-rv-h93"; */
+"Utj-rv-h93.normalTitle" = "    100";
+
+/* Class = "IBUIButton"; normalTitle = "rate"; ObjectID = "aBq-L1-O1I"; */
+"aBq-L1-O1I.normalTitle" = "rate";
+
+/* Class = "IBUIButton"; normalTitle = "PLAY"; ObjectID = "bXe-x5-ir4"; */
+"bXe-x5-ir4.normalTitle" = "PLAY";
+
+/* Class = "IBUILabel"; text = "1"; ObjectID = "qSA-VQ-Vad"; */
+"qSA-VQ-Vad.text" = "1";
+
+/* Class = "IBUIButton"; normalTitle = "    100"; ObjectID = "zXZ-13-EJ4"; */
+"zXZ-13-EJ4.normalTitle" = "    100";

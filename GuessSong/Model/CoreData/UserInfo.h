@@ -2,7 +2,7 @@
 //  UserInfo.h
 //  GuessSong
 //
-//  Created by Mr Trung on 7/12/14.
+//  Created by TrungBQ on 7/30/14.
 //  Copyright (c) 2014 Trung Bui. All rights reserved.
 //
 
@@ -12,10 +12,10 @@
 
 @interface UserInfo : NSManagedObject
 
-@property (nonatomic, retain) NSNumber   *coins;
-@property (nonatomic, retain) NSNumber   *level;
-@property (nonatomic, assign) BOOL       sound;
-@property (nonatomic, retain) NSString   *quizData;
-@property (nonatomic, retain) NSString   *updatedDate;
+@property (nonatomic, retain) NSNumber * coins;
+@property (nonatomic, retain) NSNumber * level;
+@property (nonatomic, retain) NSDictionary *quiz_data;
+@property (nonatomic, retain) NSNumber * sound;
+@property (nonatomic, retain) NSDate * updated_date;
 
 @end

@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UILabel      *lblCoins;
 @property (strong, nonatomic) IBOutlet MTLabel      *lblFinish;
 @property (strong, nonatomic) IBOutlet UILabel      *lblGuessed;
+@property (strong, nonatomic) IBOutlet UILabel      *lblCongrate;
 @property (strong, nonatomic) IBOutlet UIButton     *btnNext;
 @property (strong, nonatomic) IBOutlet UIButton     *btnDownload;
 @property (strong, nonatomic) IBOutlet UIImageView  *imgCoins;

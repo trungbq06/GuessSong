@@ -13,6 +13,7 @@
 #import "GADInterstitial.h"
 #import "GameCenterManager.h"
 #import "PlayViewController.h"
+#import "DataParser.h"
 
 @interface StartViewController : UIViewController <GADBannerViewDelegate, GKGameCenterControllerDelegate, GameCenterManagerDelegate, GADInterstitialDelegate>
 {
@@ -34,6 +35,9 @@
 @property (nonatomic, strong) IBOutlet UIButton     *btnVolume;
 
 @property (nonatomic, assign) BOOL                  sound;
+
+// Data of the quiz
+@property (nonatomic, retain) NSMutableArray        *quizData;
 
 - (IBAction)btnPlayClick:(id)sender;
 - (IBAction)changeBg:(id)sender;

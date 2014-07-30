@@ -132,38 +132,7 @@
     
     // Load data for the first time
     if (!_quizData) {
-        [SVProgressHUD showWithStatus:@"Loading ..." maskType:SVProgressHUDMaskTypeGradient];
-        NSDictionary *_parameter = [[NSDictionary alloc] initWithObjectsAndKeys:COUNTRY_CODE, @"country", nil];
-        [[AFNetworkingSynchronousSingleton sharedClient] getPath:[NSString stringWithFormat:@"%@%@", kServerURL, @"quiz/latest"] parameters:_parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            [SVProgressHUD dismiss];
-            _quizData = [DataParser parseQuiz:responseObject];
-            if (_idxQuiz < [_quizData count]) {
-                // Initiate quiz data
-                _quiz = [_quizData objectAtIndex:_idxQuiz];
-            
-                [self generateGame];
-            } else {
-                SolvedViewController *_solvedController = [self.storyboard instantiateViewControllerWithIdentifier:@"SolvedViewController"];
-                
-                [_solvedController setIdxQuiz:_idxQuiz];
-                [_solvedController setCurrCoins:_currCoins];
-                [_solvedController setQuizData:_quizData];
-                [_solvedController setCurrLevel:_idxQuiz];
-                [_solvedController setCurrQuiz:_quiz];
-                
-                [self presentPopupViewController:_solvedController animated:YES completion:nil];
-            }
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            DLog_Low(@"Error fetching data from server %@", error);
-            
-            NSString *_message = [error localizedDescription];
-            
-            UIAlertView *_alert = [[UIAlertView alloc] initWithTitle:@"Network Problem" message:_message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            _alert.tag = 1002;
-            [_alert show];
-            
-            [SVProgressHUD dismiss];
-        }];
+        
     } else {
         [SVProgressHUD dismiss];
     }
