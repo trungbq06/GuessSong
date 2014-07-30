@@ -16,6 +16,7 @@
 #import <Social/Social.h>
 #import "CharacterGenerator.h"
 #import "JingRoundView.h"
+#import <POP/POP.h>
 #import "PurchaseViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import <MediaPlayer/MPMoviePlayerController.h>

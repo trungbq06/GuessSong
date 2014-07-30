@@ -39,7 +39,7 @@
     
     [_tableView registerNib:[UINib nibWithNibName:@"PurchaseTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"PurchaseTableViewCell"];
     
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - 50)];
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 5, self.view.frame.size.width, self.view.frame.size.height - 50)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.scrollEnabled = NO;

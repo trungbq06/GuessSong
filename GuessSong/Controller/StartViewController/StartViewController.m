@@ -34,6 +34,8 @@
     _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL error:&error];
     _audioPlayer.numberOfLoops = -1;
     
+    _btnCoins.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;
+    
     /* This push local notification
     UILocalNotification* localNotification = [[UILocalNotification alloc] init];
     localNotification.fireDate = [NSDate dateWithTimeIntervalSinceNow:10];
@@ -186,6 +188,8 @@
             } else {
                 [_btnVolume setBackgroundImage:[UIImage imageNamed:@"volume"] forState:UIControlStateNormal];
             }
+            
+            [_btnCoins setTitle:@"100000" forState:UIControlStateNormal];
         }
     } failure:^(CDLoad *operation, NSError *error) {
         NSLog(@"Error %@", error);

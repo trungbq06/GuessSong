@@ -363,6 +363,26 @@
             [_charSourceArray addObject:_char];
         }
     }
+    
+    [NSTimer scheduledTimerWithTimeInterval:4.0f target:self selector:@selector(animation) userInfo:nil repeats:YES];
+}
+
+- (void) animation
+{
+    // Animate button
+    POPSpringAnimation *basicAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    //    basicAnimation.property = [POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+    basicAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0f, 1.0f)];
+    basicAnimation.fromValue =[NSValue valueWithCGSize:CGSizeMake(1.4f, 1.4f)];
+    basicAnimation.springSpeed = 5;
+    basicAnimation.springBounciness = 10;
+    
+    [basicAnimation setCompletionBlock:^(POPAnimation *animation, BOOL finished) {
+        //        [_btnPlay setFrame:normalFrame];
+        //        [_btnPlay.titleLabel setFont:[UIFont fontWithName:@"Verdana-Bold" size:30]];
+    }];
+    
+    [_btnShow.layer pop_addAnimation:basicAnimation forKey:@"positionAnimation"];
 }
 
 #pragma mark - CHAR SOURCE DELEGATE
@@ -377,7 +397,7 @@
         }
     }
     
-    NSLog(@"SOURCE %d - ALL %d", _charGenerator.currPos, [_charGenerator.songChar count]);
+    NSLog(@"SOURCE %d - ALL %lu", _charGenerator.currPos, (unsigned long)[_charGenerator.songChar count]);
     
     CharSquare *_char = [_charSquareArray objectAtIndex:_charGenerator.currPos];
     

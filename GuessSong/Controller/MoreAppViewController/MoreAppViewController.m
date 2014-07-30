@@ -8,6 +8,7 @@
 
 #import "MoreAppViewController.h"
 #import "UIViewController+CWPopup.h"
+#import "UIColor+Expand.h"
 
 @interface MoreAppViewController ()
 
@@ -196,7 +197,7 @@ int totalApps = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+    [_navigationBar setBackgroundColor:[UIColor colorFromHex:@"#C73889"]];
     
     _appDict = [[NSDictionary alloc] init];
     
