@@ -26,7 +26,7 @@
 #define SOURCE_VIEW_WIDTH 250
 #define SOURCE_OFFSET_Y   420
 #define SOURCE_LINE_SPACING 40
-#define FONT_FAMILY         @"Arial-BoldMT"
+#define FONT_FAMILY         @"DINBold"
 #define PLAY_ROUND          @"play_round"
 #define START_COINS         100
 #define kServerURL          @"http://topapp.us/"
@@ -34,6 +34,7 @@
 #define BG_MUSIC            @"memphis_soul"
 #define KWRONG_MP3          @"incorrect_sound"
 #define kTADA_MP3           @"tada"
+#define NAV_BG_COLOR        @"#ce1852"
 
 //risign text field
 #define kNotificationResignTextField                                @"resign_first_responder_text_field"

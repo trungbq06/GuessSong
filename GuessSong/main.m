@@ -12,9 +12,6 @@
 
 int main(int argc, char * argv[])
 {
-    [[NSUserDefaults standardUserDefaults] setObject:[NSArray arrayWithObjects:@"vn", @"en", nil] forKey:@"AppleLanguages"];
-    [[NSUserDefaults standardUserDefaults] synchronize]; //to make the change immediate
-    
     @autoreleasepool {
         return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
     }

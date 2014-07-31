@@ -48,6 +48,7 @@
 		37B4A99C198753C800E0C5AD /* source_bg_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B4A99A198753C800E0C5AD /* source_bg_active@2x.png */; };
 		37B4A9A3198779BC00E0C5AD /* click_off.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37B4A9A1198779BC00E0C5AD /* click_off.mp3 */; };
 		37B4A9A4198779BC00E0C5AD /* click_on.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 37B4A9A2198779BC00E0C5AD /* click_on.mp3 */; };
+		37B8F722198A5D9400F20D12 /* DINBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 37B8F721198A5D9400F20D12 /* DINBold.ttf */; };
 		37C0C962197066A300392051 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37C0C961197066A300392051 /* FacebookSDK.framework */; };
 		37C0C96B1970877D00392051 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 37C0C9691970877D00392051 /* Model.xcdatamodeld */; };
 		37C0C99F19708E0A00392051 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 37C0C96E19708E0A00392051 /* AFHTTPClient.m */; };
@@ -259,6 +260,7 @@
 		37B4A99A198753C800E0C5AD /* source_bg_active@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "source_bg_active@2x.png"; sourceTree = "<group>"; };
 		37B4A9A1198779BC00E0C5AD /* click_off.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click_off.mp3; sourceTree = "<group>"; };
 		37B4A9A2198779BC00E0C5AD /* click_on.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = click_on.mp3; sourceTree = "<group>"; };
+		37B8F721198A5D9400F20D12 /* DINBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DINBold.ttf; sourceTree = "<group>"; };
 		37C0C961197066A300392051 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		37C0C96A1970877D00392051 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		37C0C96D19708E0A00392051 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
@@ -948,6 +950,7 @@
 		67633A44196B6A1000475535 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				37B8F721198A5D9400F20D12 /* DINBold.ttf */,
 				37FD593219889EEF00EA6E11 /* incorrect_sound.mp3 */,
 				37FD593019889E8900EA6E11 /* tada.mp3 */,
 				37FD592C1988983A00EA6E11 /* btn_click_off.mp3 */,
@@ -1215,6 +1218,7 @@
 				37739CCF198784300019F4C2 /* itunes-button.png in Resources */,
 				6703DF9C197B20E10080768F /* volume@2x.png in Resources */,
 				6703A53D197DC7DD0094104B /* background_14@2x.png in Resources */,
+				37B8F722198A5D9400F20D12 /* DINBold.ttf in Resources */,
 				37C0C9B419708E0A00392051 /* SVProgressHUD.bundle in Resources */,
 				670100A11969D04A001D8926 /* Main_iPhone.storyboard in Resources */,
 				670100981969D04A001D8926 /* InfoPlist.strings in Resources */,

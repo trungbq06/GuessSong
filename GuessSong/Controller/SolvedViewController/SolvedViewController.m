@@ -32,17 +32,25 @@
 {
     [super viewDidLoad];
     
+    [_coinsEarned setHidden:YES];
+    [_btnDownload setHidden:YES];
+    [_lblCoins setHidden:YES];
+    [_imgCoins setHidden:YES];
+    [_guessedWord setHidden:YES];
+    [_lblGuessed setHidden:YES];
+    [_lblFinish setHidden:YES];
+    
     [_lblFinish setLineHeight:18];
-    [_lblFinish setFontColor:[UIColor colorFromHex:@"#11C214"]];
+    [_lblFinish setFontColor:[UIColor colorFromHex:@"#ff7b23"]];
     [_lblFinish setFontHighlightColor:[UIColor clearColor]];
-    [_lblFinish setFont:[UIFont fontWithName:@"MarkerFelt-Wide" size:25.0]];
+    [_lblFinish setFont:[UIFont fontWithName:@"DINAlternate-Bold" size:25.0]];
     [_lblFinish setTextAlignment:MTLabelTextAlignmentCenter];
     
     _guessedWord.delegate = self;
     [_guessedWord setLineHeight:18];
     [_guessedWord setFontColor:[UIColor colorFromHex:@"#11C214"]];
     [_guessedWord setFontHighlightColor:[UIColor clearColor]];
-    [_guessedWord setFont:[UIFont fontWithName:@"MarkerFelt-Thin" size:32.0]];
+    [_guessedWord setFont:[UIFont fontWithName:@"DINAlternate-Bold" size:32.0]];
     [_guessedWord setTextAlignment:MTLabelTextAlignmentCenter];
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"finish_bg"]]];
@@ -73,16 +81,19 @@
     [self animateCoin];
     
     if (_currLevel == [_quizData count]) {
-        [_btnDownload setHidden:YES];
-        [_lblCoins setHidden:YES];
-        [_imgCoins setHidden:YES];
         [_guessedWord setHidden:YES];
+        [_lblFinish setHidden:NO];
         [_btnNext setTitle:@"OK" forState:UIControlStateNormal];
-        
-        [_lblGuessed setHidden:YES];
 
         NSString *finish = @"Amazing! You finished all level! We will update new data soon. Please come back later!";
         [_lblFinish setText:finish];
+    } else {
+        [_coinsEarned setHidden:NO];
+        [_btnDownload setHidden:NO];
+        [_lblCoins setHidden:NO];
+        [_imgCoins setHidden:NO];
+        [_lblGuessed setHidden:NO];
+        [_lblFinish setHidden:NO];
     }
 }
 
@@ -103,7 +114,7 @@
         [_lblCoins setText:[NSString stringWithFormat:@"%d", ++_startCoin]];
     else {
         [_tUpdate invalidate];
-        [_lblCoins setText:[NSString stringWithFormat:@"+%d", _coins]];
+        [_lblCoins setText:[NSString stringWithFormat:@"%d", _coins]];
         
         POPSpringAnimation *basicAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
 //        basicAnimation.property = [POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];

@@ -29,6 +29,9 @@
 {
     [super viewDidLoad];
     
+    [_btnPlay.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:50]];
+    [_lbLevel setFont:[UIFont fontWithName:FONT_FAMILY size:30]];
+    [_btnCoins.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:15]];
     NSURL *playURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:BG_MUSIC ofType:@"mp3"]];
     NSError *error;
     _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL error:&error];
@@ -47,7 +50,7 @@
     [[UIApplication sharedApplication] scheduleLocalNotification:localNotification];
     */
     
-    [_navigationBar setBackgroundColor:[UIColor colorFromHex:@"#C73889"]];
+    [_navigationBar setBackgroundColor:[UIColor colorFromHex:NAV_BG_COLOR]];
     
     [_navigationBar setFrame:CGRectMake(0, 0, _navigationBar.frame.size.width, 40)];
     
@@ -119,7 +122,7 @@
                 [_btnCoins setTitle:[NSString stringWithFormat:@"   %@", _userInfo.coins] forState:UIControlStateNormal];
                 [_lbLevel setText:[NSString stringWithFormat:@"%@", _userInfo.level]];
                 
-                _sound = _userInfo.sound;
+                _sound = [_userInfo.sound boolValue];
                 
                 if (!_userInfo.sound) {
                     [_btnVolume setBackgroundImage:[UIImage imageNamed:@"volume_off"] forState:UIControlStateNormal];
@@ -239,6 +242,23 @@
     _sound = TRUE;
     
     [self reloadBgImage];
+    
+    CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
+    
+    CDModel* _cdModel = [[CDModel alloc] init];
+    _cdModel.entityName = @"UserInfo";
+    
+    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
+        DLog_Low(@"%@", responseObject);
+        for (UserInfo *_userInfo in responseObject) {
+            DLog_Low(@"Current coins: %@", _userInfo.coins);
+            DLog_Low(@"Current level: %@", _userInfo.level);
+            [_btnCoins setTitle:[NSString stringWithFormat:@"   %@", _userInfo.coins] forState:UIControlStateNormal];
+            [_lbLevel setText:[NSString stringWithFormat:@"%@", _userInfo.level]];
+        }
+    } failure:^(CDLoad *operation, NSError *error) {
+        
+    }];
 }
 
 - (void) reloadBgImage
@@ -248,7 +268,8 @@
         bgImage = @"background";
     
 //    bgImage = [bgImage stringByAppendingString:@".jpg"];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:bgImage]]];
+//    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:bgImage]]];
+    [self.view setBackgroundColor:[UIColor colorFromHex:@"#00c3bb"]];
 }
 
 #pragma mark - MORE APP

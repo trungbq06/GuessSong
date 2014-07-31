@@ -27,7 +27,7 @@
         [self.layer setBorderColor:[[UIColor clearColor] CGColor]];
         
         [button setTitle:character forState:UIControlStateNormal];
-        [button.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:26]];
+        [button.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:32]];
         [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [button setBackgroundImage:[UIImage imageNamed:@"source_bg"] forState:UIControlStateNormal];
         [button setBackgroundImage:[UIImage imageNamed:@"source_bg_active"] forState:UIControlStateHighlighted];

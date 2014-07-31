@@ -197,7 +197,7 @@ int totalApps = 0;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [_navigationBar setBackgroundColor:[UIColor colorFromHex:@"#C73889"]];
+    [_navigationBar setBackgroundColor:[UIColor colorFromHex:NAV_BG_COLOR]];
     
     _appDict = [[NSDictionary alloc] init];
     

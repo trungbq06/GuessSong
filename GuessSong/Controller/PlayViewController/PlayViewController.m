@@ -39,7 +39,10 @@
 {
     [super viewDidLoad];
     
-    [_navigationBar setBackgroundColor:[UIColor colorFromHex:@"#C73889"]];
+    [_lbLevel setFont:[UIFont fontWithName:FONT_FAMILY size:30]];
+    [_btnCoins.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:15]];
+    
+    [_navigationBar setBackgroundColor:[UIColor colorFromHex:NAV_BG_COLOR]];
     [_navigationBar setFrame:CGRectMake(0, 0, _navigationBar.frame.size.width, 40)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didChangeCoins:) name:kNotifyDidChangeCoins object:nil];
@@ -87,7 +90,7 @@
 //        NSLog(@"%@", responseObject);
         for (UserInfo *_userInfo in responseObject) {
             DLog_Low(@"Current coins: %@", _userInfo.coins);
-            _sound = _userInfo.sound;
+            _sound = [_userInfo.sound boolValue];
             _currCoins = [_userInfo.coins intValue];
             [_btnCoins setTitle:[NSString stringWithFormat:@"   %@", _userInfo.coins] forState:UIControlStateNormal];
             [_lbLevel setText:[NSString stringWithFormat:@"%@", _userInfo.level]];
@@ -96,10 +99,14 @@
             
             DLog_Low(@"Index %d", _idxQuiz);
             
-            // Initiate quiz data
-            _quiz = [_quizData objectAtIndex:_idxQuiz];
+            if (_idxQuiz < [_quizData count]) {
+                // Initiate quiz data
+                _quiz = [_quizData objectAtIndex:_idxQuiz];
             
-            [self generateGame];
+                [self generateGame];
+            } else {
+                [self finishGame];
+            }
         }
     } failure:^(CDLoad *operation, NSError *error) {
         DLog_Low(@"Error %@", error);
@@ -119,7 +126,7 @@
     
     _charGenerator = [[CharacterGenerator alloc] init];
     
-    /*
+    
     for (NSString *family in [UIFont familyNames])
     {
         NSLog(@"%@", family);
@@ -128,7 +135,7 @@
             NSLog(@"\t%@", font);
         }
     }
-    */
+    
     
     // Load data for the first time
     if (!_quizData) {
@@ -154,7 +161,8 @@
     if (!bgImage)
         bgImage = @"background";
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:bgImage]]];
+//    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:bgImage]]];
+    [self.view setBackgroundColor:[UIColor colorFromHex:@"#00c3bb"]];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -518,6 +526,23 @@
     }];
     
     return TRUE;
+}
+
+- (void) finishGame
+{
+    [_tadaPlayer play];
+    
+    SolvedViewController *_solvedController = [self.storyboard instantiateViewControllerWithIdentifier:@"SolvedViewController"];
+    [_solvedController setResult:_quiz.qResult];
+    [_solvedController setCoins:_quiz.coins];
+    
+    [_solvedController setIdxQuiz:_idxQuiz];
+    [_solvedController setCurrCoins:_currCoins];
+    [_solvedController setQuizData:_quizData];
+    [_solvedController setCurrLevel:_currLevel - 1];
+    [_solvedController setCurrQuiz:_quiz];
+    
+    [self presentPopupViewController:_solvedController animated:YES completion:nil];
 }
 
 - (BOOL) sorry
