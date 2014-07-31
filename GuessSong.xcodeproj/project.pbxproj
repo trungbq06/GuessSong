@@ -172,7 +172,6 @@
 		67474C5C196CB36B00370C30 /* UIColor+Expand.m in Sources */ = {isa = PBXBuildFile; fileRef = 67474C5B196CB36B00370C30 /* UIColor+Expand.m */; };
 		6747C24C197216540048705E /* DataParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 6747C24B197216540048705E /* DataParser.m */; };
 		67580CFF197B25F900DC3418 /* ChangeBgViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67580CFE197B25F900DC3418 /* ChangeBgViewController.m */; };
-		67608FF21989BB42008366AF /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 67608FF11989BB42008366AF /* UserInfo.m */; };
 		67633A4E196B70CF00475535 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67633A4D196B70CF00475535 /* AVFoundation.framework */; };
 		67633A50196B70EC00475535 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 67633A4F196B70EC00475535 /* AudioToolbox.framework */; };
 		67633A54196B77FB00475535 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 67633A52196B77FB00475535 /* stop.png */; };
@@ -432,8 +431,6 @@
 		6747C24B197216540048705E /* DataParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataParser.m; sourceTree = "<group>"; };
 		67580CFD197B25F900DC3418 /* ChangeBgViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeBgViewController.h; sourceTree = "<group>"; };
 		67580CFE197B25F900DC3418 /* ChangeBgViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeBgViewController.m; sourceTree = "<group>"; };
-		67608FF01989BB42008366AF /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserInfo.h; path = CoreData/UserInfo.h; sourceTree = "<group>"; };
-		67608FF11989BB42008366AF /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserInfo.m; path = CoreData/UserInfo.m; sourceTree = "<group>"; };
 		67633A4D196B70CF00475535 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		67633A4F196B70EC00475535 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		67633A52196B77FB00475535 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
@@ -1010,8 +1007,6 @@
 				379F3D60196F140000864C24 /* NSMutableArray+Shuffle.m */,
 				379F3D62196F344C00864C24 /* Helper.h */,
 				379F3D63196F344C00864C24 /* Helper.m */,
-				67608FF01989BB42008366AF /* UserInfo.h */,
-				67608FF11989BB42008366AF /* UserInfo.m */,
 				37C0C9691970877D00392051 /* Model.xcdatamodeld */,
 				67F78363197212FB002FE362 /* QuizModel.h */,
 				67F78364197212FB002FE362 /* QuizModel.m */,
@@ -1302,7 +1297,6 @@
 				371A068919768042002789EF /* RageIAPHelper.m in Sources */,
 				37C0C9AF19708E0A00392051 /* FMDatabaseAdditions.m in Sources */,
 				37C0C9A619708E0A00392051 /* AFXMLRequestOperation.m in Sources */,
-				67608FF21989BB42008366AF /* UserInfo.m in Sources */,
 				37C0C9B319708E0A00392051 /* Reachability.m in Sources */,
 				3791E18819704A1F0043E691 /* GameCenterManager.m in Sources */,
 				372A28EF198660E5001D49D5 /* MTLabel.m in Sources */,

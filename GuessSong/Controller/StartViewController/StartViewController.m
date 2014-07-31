@@ -92,6 +92,94 @@
             [_alert show];
         }
     }];
+    
+    // Insert new record to database
+    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:START_COINS], kCoins, [NSNumber numberWithInt:1], @"level", @FALSE, kSound, nil, kQuizData, nil, kUpdatedDate, nil];
+    NSArray *_data = [[NSArray alloc] initWithObjects:_uInfo, nil];
+    
+    CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
+    
+    CDModel* _cdModel = [[CDModel alloc] init];
+    _cdModel.entityName = @"UserInfo";
+    
+    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
+        DLog_Low(@"%@", responseObject);
+        if ([responseObject count] == 0) {
+            [_cdSingleton insertWithData:_data tableName:@"UserInfo" success:^(CDInsert *operation, id responseObject) {
+                DLog_Low(@"Inserted succesfully!");
+                
+                [self downloadData:responseObject updatedDate:@"" cdSingleton:_cdSingleton cdModel:_cdModel];
+            } failure:^(CDInsert *operation, NSError *error) {
+                
+            }];
+        } else {
+            for (UserInfo *_userInfo in responseObject) {
+                DLog_Low(@"Current coins: %@", _userInfo.coins);
+                DLog_Low(@"Current level: %@", _userInfo.level);
+                [_btnCoins setTitle:[NSString stringWithFormat:@"   %@", _userInfo.coins] forState:UIControlStateNormal];
+                [_lbLevel setText:[NSString stringWithFormat:@"%@", _userInfo.level]];
+                
+                _sound = _userInfo.sound;
+                
+                if (!_userInfo.sound) {
+                    [_btnVolume setBackgroundImage:[UIImage imageNamed:@"volume_off"] forState:UIControlStateNormal];
+                } else {
+                    [_btnVolume setBackgroundImage:[UIImage imageNamed:@"volume"] forState:UIControlStateNormal];
+                }
+                
+                _quizData = [DataParser parseQuiz:_userInfo.quiz_data];
+                
+                [self downloadData:responseObject updatedDate:_userInfo.updated_date cdSingleton:_cdSingleton cdModel:_cdModel];
+            }
+        }
+    } failure:^(CDLoad *operation, NSError *error) {
+        [SVProgressHUD dismiss];
+        DLog_Low(@"Error %@", error);
+    }];
+}
+
+- (void) downloadData:(id) responseObject updatedDate:(NSString*) updatedDate cdSingleton:(CDSingleton*) _cdSingleton cdModel:(CDModel*) _cdModel
+{
+    NSDictionary *_parameterD = [[NSDictionary alloc] initWithObjectsAndKeys:updatedDate, @"updated_date", nil];
+    [SVProgressHUD showWithStatus:@"Loading ..." maskType:SVProgressHUDMaskTypeGradient];
+    [[AFNetworkingSynchronousSingleton sharedClient] getPath:[NSString stringWithFormat:@"%@%@", kServerURL, @"quiz/checkDate"] parameters:_parameterD success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [SVProgressHUD dismiss];
+        
+        NSDictionary *_result = [responseObject objectForKey:@"results"];
+        if ([[_result objectForKey:@"need_download"] boolValue]) {
+            NSString *toUpdate = [_result objectForKey:@"updated_date"];
+            
+            [SVProgressHUD showWithStatus:@"Downloading data ..." maskType:SVProgressHUDMaskTypeGradient];
+            NSDictionary *_parameter = [[NSDictionary alloc] initWithObjectsAndKeys:COUNTRY_CODE, @"country", nil];
+            [[AFNetworkingSynchronousSingleton sharedClient] getPath:[NSString stringWithFormat:@"%@%@", kServerURL, @"quiz/latest"] parameters:_parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                [SVProgressHUD dismiss];
+                
+                _quizData = [DataParser parseQuiz:responseObject];
+                
+                // Save to database
+                NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:responseObject, kQuizData, toUpdate, kUpdatedDate, nil];
+                // Update to database
+                [_cdSingleton updateWithData:_cdModel newData:_uInfo success:^(CDUpdate *operation, id responseObject) {
+                    DLog_Low(@"Updated quiz data success");
+                } failure:^(CDUpdate *operation, NSError *error) {
+                    DLog_Low(@"Update quiz data error");
+                }];
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                DLog_Low(@"Error fetching data from server %@", error);
+                
+                NSString *_message = [error localizedDescription];
+                
+                UIAlertView *_alert = [[UIAlertView alloc] initWithTitle:@"Network Problem" message:_message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                _alert.tag = 1002;
+                [_alert show];
+                
+                [SVProgressHUD dismiss];
+            }];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [SVProgressHUD dismiss];
+    }];
 }
 
 - (void) viewDidDisappear:(BOOL)animated
@@ -151,79 +239,6 @@
     _sound = TRUE;
     
     [self reloadBgImage];
-    
-    // Insert new record to database
-    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:START_COINS], kCoins, [NSNumber numberWithInt:1], @"level", @FALSE, kSound, nil];
-    NSArray *_data = [[NSArray alloc] initWithObjects:_uInfo, nil];
-    
-    CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
-    
-    CDModel* _cdModel = [[CDModel alloc] init];
-    _cdModel.entityName = @"UserInfo";
-    
-    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
-        DLog_Low(@"%@", responseObject);
-        if ([responseObject count] == 0) {
-            [_cdSingleton insertWithData:_data tableName:@"UserInfo" success:^(CDInsert *operation, id responseObject) {
-                DLog_Low(@"Inserted succesfully!");
-            } failure:^(CDInsert *operation, NSError *error) {
-                
-            }];
-        }
-    } failure:^(CDLoad *operation, NSError *error) {
-        DLog_Low(@"Error %@", error);
-    }];
-    
-    // Load coins and level from local database
-    [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
-        //        NSLog(@"%@", responseObject);
-        for (UserInfo *_userInfo in responseObject) {
-            DLog_Low(@"Current coins: %@", _userInfo.coins);
-            DLog_Low(@"Current level: %@", _userInfo.level);
-            [_btnCoins setTitle:[NSString stringWithFormat:@"   %@", _userInfo.coins] forState:UIControlStateNormal];
-            [_lbLevel setText:[NSString stringWithFormat:@"%@", _userInfo.level]];
-            
-            _sound = _userInfo.sound;
-            
-            if (!_userInfo.sound) {
-                [_btnVolume setBackgroundImage:[UIImage imageNamed:@"volume_off"] forState:UIControlStateNormal];
-            } else {
-                [_btnVolume setBackgroundImage:[UIImage imageNamed:@"volume"] forState:UIControlStateNormal];
-            }
-            
-            NSDate *updatedDate = _userInfo.updated_date;
-            
-            [SVProgressHUD showWithStatus:@"Loading ..." maskType:SVProgressHUDMaskTypeGradient];
-            [[AFNetworkingSynchronousSingleton sharedClient] getPath:[NSString stringWithFormat:@"%@%@", kServerURL, @""] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                
-                if ([responseObject objectForKey:@"results"]) {
-                    [SVProgressHUD showWithStatus:@"Download data ..." maskType:SVProgressHUDMaskTypeGradient];
-                    NSDictionary *_parameter = [[NSDictionary alloc] initWithObjectsAndKeys:COUNTRY_CODE, @"country", nil];
-                    [[AFNetworkingSynchronousSingleton sharedClient] getPath:[NSString stringWithFormat:@"%@%@", kServerURL, @"quiz/latest"] parameters:_parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                        [SVProgressHUD dismiss];
-                        
-                        // Save to database
-                        NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:START_COINS], kCoins, [NSNumber numberWithInt:1], @"level", @FALSE, kSound, nil];
-                        
-                    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                        DLog_Low(@"Error fetching data from server %@", error);
-                        
-                        NSString *_message = [error localizedDescription];
-                        
-                        UIAlertView *_alert = [[UIAlertView alloc] initWithTitle:@"Network Problem" message:_message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                        _alert.tag = 1002;
-                        [_alert show];
-                        
-                        [SVProgressHUD dismiss];
-                    }];
-                }
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                
-            }];
-        }
-    } failure:^(CDLoad *operation, NSError *error) {
-        DLog_Low(@"Error %@", error);
-    }];
 }
 
 - (void) reloadBgImage
@@ -453,6 +468,7 @@
     PlayViewController *_playController = [self.storyboard instantiateViewControllerWithIdentifier:@"PlayViewController"];
     [_playController setIdxQuiz:0];
     [_playController setCurrLevel:1];
+    [_playController setQuizData:_quizData];
     
     [self.navigationController pushViewController:_playController animated:YES];
 }

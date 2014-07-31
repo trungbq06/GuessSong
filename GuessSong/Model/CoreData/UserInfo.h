@@ -16,6 +16,6 @@
 @property (nonatomic, retain) NSNumber * level;
 @property (nonatomic, retain) NSDictionary *quiz_data;
 @property (nonatomic, retain) NSNumber * sound;
-@property (nonatomic, retain) NSDate * updated_date;
+@property (nonatomic, retain) NSString * updated_date;
 
 @end
