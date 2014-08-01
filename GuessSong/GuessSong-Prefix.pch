@@ -71,6 +71,8 @@
 #define kSkipAlert                  1007
 #define RATED_APP                   @"rated_app"
 #define kSound                      @"sound"
+#define PLAY_IMAGE                  @"play"
+#define PAUSE_IMAGE                 @"pause"
 
 
 #define DEBUG           1

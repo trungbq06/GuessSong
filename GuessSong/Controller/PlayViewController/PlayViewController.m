@@ -56,7 +56,7 @@
     [self.view setBackgroundColor:[UIColor colorFromHex:@"#24A3BD"]];
     
     _playingRound.delegate = self;
-    _playingRound.roundImage = [UIImage imageNamed:@"cd_rom1"];
+    _playingRound.roundImage = [UIImage imageNamed:@"cd_play"];
     _playingRound.rotationDuration = 8.0;
     _playingRound.isPlay = NO;
     
@@ -68,12 +68,12 @@
     
     UIImage *stateImage;
     if (_isPlaying) {
-        stateImage = [UIImage imageNamed:@"pause"];
+        stateImage = [UIImage imageNamed:PAUSE_IMAGE];
     }else{
-        stateImage = [UIImage imageNamed:@"start"];
+        stateImage = [UIImage imageNamed:PLAY_IMAGE];
     }
     
-    _playBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, stateImage.size.width, stateImage.size.height)];
+    _playBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
     [_playBtn setCenter:center];
     [_playBtn setBackgroundImage:stateImage forState:UIControlStateNormal];
     [_playBtn addTarget:self action:@selector(playSong:) forControlEvents:UIControlEventTouchUpInside];
@@ -810,7 +810,7 @@
     if (!_isPlaying) {
         _isPlaying = TRUE;
         [_playingRound setIsPlay:_isPlaying];
-        [_playBtn setBackgroundImage:[UIImage imageNamed:@"pause"] forState:UIControlStateNormal];
+        [_playBtn setBackgroundImage:[UIImage imageNamed:PAUSE_IMAGE] forState:UIControlStateNormal];
         
         if (!_songPlayer) {
             NSString *playString = [_quiz.qSource objectForKey:@"preview_url"];

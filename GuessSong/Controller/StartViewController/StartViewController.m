@@ -29,6 +29,8 @@
 {
     [super viewDidLoad];
     
+    _sound = TRUE;
+    
     [_btnPlay.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:50]];
     [_lbLevel setFont:[UIFont fontWithName:FONT_FAMILY size:30]];
     [_btnCoins.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:15]];
@@ -238,8 +240,6 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    _sound = TRUE;
     
     [self reloadBgImage];
     

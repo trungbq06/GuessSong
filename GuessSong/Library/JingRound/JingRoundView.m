@@ -61,9 +61,9 @@
     //set play state
     UIImage *stateImage;
     if (self.isPlay) {
-        stateImage = [UIImage imageNamed:@"pause"];
+        stateImage = [UIImage imageNamed:PAUSE_IMAGE];
     }else{
-        stateImage = [UIImage imageNamed:@"start"];
+        stateImage = [UIImage imageNamed:PLAY_IMAGE];
     }
     
     self.playStateView = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, stateImage.size.width, stateImage.size.height)];
@@ -163,8 +163,8 @@
     self.layer.beginTime = timeSincePause;
     
     //set ImgView
-//    self.playStateView.image = [UIImage imageNamed:@"pause"];
-    [self.playStateView setBackgroundImage:[UIImage imageNamed:@"paused"] forState:UIControlStateNormal];
+//    self.playStateView.image = [UIImage imageNamed:PAUSE_IMAGE];
+    [self.playStateView setBackgroundImage:[UIImage imageNamed:PAUSE_IMAGE] forState:UIControlStateNormal];
     [UIView animateWithDuration:0.6 delay:0 options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
                          self.playStateView.alpha = 1;
@@ -180,7 +180,7 @@
 {
     //set ImgView
 //    self.playStateView.image = [UIImage imageNamed:@"start"];
-    [self.playStateView setBackgroundImage:[UIImage imageNamed:@"start"] forState:UIControlStateNormal];
+    [self.playStateView setBackgroundImage:[UIImage imageNamed:PLAY_IMAGE] forState:UIControlStateNormal];
 //    self.userInteractionEnabled = NO;
     [UIView animateWithDuration:0.6 delay:0 options:UIViewAnimationOptionCurveEaseInOut
                      animations:^{
