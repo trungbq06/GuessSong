@@ -32,6 +32,8 @@
 {
     [super viewDidLoad];
     
+    [_lblFinish setTextColor:[UIColor colorFromHex:@"#ff7b23"]];
+    
     [_coinsEarned setHidden:YES];
     [_btnDownload setHidden:YES];
     [_lblCoins setHidden:YES];
@@ -40,32 +42,42 @@
     [_lblGuessed setHidden:YES];
     [_lblFinish setHidden:YES];
     
+    [_lblCoins setTextColor:[UIColor colorFromHex:@"#ff7b23"]];
+    /*
     [_lblFinish setLineHeight:18];
     [_lblFinish setFontColor:[UIColor colorFromHex:@"#ff7b23"]];
     [_lblFinish setFontHighlightColor:[UIColor clearColor]];
     [_lblFinish setFont:[UIFont fontWithName:@"DINAlternate-Bold" size:25.0]];
     [_lblFinish setTextAlignment:MTLabelTextAlignmentCenter];
+    */
+    [_lblFinish setNumberOfLines:0];
+    [_lblFinish setFont:[UIFont fontWithName:@"DINBold" size:25.0]];
+//    [_lblFinish setTextColor:[UIColor colorFromHex:@"#ff7b23"]];
+    [_lblFinish setTextAlignment:NSTextAlignmentCenter];
     
+    /*
     _guessedWord.delegate = self;
     [_guessedWord setLineHeight:18];
-    [_guessedWord setFontColor:[UIColor colorFromHex:@"#11C214"]];
+    [_guessedWord setFontColor:[UIColor colorFromHex:@"#ff7b23"]];
     [_guessedWord setFontHighlightColor:[UIColor clearColor]];
     [_guessedWord setFont:[UIFont fontWithName:@"DINAlternate-Bold" size:32.0]];
     [_guessedWord setTextAlignment:MTLabelTextAlignmentCenter];
+     */
+    [_guessedWord setNumberOfLines:0];
+    [_guessedWord setFont:[UIFont fontWithName:@"DINBold" size:30.0]];
+    [_guessedWord setTextColor:[UIColor colorFromHex:@"#ff7b23"]];
+    [_guessedWord setTextAlignment:NSTextAlignmentCenter];
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"finish_bg"]]];
-    
-    [_lblCongrate setText:NSLocalizedString(@"Congratulations", @"Congratulations")];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [_guessedWord setText:_result];
+    [_guessedWord setText:[_result uppercaseString]];
 //    [_guessedWord setText:@"Co khi nao ta xa nhau roi hoi nguoi"];
     [_guessedWord setHidden:YES];
-    [_lblCoins setText:@"1"];
     
     [_btnNext.layer setCornerRadius:10];
     [_btnNext.layer setBorderColor:[[UIColor whiteColor] CGColor]];

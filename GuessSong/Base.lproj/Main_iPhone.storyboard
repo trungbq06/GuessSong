@@ -153,7 +153,7 @@
                                 <rect key="frame" x="60" y="422" width="200" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.12549020349979401" green="0.63921570777893066" blue="0.090196080505847931" alpha="1" colorSpace="deviceRGB"/>
-                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="35"/>
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="30"/>
                                 <state key="normal" title="NEXT">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -166,7 +166,7 @@
                                 <rect key="frame" x="169" y="310" width="35" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <view appearanceType="aqua" contentMode="scaleToFill" id="8zv-EJ-Yc9" customClass="MTLabel">
+                            <view appearanceType="aqua" contentMode="scaleToFill" id="8zv-EJ-Yc9" customClass="UILabel">
                                 <rect key="frame" x="12" y="171" width="296" height="101"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -178,8 +178,8 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" id="2Jw-AX-Oka" customClass="MTLabel">
-                                <rect key="frame" x="41" y="124" width="238" height="190"/>
+                            <view contentMode="scaleToFill" id="2Jw-AX-Oka" customClass="UILabel">
+                                <rect key="frame" x="41" y="138" width="238" height="190"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>

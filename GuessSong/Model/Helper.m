@@ -133,4 +133,13 @@
     }];
 }
 
++ (NSString *) localizedString:(NSString *) key
+{
+    // langCode should be set as a global variable somewhere
+    NSString *path = [[NSBundle mainBundle] pathForResource:LANG_CODE ofType:@"lproj"];
+    
+    NSBundle* languageBundle = [NSBundle bundleWithPath:path];
+    return [languageBundle localizedStringForKey:key value:@"" table:nil];
+}
+
 @end

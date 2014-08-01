@@ -14,9 +14,9 @@
 
 @property (nonatomic, retain) NSString              *result;
 @property (nonatomic, assign) int                   coins;
-@property (strong, nonatomic) IBOutlet MTLabel      *guessedWord;
+@property (strong, nonatomic) IBOutlet UILabel      *guessedWord;
 @property (strong, nonatomic) IBOutlet UILabel      *lblCoins;
-@property (strong, nonatomic) IBOutlet MTLabel      *lblFinish;
+@property (strong, nonatomic) IBOutlet UILabel      *lblFinish;
 @property (strong, nonatomic) IBOutlet UILabel      *lblGuessed;
 @property (strong, nonatomic) IBOutlet UILabel      *lblCongrate;
 @property (strong, nonatomic) IBOutlet UILabel      *coinsEarned;

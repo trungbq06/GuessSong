@@ -29,6 +29,13 @@
 {
     [super viewDidLoad];
     
+    int playRound = [[[NSUserDefaults standardUserDefaults] objectForKey:PLAY_ROUND] intValue];
+    playRound++;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:playRound] forKey:PLAY_ROUND];
+    
+    _sound = TRUE;
+    
     [_btnPlay.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:50]];
     [_lbLevel setFont:[UIFont fontWithName:FONT_FAMILY size:30]];
     [_btnCoins.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:15]];
@@ -106,7 +113,7 @@
     _cdModel.entityName = @"UserInfo";
     
     [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
-        DLog_Low(@"%@", responseObject);
+//        DLog_Low(@"%@", responseObject);
         if ([responseObject count] == 0) {
             [_cdSingleton insertWithData:_data tableName:@"UserInfo" success:^(CDInsert *operation, id responseObject) {
                 DLog_Low(@"Inserted succesfully!");
@@ -190,6 +197,8 @@
     [super viewDidDisappear:animated];
     
     [_audioPlayer pause];
+    
+    DLog_Low(@"%@", NSLocalizedString(@"Congratulations", @"Congratulations"));
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -239,9 +248,9 @@
 {
     [super viewWillAppear:animated];
     
-    _sound = TRUE;
-    
     [self reloadBgImage];
+    
+    DLog_Low(@"%@", [Helper localizedString:@"Congratulations"]);
     
     CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
     
@@ -249,7 +258,7 @@
     _cdModel.entityName = @"UserInfo";
     
     [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
-        DLog_Low(@"%@", responseObject);
+//        DLog_Low(@"%@", responseObject);
         for (UserInfo *_userInfo in responseObject) {
             DLog_Low(@"Current coins: %@", _userInfo.coins);
             DLog_Low(@"Current level: %@", _userInfo.level);

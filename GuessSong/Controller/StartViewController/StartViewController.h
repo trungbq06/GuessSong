@@ -14,6 +14,7 @@
 #import "GameCenterManager.h"
 #import "PlayViewController.h"
 #import "DataParser.h"
+#import "Helper.h"
 
 @interface StartViewController : UIViewController <GADBannerViewDelegate, GKGameCenterControllerDelegate, GameCenterManagerDelegate, GADInterstitialDelegate>
 {

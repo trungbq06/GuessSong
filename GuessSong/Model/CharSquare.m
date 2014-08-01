@@ -77,7 +77,7 @@
 - (void) showHint
 {
     _isHint = TRUE;
-    [_charBtn setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+    [_charBtn setTitleColor:[UIColor colorFromHex:@"#ce584c"] forState:UIControlStateNormal];
     [_charBtn.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:26]];
     [self setBackgroundColor:[UIColor clearColor]];
 }
