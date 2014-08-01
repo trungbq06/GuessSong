@@ -113,7 +113,7 @@
     _cdModel.entityName = @"UserInfo";
     
     [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
-        DLog_Low(@"%@", responseObject);
+//        DLog_Low(@"%@", responseObject);
         if ([responseObject count] == 0) {
             [_cdSingleton insertWithData:_data tableName:@"UserInfo" success:^(CDInsert *operation, id responseObject) {
                 DLog_Low(@"Inserted succesfully!");
@@ -197,6 +197,8 @@
     [super viewDidDisappear:animated];
     
     [_audioPlayer pause];
+    
+    DLog_Low(@"%@", NSLocalizedString(@"Congratulations", @"Congratulations"));
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -248,13 +250,15 @@
     
     [self reloadBgImage];
     
+    DLog_Low(@"%@", [Helper localizedString:@"Congratulations"]);
+    
     CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
     
     CDModel* _cdModel = [[CDModel alloc] init];
     _cdModel.entityName = @"UserInfo";
     
     [_cdSingleton loadWithData:_cdModel success:^(CDLoad *operation, id responseObject) {
-        DLog_Low(@"%@", responseObject);
+//        DLog_Low(@"%@", responseObject);
         for (UserInfo *_userInfo in responseObject) {
             DLog_Low(@"Current coins: %@", _userInfo.coins);
             DLog_Low(@"Current level: %@", _userInfo.level);

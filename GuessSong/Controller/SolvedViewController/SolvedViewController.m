@@ -69,8 +69,6 @@
     [_guessedWord setTextAlignment:NSTextAlignmentCenter];
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"finish_bg"]]];
-    
-    DLog_Low(@"%@", NSLocalizedString(@"Congratulations", @"Congratulations"));
 }
 
 - (void)viewWillAppear:(BOOL)animated

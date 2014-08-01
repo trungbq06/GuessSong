@@ -73,7 +73,7 @@
 #define kSound                      @"sound"
 #define PLAY_IMAGE                  @"play"
 #define PAUSE_IMAGE                 @"pause"
-
+#define LANG_CODE                   @"vi"
 
 #define DEBUG           1
 
