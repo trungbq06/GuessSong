@@ -2,8 +2,8 @@
 /* Class = "IBUILabel"; text = "Congratulations!"; ObjectID = "1gY-XP-4jc"; */
 "1gY-XP-4jc.text" = "Chúc mừng bạn!";
 
-/* Class = "IBUILabel"; text = "You solved the song"; ObjectID = "1k7-F6-DKd"; */
-"1k7-F6-DKd.text" = "You solved the song";
+/* Class = "IBUILabel"; text = "The song was"; ObjectID = "1k7-F6-DKd"; */
+"1k7-F6-DKd.text" = "The song was";
 
 /* Class = "IBUIButton"; normalTitle = "BUY"; ObjectID = "Asn-Up-41I"; */
 "Asn-Up-41I.normalTitle" = "BUY";
@@ -23,14 +23,17 @@
 /* Class = "IBUIButton"; normalTitle = "Back"; ObjectID = "JCN-U6-Sxg"; */
 "JCN-U6-Sxg.normalTitle" = "Back";
 
-/* Class = "IBUILabel"; text = "+10"; ObjectID = "NNH-qV-BP0"; */
-"NNH-qV-BP0.text" = "+10";
+/* Class = "IBUILabel"; text = "10"; ObjectID = "NNH-qV-BP0"; */
+"NNH-qV-BP0.text" = "10";
 
 /* Class = "IBUILabel"; text = "500 coins"; ObjectID = "NRs-1X-wib"; */
 "NRs-1X-wib.text" = "500 coins";
 
 /* Class = "IBUIButton"; normalTitle = "    100"; ObjectID = "Utj-rv-h93"; */
 "Utj-rv-h93.normalTitle" = "    100";
+
+/* Class = "IBUILabel"; text = "Coins earned"; ObjectID = "V8O-Bo-oBi"; */
+"V8O-Bo-oBi.text" = "Coins earned";
 
 /* Class = "IBUIButton"; normalTitle = "rate"; ObjectID = "aBq-L1-O1I"; */
 "aBq-L1-O1I.normalTitle" = "rate";

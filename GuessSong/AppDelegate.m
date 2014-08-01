@@ -108,19 +108,27 @@
 //    [[UIApplication sharedApplication] cancelAllLocalNotifications];
     [[UIApplication sharedApplication] setApplicationIconBadgeNumber:--[UIApplication sharedApplication].applicationIconBadgeNumber];
     
-    NSLog(@"Push notification received %@", pushNotification);
+    int _coins = 30;
+    [Helper updateCoins:_coins];
+    
+    UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:@"Congratulations" message:@"You got 30 free coins !" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [_alertView show];
+    
+    DLog_Low(@"Push notification received %@", pushNotification);
     
     NSString *alert = [pushNotification objectForKey:@"u"];
-    NSData *pushData = [alert dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *jsonParsingError = nil;
-    NSDictionary *pushDict = [NSJSONSerialization JSONObjectWithData:pushData
-                                                              options:0 error:&jsonParsingError];
-
-    NSLog(@"Notification: %@",  [pushDict objectForKey:@"u"]);
-    int _coins = [[pushDict objectForKey:kCoins] intValue];
-    NSString *_date = [pushDict objectForKey:@"date"];
     
-    [Helper updateCoins:_coins];
+    if (alert) {
+        NSData *pushData = [alert dataUsingEncoding:NSUTF8StringEncoding];
+        NSError *jsonParsingError = nil;
+        NSDictionary *pushDict = [NSJSONSerialization JSONObjectWithData:pushData
+                                                                  options:0 error:&jsonParsingError];
+
+        DLog_Low(@"Notification: %@",  [pushDict objectForKey:@"u"]);
+        int _coins = [[pushDict objectForKey:kCoins] intValue];
+        
+        [Helper updateCoins:_coins];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

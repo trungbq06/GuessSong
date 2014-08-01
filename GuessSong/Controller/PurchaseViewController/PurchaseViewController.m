@@ -55,7 +55,16 @@
         _coins = [responseObject objectForKey:@"coins"];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SVProgressHUD dismiss];
+        
+        UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please check your network connection" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [_alertView show];
     }];
+}
+
+#pragma mark - UIALERTVIEW DELEGATE
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:kDoneClick object:nil];
 }
 
 #pragma mark - RETRIEVE PRODUCT INFORMATION

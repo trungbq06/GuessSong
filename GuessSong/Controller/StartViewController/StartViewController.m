@@ -29,6 +29,11 @@
 {
     [super viewDidLoad];
     
+    int playRound = [[[NSUserDefaults standardUserDefaults] objectForKey:PLAY_ROUND] intValue];
+    playRound++;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithInt:playRound] forKey:PLAY_ROUND];
+    
     _sound = TRUE;
     
     [_btnPlay.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:50]];

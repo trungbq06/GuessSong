@@ -836,29 +836,51 @@
 
             AVPlayerItem *playerItem = [AVPlayerItem playerItemWithURL:playURL];
 
+//            _songPlayer = [AVPlayer playerWithPlayerItem:playerItem];
             _songPlayer = [AVPlayer playerWithPlayerItem:playerItem];
             // Subscribe to the AVPlayerItem's DidPlayToEndTime notification.
             [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(itemDidFinishPlaying:) name:AVPlayerItemDidPlayToEndTimeNotification object:playerItem];
         }
         
         [_songPlayer play];
+        
+        _sliderTimer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(updateSlider) userInfo:nil repeats:YES];
     } else {
         _isPlaying = FALSE;
         [_playingRound setIsPlay:_isPlaying];
-        [_playBtn setBackgroundImage:[UIImage imageNamed:@"start"] forState:UIControlStateNormal];
+        [_playBtn setBackgroundImage:[UIImage imageNamed:PLAY_IMAGE] forState:UIControlStateNormal];
         
         [_songPlayer pause];
+    }
+}
+
+- (void) updateSlider
+{
+    _currentTime = CMTimeGetSeconds(_songPlayer.currentTime);
+    
+    DLog_Low(@"Current Time %d", _currentTime);
+    
+    if (_currentTime > 20) {
+        [self stopPlayer];
+        
+        [_sliderTimer invalidate];
     }
 }
 
 #pragma mark - NOTIFICATION FINISH PLAYING
 - (void) itemDidFinishPlaying:(NSNotification*) notification
 {
-    [_playBtn setBackgroundImage:[UIImage imageNamed:@"start"] forState:UIControlStateNormal];
+    [self stopPlayer];
+}
+
+- (void) stopPlayer
+{
+    [_playBtn setBackgroundImage:[UIImage imageNamed:PLAY_IMAGE] forState:UIControlStateNormal];
     
     [_playingRound setIsPlay:NO];
     _isPlaying = FALSE;
     [_songPlayer pause];
+    [_songPlayer seekToTime:kCMTimeZero];
 }
 
 - (BOOL)prefersStatusBarHidden {

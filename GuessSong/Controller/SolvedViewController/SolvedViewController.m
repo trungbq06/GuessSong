@@ -32,7 +32,7 @@
 {
     [super viewDidLoad];
     
-    [_lblFinish setTextColor:[UIColor colorFromHex:NAV_BG_COLOR]];
+    [_lblFinish setTextColor:[UIColor colorFromHex:@"#ff7b23"]];
     
     [_coinsEarned setHidden:YES];
     [_btnDownload setHidden:YES];
@@ -70,7 +70,7 @@
     
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"finish_bg"]]];
     
-    [_lblCongrate setText:NSLocalizedString(@"Congratulations", @"Congratulations")];
+    DLog_Low(@"%@", NSLocalizedString(@"Congratulations", @"Congratulations"));
 }
 
 - (void)viewWillAppear:(BOOL)animated

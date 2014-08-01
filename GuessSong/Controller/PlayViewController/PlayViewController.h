@@ -56,9 +56,11 @@
 @property (weak, nonatomic) IBOutlet UIButton       *btnNext;
 @property (weak, nonatomic) IBOutlet UILabel        *lblGotCoins;
 @property (nonatomic, weak) IBOutlet UIView         *navigationBar;
+@property (nonatomic, retain) NSTimer               *sliderTimer;
 
 @property (nonatomic, assign) int                   totalChar;
 @property (nonatomic, assign) int                   removedChar;
+@property (nonatomic, assign) int                   currentTime;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnFacebook;
 @property (weak, nonatomic) IBOutlet UIButton *btnShow;

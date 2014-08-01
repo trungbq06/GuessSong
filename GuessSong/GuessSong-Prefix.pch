@@ -30,7 +30,7 @@
 #define PLAY_ROUND          @"play_round"
 #define START_COINS         100
 #define kServerURL          @"http://topapp.us/"
-#define COUNTRY_CODE        @"usa"
+#define COUNTRY_CODE        @"vn"
 #define BG_MUSIC            @"memphis_soul"
 #define KWRONG_MP3          @"incorrect_sound"
 #define kTADA_MP3           @"tada"
