@@ -57,6 +57,9 @@
 @property (weak, nonatomic) IBOutlet UILabel        *lblGotCoins;
 @property (nonatomic, weak) IBOutlet UIView         *navigationBar;
 
+@property (nonatomic, assign) int                   totalChar;
+@property (nonatomic, assign) int                   removedChar;
+
 @property (weak, nonatomic) IBOutlet UIButton *btnFacebook;
 @property (weak, nonatomic) IBOutlet UIButton *btnShow;
 @property (weak, nonatomic) IBOutlet UIButton *btnDelete;

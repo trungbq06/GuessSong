@@ -151,6 +151,8 @@
     NSURL *playURL2 = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:kTADA_MP3 ofType:@"mp3"]];
 
     _tadaPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL2 error:nil];
+    
+    _removedChar = 0;
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -331,7 +333,7 @@
     
     // Draw source character
     for (int i = 0;i < totalRow;i++) {
-        offsetX = (appFrame.size.width - SOURCE_VIEW_WIDTH) / 2;
+        offsetX = (appFrame.size.width - SOURCE_VIEW_WIDTH) / 2 - CHAR_SPACING * 3;
         offsetY = sOffsetY + i * SOURCE_LINE_SPACING;
         for (int j = 0;j < charPerRow;j++) {
             iChar = i * charPerRow + j;
@@ -352,6 +354,8 @@
     }
     
     [NSTimer scheduledTimerWithTimeInterval:4.0f target:self selector:@selector(animation) userInfo:nil repeats:YES];
+    
+    _totalChar = [_charSourceArray count];
 }
 
 - (void) animation
@@ -483,14 +487,17 @@
     } else if (alertView.tag == 1002) {
         [self.navigationController popToRootViewControllerAnimated:YES];
     } else if (alertView.tag == kShowHintAlert && buttonIndex == 1) {
+        // Show a character hint
         [self showCharHint];
         
         [_btnCoins setTitle:[NSString stringWithFormat:@"   %d", _currCoins] forState:UIControlStateNormal];
     } else if (alertView.tag == kDeleteAlert && buttonIndex == 1) {
+        // Delete wrong character
         [self deleteWrongChar];
         
         [_btnCoins setTitle:[NSString stringWithFormat:@"   %d", _currCoins] forState:UIControlStateNormal];
     } else if (alertView.tag == kSkipAlert && buttonIndex == 1) {
+        // Skip this game
         _currCoins -= kSkipCoins;
         
         [self nextGame];
@@ -618,18 +625,22 @@
 - (IBAction)deleteChar:(id)sender
 {
     if ([self checkCoins:kDeleteCoins]) {
-        UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove character", @"Remove character") message:NSLocalizedString(@"Do you want to delete a wrong character for 10 coins", @"") delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-        _alertView.tag = kDeleteAlert;
-        [_alertView setDelegate:self];
-        [_alertView show];
+        int toRemoveChar = _totalChar - [_charSquareArray count];
+        
+        if (_removedChar < toRemoveChar) {
+            UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove character", @"Remove character") message:NSLocalizedString(@"Do you want to delete a wrong character for 10 coins", @"") delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+            _alertView.tag = kDeleteAlert;
+            [_alertView setDelegate:self];
+            [_alertView show];
+        } else {
+            
+        }
     }
 }
 
 - (void) deleteWrongChar
 {
     BOOL removed = FALSE;
-    _currCoins -= kDeleteCoins;
-    [Helper updateNewCoins:_currCoins success:nil];
     
     for (int i = 0;i < [_charSourceArray count];i++) {
         CharSource *_source = [_charSourceArray objectAtIndex:i];
@@ -644,7 +655,6 @@
     if (!removed) {
         for (int i = 0;i < [_charSquareArray count];i++) {
             CharSquare *_square = [_charSquareArray objectAtIndex:i];
-            NSString *_sChar = [_charGenerator.songChar objectAtIndex:i];
             if (![_charGenerator.songChar containsObject:_square.character] && ![_square.character isEqualToString:@""]) {
                 [_square setCharacter:@""];
                 
@@ -656,6 +666,12 @@
 //                NSLog(@"CHAR %@", _square.character);
             }
         }
+    }
+    
+    if (removed) {
+        _removedChar++;
+        _currCoins -= kDeleteCoins;
+        [Helper updateNewCoins:_currCoins success:nil];
     }
 }
 
