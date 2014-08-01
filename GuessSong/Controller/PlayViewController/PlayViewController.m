@@ -858,7 +858,7 @@
 {
     _currentTime = CMTimeGetSeconds(_songPlayer.currentTime);
     
-    DLog_Low(@"Current Time %d", _currentTime);
+//    DLog_Low(@"Current Time %d", _currentTime);
     
     if (_currentTime > 20) {
         [self stopPlayer];

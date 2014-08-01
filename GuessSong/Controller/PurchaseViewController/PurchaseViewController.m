@@ -79,6 +79,9 @@
 // SKProductsRequestDelegate protocol method
 - (void)productsRequest:(SKProductsRequest *)request didReceiveResponse:(SKProductsResponse *)response
 {
+    for(SKProduct *aProduct in response.products){
+        DLog_Low(@"%@", aProduct.productIdentifier);
+    }
     _products = response.products;
     
     [self displayStoreUI]; // Custom method

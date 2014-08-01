@@ -21,10 +21,10 @@
 #define WIDTH             28
 #define CHAR_SPACING      3
 #define LINE_SPACING      32
-#define OFFSETY           320
+#define OFFSETY           300
 #define SOURCE_CHAR_WIDTH 35
 #define SOURCE_VIEW_WIDTH 250
-#define SOURCE_OFFSET_Y   420
+#define SOURCE_OFFSET_Y   400
 #define SOURCE_LINE_SPACING 40
 #define FONT_FAMILY         @"DINBold"
 #define PLAY_ROUND          @"play_round"
