@@ -84,9 +84,9 @@
     if (updateData.retainCount > 0) {
         [updateData release];
     }
-    if (errorMessage.retainCount > 0) {
-        [errorMessage release];
-    }
+//    if (errorMessage.retainCount > 0) {
+//        [errorMessage release];
+//    }
     if (responseData.retainCount > 0) {
         [responseData release];
     }

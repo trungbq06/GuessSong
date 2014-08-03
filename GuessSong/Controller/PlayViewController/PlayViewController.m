@@ -12,6 +12,7 @@
 #import <AVFoundation/AVPlayer.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import "AFNetworkingSynchronousSingleton.h"
+#import "UIImageView+AFNetworking.h"
 #import "CDSingleton.h"
 #import "CDModel.h"
 #import "UserInfo.h"
@@ -55,29 +56,33 @@
     
     [self.view setBackgroundColor:[UIColor colorFromHex:@"#24A3BD"]];
     
-    _playingRound.delegate = self;
-    _playingRound.roundImage = [UIImage imageNamed:@"cd_play"];
-    _playingRound.rotationDuration = 8.0;
-    _playingRound.isPlay = NO;
-    
-    if (!IS_IPHONE_5) {
-        [_playingRound setFrame:CGRectMake(_playingRound.frame.origin.x, _playingRound.frame.origin.y - 30, _playingRound.frame.size.width, _playingRound.frame.size.height)];
+    if (DATA_TYPE == 1) {
+        _playingRound.delegate = self;
+        _playingRound.roundImage = [UIImage imageNamed:@"cd_play"];
+        _playingRound.rotationDuration = 8.0;
+        _playingRound.isPlay = NO;
+        
+        if (!IS_IPHONE_5) {
+            [_playingRound setFrame:CGRectMake(_playingRound.frame.origin.x, _playingRound.frame.origin.y - 20, _playingRound.frame.size.width, _playingRound.frame.size.height)];
+        }
+        
+        CGPoint center = CGPointMake(_playingRound.frame.origin.x + _playingRound.frame.size.width / 2.0, _playingRound.frame.origin.y + _playingRound.frame.size.height / 2.0);
+        
+        UIImage *stateImage;
+        if (_isPlaying) {
+            stateImage = [UIImage imageNamed:PAUSE_IMAGE];
+        }else{
+            stateImage = [UIImage imageNamed:PLAY_IMAGE];
+        }
+        
+        _playBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+        [_playBtn setCenter:center];
+        [_playBtn setBackgroundImage:stateImage forState:UIControlStateNormal];
+        [_playBtn addTarget:self action:@selector(playSong:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_playBtn];
+    } else {
+        [_playingRound setHidden:YES];
     }
-    
-    CGPoint center = CGPointMake(_playingRound.frame.origin.x + _playingRound.frame.size.width / 2.0, _playingRound.frame.origin.y + _playingRound.frame.size.height / 2.0);
-    
-    UIImage *stateImage;
-    if (_isPlaying) {
-        stateImage = [UIImage imageNamed:PAUSE_IMAGE];
-    }else{
-        stateImage = [UIImage imageNamed:PLAY_IMAGE];
-    }
-    
-    _playBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    [_playBtn setCenter:center];
-    [_playBtn setBackgroundImage:stateImage forState:UIControlStateNormal];
-    [_playBtn addTarget:self action:@selector(playSong:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_playBtn];
 //    [self.view sendSubviewToBack:_playBtn];
     
     CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
@@ -136,7 +141,6 @@
         }
     }
     
-    
     // Load data for the first time
     if (!_quizData) {
         
@@ -164,7 +168,7 @@
         bgImage = @"background";
     
 //    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:bgImage]]];
-    [self.view setBackgroundColor:[UIColor colorFromHex:@"#00c3bb"]];
+    [self.view setBackgroundColor:[UIColor colorFromHex:kBackgroundColor]];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -252,13 +256,51 @@
     }];
 }
 
+- (IBAction)imageClick:(id)sender
+{
+    ZoomImageViewController *_zoomController = [self.storyboard instantiateViewControllerWithIdentifier:@"ZoomImageViewController"];
+    UIImageView *object = (UIImageView*) [sender view];
+    [_zoomController setImageView:[[UIImageView alloc] initWithImage:[object image]]];
+    
+    [self presentPopupViewController:_zoomController animated:YES completion:^{
+        
+    }];
+}
+
 - (void) generateNewQuiz:(NSString*) quizName
 {
     [_charSquareArray removeAllObjects];
     
-    [_charGenerator setSongName:quizName];
+    if (DATA_TYPE == 2) {
+        [_leftImage.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+        [_leftImage.layer setBorderWidth:3];
+        [_leftImage.layer setCornerRadius:8];
+        [_leftImage setBackgroundColor:[UIColor lightGrayColor]];
+        [_leftImage.layer setMasksToBounds:YES];
+        
+        [_rightImage.layer setBorderColor:[[UIColor whiteColor] CGColor]];
+        [_rightImage.layer setBorderWidth:3];
+        [_rightImage.layer setCornerRadius:8];
+        [_rightImage setBackgroundColor:[UIColor lightGrayColor]];
+        [_rightImage.layer setMasksToBounds:YES];
+        
+        [_leftImage setUserInteractionEnabled:YES];
+        [_rightImage setUserInteractionEnabled:YES];
+        
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+        tapGesture.numberOfTapsRequired = 1;
+        [_leftImage setGestureRecognizers:[NSArray arrayWithObjects:tapGesture, nil]];
+        
+        NSArray *_imgArr = (NSArray*) _quiz.qSource;
+        [_leftImage setImageWithURL:[NSURL URLWithString:[_imgArr objectAtIndex:0]]];
+        [_rightImage setImageWithURL:[NSURL URLWithString:[_imgArr objectAtIndex:1]]];
+    } else {
+        [_leftImage setHidden:YES];
+        [_rightImage setHidden:YES];
+        [_lblPlus setHidden:YES];
+    }
     
-//    [_playingRound.roundImageView setImageWithURL:[NSURL URLWithString:[_quiz.qSource objectForKey:@"thumbnail"]]];
+    [_charGenerator setSongName:quizName];
     
     [_lbLevel setText:[NSString stringWithFormat:@"%d", _currLevel]];
     
@@ -268,17 +310,34 @@
     int offsetX = 0;
     int offsetY = OFFSETY;
     int sOffsetY = SOURCE_OFFSET_Y;
+    int startYImage = START_Y_IMAGE;
     DLog_Low(@"%d - %d - %@", IS_IPHONE, IS_WIDE_SCREEN, [ [UIDevice currentDevice] model ]);
     
     if (!IS_IPHONE_5) {
         offsetY -= 50;
         sOffsetY -= 60;
-        int decrease = 45;
+        startYImage -= 20;
+        int decrease = 20;
         
-        [_btnFacebook setFrame:CGRectMake(_btnFacebook.frame.origin.x, _btnFacebook.frame.origin.y - decrease, _btnFacebook.frame.size.width, _btnFacebook.frame.size.height)];
-        [_btnShow setFrame:CGRectMake(_btnShow.frame.origin.x, _btnShow.frame.origin.y - decrease, _btnShow.frame.size.width, _btnShow.frame.size.height)];
-        [_btnDelete setFrame:CGRectMake(_btnDelete.frame.origin.x, _btnDelete.frame.origin.y - decrease, _btnDelete.frame.size.width, _btnDelete.frame.size.height)];
-        [_btnNext setFrame:CGRectMake(_btnNext.frame.origin.x, _btnNext.frame.origin.y - decrease, _btnNext.frame.size.width, _btnNext.frame.size.height)];
+        if (DATA_TYPE == 1) {
+            [_btnFacebook setFrame:CGRectMake(_btnFacebook.frame.origin.x, _btnFacebook.frame.origin.y - decrease, _btnFacebook.frame.size.width, _btnFacebook.frame.size.height)];
+            [_btnShow setFrame:CGRectMake(_btnShow.frame.origin.x, _btnShow.frame.origin.y - decrease, _btnShow.frame.size.width, _btnShow.frame.size.height)];
+            [_btnDelete setFrame:CGRectMake(_btnDelete.frame.origin.x, _btnDelete.frame.origin.y - decrease, _btnDelete.frame.size.width, _btnDelete.frame.size.height)];
+            [_btnNext setFrame:CGRectMake(_btnNext.frame.origin.x, _btnNext.frame.origin.y - decrease, _btnNext.frame.size.width, _btnNext.frame.size.height)];
+            [_btnTwitter setFrame:CGRectMake(_btnTwitter.frame.origin.x, _btnTwitter.frame.origin.y - decrease, _btnTwitter.frame.size.width, _btnTwitter.frame.size.height)];
+            [_btnItunes setFrame:CGRectMake(_btnItunes.frame.origin.x, _btnItunes.frame.origin.y - decrease, _btnItunes.frame.size.width, _btnItunes.frame.size.height)];
+        }
+    }
+    
+    if (DATA_TYPE == 2) {
+        int newWidth = 32;
+        [_btnFacebook setFrame:CGRectMake(55, startYImage, newWidth, newWidth)];
+        [_btnShow setFrame:CGRectMake(140, startYImage, newWidth, newWidth)];
+        [_btnDelete setFrame:CGRectMake(183, startYImage, newWidth, newWidth)];
+        [_btnNext setFrame:CGRectMake(226, startYImage, newWidth, newWidth)];
+        [_btnTwitter setFrame:CGRectMake(98, startYImage, newWidth, newWidth)];
+        
+        [_btnItunes setHidden:YES];
     }
     
     offsetY += (sOffsetY - offsetY) / 2 - ([_charGenerator.wordOffset count] * WIDTH/2);
@@ -323,6 +382,10 @@
     int charPerRow = nTotalChar / totalRow;
     
     // Need how many more character ???
+    if (nTotalChar == totalChar) {
+        nTotalChar += 7;
+        totalRow += 1;
+    }
     for (int i = 0;i< nTotalChar - totalChar;i++) {
         [_sourceChar addObject:[self randomChar:_sourceChar]];
     }
@@ -503,6 +566,15 @@
         [self nextGame];
         
         [_btnCoins setTitle:[NSString stringWithFormat:@"   %d", _currCoins] forState:UIControlStateNormal];
+    } else if (alertView.tag == kOpenItunes && buttonIndex == 1) {
+        // Skip this game
+        _currCoins -= kSkipCoins;
+        
+        [Helper updateNewCoins:_currCoins success:^{
+            [_btnCoins setTitle:[NSString stringWithFormat:@"   %d", _currCoins] forState:UIControlStateNormal];
+            
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:_quiz.itunesURL]];
+        }];
     }
 }
 
@@ -528,6 +600,7 @@
     [_solvedController setCurrLevel:_currLevel];
     [_solvedController setCurrQuiz:_quiz];
     
+//    [self presentPopupViewController:_solvedController animated:YES completion:nil];
     [Helper updateLevel:_currLevel + 1 success:^{
         [self presentPopupViewController:_solvedController animated:YES completion:nil];
     }];
@@ -555,7 +628,7 @@
 - (BOOL) sorry
 {
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sorry" message:@"You didn't make it. Please try again !" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    [alertView show];
+//    [alertView show];
     
     return FALSE;
 }
@@ -564,7 +637,7 @@
 - (IBAction)showHint:(id)sender
 {
     if ([self checkCoins:kShowCoins]) {
-        UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Correct character", @"Correct character") message:NSLocalizedString(@"Do you want to reveal a character for 15 coins", @"") delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:[Helper localizedString:@"Correct character"] message:[Helper localizedString:[NSString stringWithFormat:@"Do you want to reveal a character for %d coins", kShowCoins]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
         _alertView.tag = kShowHintAlert;
         [_alertView setDelegate:self];
         [_alertView show];
@@ -584,7 +657,8 @@
     
     if (_charGenerator.remainingChar < [_charGenerator.songChar count]) {
         if (!_char.isHint) {
-            [self chooseSource:_currChar];
+            if (![_char.character isEqualToString:_currChar])
+                [self chooseSource:_currChar];
             
             if ([_char.character isEqualToString:@""]) {
                 _charGenerator.remainingChar++;
@@ -628,7 +702,7 @@
         int toRemoveChar = _totalChar - [_charSquareArray count];
         
         if (_removedChar < toRemoveChar) {
-            UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Remove character", @"Remove character") message:NSLocalizedString(@"Do you want to delete a wrong character for 10 coins", @"") delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+            UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:[Helper localizedString:@"Remove character"] message:[Helper localizedString:[NSString stringWithFormat:@"Do you want to delete a wrong character for %d coins", kDeleteCoins]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
             _alertView.tag = kDeleteAlert;
             [_alertView setDelegate:self];
             [_alertView show];
@@ -678,11 +752,19 @@
 - (IBAction)skipLevel:(id)sender
 {
     if ([self checkCoins:kSkipCoins]) {
-        UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Skip Level", @"Skip Level") message:NSLocalizedString(@"Do you want to skip this level for 30 coins", @"") delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+        UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:[Helper localizedString:@"Skip Level"] message:[Helper localizedString:[NSString stringWithFormat:@"Do you want to skip this level for %d coins", kSkipCoins]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
         _alertView.tag = kSkipAlert;
         [_alertView setDelegate:self];
         [_alertView show];
     }
+}
+
+- (IBAction)btnItunesClick:(id)sender
+{
+    UIAlertView *_alertView = [[UIAlertView alloc] initWithTitle:[Helper localizedString:@"Listen"] message:[Helper localizedString:[NSString stringWithFormat:@"Do you want to listen to this song for %d coins", kSkipCoins]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+    _alertView.tag = kOpenItunes;
+    [_alertView setDelegate:self];
+    [_alertView show];
 }
 
 - (BOOL) checkCoins:(int) _neededCoins
@@ -699,7 +781,7 @@
 - (IBAction)shareFB:(id)sender
 {
     // get the app delegate so that we can access the session property
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
     
     // this button's job is to flip-flop the session from open to closed
     if (appDelegate.session.isOpen) {
@@ -709,21 +791,26 @@
         // cause the implicit cached-token login to occur on next launch of the application
 //        [appDelegate.session closeAndClearTokenInformation];
         
-        FBShareDialogParams *params = [[FBShareDialogParams alloc] init];
+        FBLinkShareParams *params = [[FBLinkShareParams alloc] init];
         params.link = [NSURL URLWithString:kServerURL];
-        params.picture = [NSURL URLWithString:@"https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xpa1/t1.0-9/10513289_10202084649312804_5356930935114971960_n.jpg"];
+//        params.picture = [NSURL URLWithString:@"https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xpa1/t1.0-9/10513289_10202084649312804_5356930935114971960_n.jpg"];
+        params.picture = [NSURL fileURLWithPath:[self screenshot]];
         params.name = @"Guess The Song";
         params.caption = @"Can you guess these song ?";
+        
         /*
         FBPhotoParams *params = [[FBPhotoParams alloc] initWithPhotos:[NSArray arrayWithObjects:[self screenshot], nil]];
          */
-        [FBDialogs presentShareDialogWithParams:params clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
-            if(error) {
-                DLog_Low(@"Error: %@", error.description);
-            } else {
-                DLog_Low(@"Success!");
-            }
-        }];
+        BOOL canShare = [FBDialogs canPresentShareDialogWithParams:params];
+        if (canShare) {
+            [FBDialogs presentShareDialogWithParams:params clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+                if(error) {
+                    DLog_Low(@"Error: %@", error.description);
+                } else {
+                    DLog_Low(@"Success!");
+                }
+            }];
+        }
     } else {
         if (appDelegate.session.state != FBSessionStateCreated) {
             // Create a new, logged out session.
@@ -762,7 +849,48 @@
      */
 }
 
-- (UIImage *) screenshot {
+- (IBAction)showTweetSheet:(id) sender
+{
+    //  Create an instance of the Tweet Sheet
+    SLComposeViewController *tweetSheet = [SLComposeViewController
+                                           composeViewControllerForServiceType:
+                                           SLServiceTypeTwitter];
+    
+    // Sets the completion handler.  Note that we don't know which thread the
+    // block will be called on, so we need to ensure that any required UI
+    // updates occur on the main queue
+    tweetSheet.completionHandler = ^(SLComposeViewControllerResult result) {
+        switch(result) {
+                //  This means the user cancelled without sending the Tweet
+            case SLComposeViewControllerResultCancelled:
+                break;
+                //  This means the user hit 'Send'
+            case SLComposeViewControllerResultDone:
+                break;
+        }
+    };
+    
+    //  Set the initial body of the Tweet
+    [tweetSheet setInitialText:@"Can you guess this song ?"];
+    
+    //  Adds an image to the Tweet.  For demo purposes, assume we have an
+    //  image named 'larry.png' that we wish to attach
+    if (![tweetSheet addImage:[UIImage imageWithContentsOfFile:[self screenshot]]]) {
+        DLog_Low(@"Unable to add the image!");
+    }
+    
+    //  Add an URL to the Tweet.  You can add multiple URLs.
+    if (![tweetSheet addURL:[NSURL URLWithString:kAppStoreUrl]]){
+        DLog_Low(@"Unable to add the URL!");
+    }
+    
+    //  Presents the Tweet Sheet to the user
+    [self presentViewController:tweetSheet animated:NO completion:^{
+        NSLog(@"Tweet sheet has been presented.");
+    }];
+}
+
+- (NSString *) screenshot {
     UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
     CGRect rect = [keyWindow bounds];
     UIGraphicsBeginImageContextWithOptions(rect.size,YES,0.0f);
@@ -771,7 +899,7 @@
     UIImage *capturedScreen = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
-    return capturedScreen;
+//    return capturedScreen;
     
     NSString *imagePath = [NSHomeDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"Documents/capturedImage.jpg"]];
     [UIImageJPEGRepresentation(capturedScreen, 0.95) writeToFile:imagePath atomically:YES];
@@ -830,6 +958,7 @@
         
         if (!_songPlayer) {
             NSString *playString = [_quiz.qSource objectForKey:@"preview_url"];
+            DLog_Low(@"Preview: %@", playString);
             
             //Converts songURL into a playable NSURL
             NSURL *playURL = [NSURL URLWithString:playString];

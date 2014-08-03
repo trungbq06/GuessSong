@@ -37,6 +37,12 @@
 {
     [super viewDidLoad];
     
+    [_btnDone setTitle:[Helper localizedString:@"Back"] forState:UIControlStateNormal];
+    
+    if (IS_IOS7 == 0) {
+        [_btnDone setFrame:CGRectMake(_btnDone.frame.origin.x, _btnDone.frame.origin.y - 20, _btnDone.frame.size.width, _btnDone.frame.size.height)];
+    }
+    
     [_tableView registerNib:[UINib nibWithNibName:@"PurchaseTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"PurchaseTableViewCell"];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 5, self.view.frame.size.width, self.view.frame.size.height - 50)];
@@ -213,6 +219,11 @@
                 NSNumber *_addCoins = [_coins objectForKey:transaction.payment.productIdentifier];
                 
                 [Helper updateCoins:[_addCoins intValue]];
+                
+                if ([_addCoins intValue] == 5000) {
+                    // Update no_ads = TRUE
+                    [Helper updateNoAds:TRUE success:nil];
+                }
                 
                 [SVProgressHUD showSuccessWithStatus:[NSString stringWithFormat:@"You purchased %d coins !", [_addCoins intValue]]];
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];

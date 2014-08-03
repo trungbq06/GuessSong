@@ -2,7 +2,7 @@
 //  UserInfo.m
 //  GuessSong
 //
-//  Created by TrungBQ on 7/30/14.
+//  Created by TrungBQ on 8/2/14.
 //  Copyright (c) 2014 Trung Bui. All rights reserved.
 //
 
@@ -16,5 +16,6 @@
 @dynamic quiz_data;
 @dynamic sound;
 @dynamic updated_date;
+@dynamic no_ads;
 
 @end

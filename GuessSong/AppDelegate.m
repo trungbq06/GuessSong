@@ -48,10 +48,11 @@
     pushManager.delegate = self;
     
     // handling push on app start
-    [[PushNotificationManager pushManager] handlePushReceived:launchOptions];
+//    [[PushNotificationManager pushManager] handlePushReceived:launchOptions];
     
     // make sure we count app open in Pushwoosh stats
-    [[PushNotificationManager pushManager] sendAppOpen];
+    if (IS_IOS7)
+        [[PushNotificationManager pushManager] sendAppOpen];
     
     // register for push notifications!
     [[PushNotificationManager pushManager] registerForPushNotifications];

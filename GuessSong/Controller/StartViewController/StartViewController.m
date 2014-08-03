@@ -104,7 +104,7 @@
     }];
     
     // Insert new record to database
-    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:START_COINS], kCoins, [NSNumber numberWithInt:1], @"level", @FALSE, kSound, nil, kQuizData, nil, kUpdatedDate, nil];
+    NSDictionary *_uInfo = [[NSDictionary alloc] initWithObjectsAndKeys:[NSNumber numberWithInt:START_COINS], kCoins, [NSNumber numberWithInt:1], @"level", @TRUE, kSound, nil, kQuizData, nil, kUpdatedDate, @FALSE, kNoAds, nil];
     NSArray *_data = [[NSArray alloc] initWithObjects:_uInfo, nil];
     
     CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
@@ -126,6 +126,10 @@
             for (UserInfo *_userInfo in responseObject) {
                 DLog_Low(@"Current coins: %@", _userInfo.coins);
                 DLog_Low(@"Current level: %@", _userInfo.level);
+                DLog_Low(@"Last updated date: %@", _userInfo.updated_date);
+                
+                _noAds = [_userInfo.no_ads boolValue];
+                
                 [_btnCoins setTitle:[NSString stringWithFormat:@"   %@", _userInfo.coins] forState:UIControlStateNormal];
                 [_lbLevel setText:[NSString stringWithFormat:@"%@", _userInfo.level]];
                 
@@ -150,7 +154,7 @@
 
 - (void) downloadData:(id) responseObject updatedDate:(NSString*) updatedDate cdSingleton:(CDSingleton*) _cdSingleton cdModel:(CDModel*) _cdModel
 {
-    NSDictionary *_parameterD = [[NSDictionary alloc] initWithObjectsAndKeys:updatedDate, @"updated_date", nil];
+    NSDictionary *_parameterD = [[NSDictionary alloc] initWithObjectsAndKeys:updatedDate, @"updated_date", [NSNumber numberWithInt:DATA_TYPE], @"type", nil];
     [SVProgressHUD showWithStatus:@"Loading ..." maskType:SVProgressHUDMaskTypeGradient];
     [[AFNetworkingSynchronousSingleton sharedClient] getPath:[NSString stringWithFormat:@"%@%@", kServerURL, @"quiz/checkDate"] parameters:_parameterD success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [SVProgressHUD dismiss];
@@ -160,7 +164,9 @@
             NSString *toUpdate = [_result objectForKey:@"updated_date"];
             
             [SVProgressHUD showWithStatus:@"Downloading data ..." maskType:SVProgressHUDMaskTypeGradient];
-            NSDictionary *_parameter = [[NSDictionary alloc] initWithObjectsAndKeys:COUNTRY_CODE, @"country", nil];
+            NSMutableDictionary *_parameter = [[NSMutableDictionary alloc] initWithObjectsAndKeys:COUNTRY_CODE, @"country", [NSNumber numberWithInt:DATA_TYPE], @"type", nil];
+            if (DATA_TYPE == 2)
+                [_parameter removeObjectForKey:@"country"];
             [[AFNetworkingSynchronousSingleton sharedClient] getPath:[NSString stringWithFormat:@"%@%@", kServerURL, @"quiz/latest"] parameters:_parameter success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 [SVProgressHUD dismiss];
                 
@@ -264,6 +270,8 @@
             DLog_Low(@"Current level: %@", _userInfo.level);
             [_btnCoins setTitle:[NSString stringWithFormat:@"   %@", _userInfo.coins] forState:UIControlStateNormal];
             [_lbLevel setText:[NSString stringWithFormat:@"%@", _userInfo.level]];
+            
+            _noAds = [_userInfo.no_ads boolValue];
         }
     } failure:^(CDLoad *operation, NSError *error) {
         
@@ -278,7 +286,13 @@
     
 //    bgImage = [bgImage stringByAppendingString:@".jpg"];
 //    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:bgImage]]];
-    [self.view setBackgroundColor:[UIColor colorFromHex:@"#00c3bb"]];
+    [self.view setBackgroundColor:[UIColor colorFromHex:kBackgroundColor]];
+}
+
+#pragma mark - CUP BUTTON CLICK
+- (IBAction)btnCupClick:(id)sender
+{
+    
 }
 
 #pragma mark - MORE APP
@@ -292,7 +306,7 @@
 #pragma mark - RATE APP
 - (IBAction)share:(id)sender
 {
-    NSString *message = [NSString stringWithFormat:@"OMG! This is fantastic game! How can you defeat me on this game http://itunes.apple.com/app/id892274452"];
+    NSString *message = [NSString stringWithFormat:@"OMG! This is fantastic game! How can you defeat me on this game http://itunes.apple.com/app/%@", kAppID];
     NSArray *postItems = @[message];
     
     UIActivityViewController *activityVC = [[UIActivityViewController alloc]
@@ -309,9 +323,9 @@
 
 - (void) rateApp
 {
-    NSString *str = @"itms-apps://itunes.apple.com/app/id892274452";
+    NSString *str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/app/%@", kAppID];
     if (IS_IOS7 == 0) {
-        str = @"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=id892274452";
+        str = [NSString stringWithFormat:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=%@", kAppID];
     }
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:str]];
@@ -362,13 +376,15 @@
 
 - (void) loadIntersial
 {
-    if (!bannerShown) {
-        DLog_Low(@"Loading intersial");
-        
-        interstitial_ = [[GADInterstitial alloc] init];
-        interstitial_.adUnitID = MY_BANNER_INTERSITIAL_UNIT_ID;
-        [interstitial_ setDelegate:self];
-        [interstitial_ loadRequest:[GADRequest request]];
+    if (!_noAds) {
+        if (!bannerShown) {
+            DLog_Low(@"Loading intersial");
+            
+            interstitial_ = [[GADInterstitial alloc] init];
+            interstitial_.adUnitID = MY_BANNER_INTERSITIAL_UNIT_ID;
+            [interstitial_ setDelegate:self];
+            [interstitial_ loadRequest:[GADRequest request]];
+        }
     }
 }
 
@@ -440,33 +456,35 @@
 }
 
 - (void) loadBanner {
-    CGRect appframe= [[UIScreen mainScreen] applicationFrame];
-    
-    if (IS_IPAD) {
-        bannerView_ = [[GADBannerView alloc]
-                       initWithFrame:CGRectMake(20.0,
-                                                appframe.size.height - 90,
-                                                GAD_SIZE_728x90.width,
-                                                GAD_SIZE_728x90.height)];
-    } else {
-        bannerView_ = [[GADBannerView alloc]
-                       initWithFrame:CGRectMake(0.0,
-                                                appframe.size.height - 50,
-                                                GAD_SIZE_320x50.width,
-                                                GAD_SIZE_320x50.height)];
+    if (!_noAds) {
+        CGRect appframe= [[UIScreen mainScreen] applicationFrame];
+        
+        if (IS_IPAD) {
+            bannerView_ = [[GADBannerView alloc]
+                           initWithFrame:CGRectMake(20.0,
+                                                    appframe.size.height - 90,
+                                                    GAD_SIZE_728x90.width,
+                                                    GAD_SIZE_728x90.height)];
+        } else {
+            bannerView_ = [[GADBannerView alloc]
+                           initWithFrame:CGRectMake(0.0,
+                                                    appframe.size.height - 50,
+                                                    GAD_SIZE_320x50.width,
+                                                    GAD_SIZE_320x50.height)];
+        }
+        
+        // Specify the ad's "unit identifier." This is your AdMob Publisher ID.
+        bannerView_.adUnitID = MY_BANNER_UNIT_ID;
+        
+        // Let the runtime know which UIViewController to restore after taking
+        // the user wherever the ad goes and add it to the view hierarchy.
+        bannerView_.rootViewController = self;
+        bannerView_.delegate = self;
+        [self.view addSubview:bannerView_];
+        
+        // Initiate a generic request to load it with an ad.
+        [bannerView_ loadRequest:[self request]];
     }
-    
-    // Specify the ad's "unit identifier." This is your AdMob Publisher ID.
-    bannerView_.adUnitID = MY_BANNER_UNIT_ID;
-    
-    // Let the runtime know which UIViewController to restore after taking
-    // the user wherever the ad goes and add it to the view hierarchy.
-    bannerView_.rootViewController = self;
-    bannerView_.delegate = self;
-    [self.view addSubview:bannerView_];
-    
-    // Initiate a generic request to load it with an ad.
-    [bannerView_ loadRequest:[self request]];
 }
 
 #pragma mark GADRequest generation

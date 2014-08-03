@@ -20,6 +20,7 @@
 #import "PurchaseViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import <MediaPlayer/MPMoviePlayerController.h>
+#import "ZoomImageViewController.h"
 #import "QuizModel.h"
 
 @interface PlayViewController : UIViewController <CharSourceDelegate, CharSquarelegate, UIAlertViewDelegate, JingRoundViewDelegate>
@@ -57,6 +58,8 @@
 @property (weak, nonatomic) IBOutlet UILabel        *lblGotCoins;
 @property (nonatomic, weak) IBOutlet UIView         *navigationBar;
 @property (nonatomic, retain) NSTimer               *sliderTimer;
+@property (nonatomic, weak) IBOutlet UIImageView    *leftImage;
+@property (nonatomic, weak) IBOutlet UIImageView    *rightImage;
 
 @property (nonatomic, assign) int                   totalChar;
 @property (nonatomic, assign) int                   removedChar;
@@ -65,6 +68,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnFacebook;
 @property (weak, nonatomic) IBOutlet UIButton *btnShow;
 @property (weak, nonatomic) IBOutlet UIButton *btnDelete;
+@property (weak, nonatomic) IBOutlet UIButton *btnTwitter;
+@property (weak, nonatomic) IBOutlet UIButton *btnItunes;
+@property (weak, nonatomic) IBOutlet UILabel  *lblPlus;
 @property (nonatomic, assign) BOOL            sound;
 
 - (IBAction)gotoNextGame:(id)sender;
@@ -75,5 +81,7 @@
 - (IBAction)deleteChar:(id)sender;
 - (IBAction)skipLevel:(id)sender;
 - (IBAction)shareFB:(id)sender;
+- (IBAction)showTweetSheet:(id) sender;
+- (IBAction)btnItunesClick:(id)sender;
 
 @end

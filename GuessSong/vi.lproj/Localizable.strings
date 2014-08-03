@@ -5,4 +5,23 @@
   Created by Mr Trung on 8/1/14.
   Copyright (c) 2014 Trung Bui. All rights reserved.
 */
-"Congratulations" = "Chúc mừng bạn";
+"Awesome" = "Tuyệt vời";
+"Good Job" = "Rất tốt";
+"Amazing" = "Xuất sắc";
+"Great" = "Xuất sắc";
+"Incredible" = "Tuyệt vời";
+"The song was"    = "Bài hát là";
+"The word was"    = "Đáp án là";
+"You finished all level! We will update new data soon. Please come back later!" = "Bạn đã hoàn thành tất cả level hiện tại. Chúng tôi sẽ cập nhật dữ liệu sớm. Bạn quay lại sau nhé !";
+"Coins earned" = "Bạn được tặng";
+"Remove character" = "Xoá ký tự";
+"Correct character" = "Xoá ký tự";
+"Do you want to reveal a character for 35 coins" = "Bạn có muốn dùng 35 coins để mở một ký tự đúng không ?";
+"Do you want to delete a wrong character for 25 coins" = "Bạn có muốn dùng 25 coins để xoá một ký tự sai không ?";
+"Skip Level" = "Bỏ qua Level";
+"Do you want to skip this level for 55 coins" = "Bạn có muốn dùng 55 coins để bỏ qua level này không ?";
+"Sorry" = "Xin lỗi";
+"You didn't make it. Please try again !" = "Bạn chưa trả lời đúng !";
+"Do you want to listen to this song for 55 coins" = "Bạn có muốn dùng 55 coins để nghe thử bài này trên iTunes không ?";
+"Listen" = "Nghe nhạc";
+"Back"   = "Quay lại";

@@ -11,6 +11,7 @@
 #import "StartViewController.h"
 #import "UIColor+Expand.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Helper.h"
 #import <POP/POP.h>
 
 @interface SolvedViewController ()
@@ -32,7 +33,26 @@
 {
     [super viewDidLoad];
     
-    [_lblFinish setTextColor:[UIColor colorFromHex:@"#ff7b23"]];
+    _finishArr = [NSArray arrayWithObjects:[Helper localizedString:@"Good Job"], [Helper localizedString:@"Amazing"],
+                           [Helper localizedString:@"Great"],[Helper localizedString:@"Hooray"],
+                           [Helper localizedString:@"Awesome"],[Helper localizedString:@"Incredible"], nil];
+    
+    int random = arc4random() % [_finishArr count];
+    NSString *_finish = [_finishArr objectAtIndex:random];
+    [_lblCongrate setText:[NSString stringWithFormat:@"%@ !" , [_finish uppercaseString]]];
+    [_lblCongrate setTextColor:[UIColor colorFromHex:kYellowColor]];
+    [_guessedWord setTextColor:[UIColor colorFromHex:kYellowColor]];
+    [_lblCoins setTextColor:[UIColor colorFromHex:kYellowColor]];
+    
+    if (DATA_TYPE == 1)
+        [_lblGuessed setText:[Helper localizedString:@"The song was"]];
+    else {
+        [_lblGuessed setText:[Helper localizedString:@"The word was"]];
+    }
+    
+    [_coinsEarned setText:[Helper localizedString:@"Coins earned"]];
+    
+    [_lblFinish setTextColor:[UIColor colorFromHex:@"#FF1447"]];
     
     [_coinsEarned setHidden:YES];
     [_btnDownload setHidden:YES];
@@ -42,7 +62,6 @@
     [_lblGuessed setHidden:YES];
     [_lblFinish setHidden:YES];
     
-    [_lblCoins setTextColor:[UIColor colorFromHex:@"#ff7b23"]];
     /*
     [_lblFinish setLineHeight:18];
     [_lblFinish setFontColor:[UIColor colorFromHex:@"#ff7b23"]];
@@ -50,8 +69,12 @@
     [_lblFinish setFont:[UIFont fontWithName:@"DINAlternate-Bold" size:25.0]];
     [_lblFinish setTextAlignment:MTLabelTextAlignmentCenter];
     */
+    NSString *font = @"DINBold";
+    if ([LANG_CODE isEqualToString:@"vi"]) {
+        font = @"TimesNewRomanPS-BoldMT";
+    }
     [_lblFinish setNumberOfLines:0];
-    [_lblFinish setFont:[UIFont fontWithName:@"DINBold" size:25.0]];
+    [_lblFinish setFont:[UIFont fontWithName:font size:25.0]];
 //    [_lblFinish setTextColor:[UIColor colorFromHex:@"#ff7b23"]];
     [_lblFinish setTextAlignment:NSTextAlignmentCenter];
     
@@ -65,23 +88,39 @@
      */
     [_guessedWord setNumberOfLines:0];
     [_guessedWord setFont:[UIFont fontWithName:@"DINBold" size:30.0]];
-    [_guessedWord setTextColor:[UIColor colorFromHex:@"#ff7b23"]];
     [_guessedWord setTextAlignment:NSTextAlignmentCenter];
     
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"finish_bg"]]];
+//    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"finish_bg"]]];
+    [self.view setBackgroundColor:[UIColor colorFromHex:kBackgroundColor]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    [_guessedWord setText:[_result uppercaseString]];
+    if (DATA_TYPE == 2) {
+        NSString *string = [_result uppercaseString];
+        if (string) {
+            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+            [attributedString addAttribute:NSKernAttributeName
+                                     value:@(5)
+                                     range:NSMakeRange(0, [string length])];
+            [attributedString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"DINBold" size:35] range:NSMakeRange(0, [string length])];
+            [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorFromHex:kYellowColor] range:NSMakeRange(0, [string length])];
+            
+            _guessedWord.attributedText = attributedString;
+        }
+    } else {
+        [_guessedWord setText:[_result uppercaseString]];
+    }
 //    [_guessedWord setText:@"Co khi nao ta xa nhau roi hoi nguoi"];
     [_guessedWord setHidden:YES];
     
     [_btnNext.layer setCornerRadius:10];
     [_btnNext.layer setBorderColor:[[UIColor whiteColor] CGColor]];
     [_btnNext.layer setBorderWidth:2];
+    [_btnNext setBackgroundColor:[UIColor colorFromHex:@"#F2C200"]];
+//    [_btnNext setBackgroundImage:[UIImage imageNamed:@""] forState:UIControlStateSelected];
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -97,11 +136,12 @@
         [_lblFinish setHidden:NO];
         [_btnNext setTitle:@"OK" forState:UIControlStateNormal];
 
-        NSString *finish = @"Amazing! You finished all level! We will update new data soon. Please come back later!";
+        NSString *finish = [Helper localizedString:@"You finished all level! We will update new data soon. Please come back later!"];
         [_lblFinish setText:finish];
     } else {
         [_coinsEarned setHidden:NO];
-        [_btnDownload setHidden:NO];
+        if (DATA_TYPE == 1)
+            [_btnDownload setHidden:NO];
         [_lblCoins setHidden:NO];
         [_imgCoins setHidden:NO];
         [_lblGuessed setHidden:NO];

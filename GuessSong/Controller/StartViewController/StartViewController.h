@@ -27,6 +27,7 @@
     BOOL bannerShown;
 }
 
+@property (nonatomic, assign) BOOL                  noAds;
 @property (nonatomic, retain) AVAudioPlayer         *audioPlayer;
 @property (nonatomic, retain) GameCenterManager     *gameCenterManager;
 @property (weak, nonatomic) IBOutlet UILabel        *lbLevel;
@@ -46,5 +47,6 @@
 - (IBAction)rate:(id)sender;
 - (IBAction)moreApp:(id)sender;
 - (IBAction)btnVolumeClick:(id)sender;
+- (IBAction)btnCupClick:(id)sender;
 
 @end

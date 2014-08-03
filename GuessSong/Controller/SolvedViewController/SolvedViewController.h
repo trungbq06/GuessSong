@@ -26,6 +26,7 @@
 @property (nonatomic, assign) int                   startCoin;
 @property (nonatomic, strong) NSTimer               *tUpdate;
 @property (nonatomic, retain) QuizModel             *currQuiz;
+@property (nonatomic, retain) NSArray               *finishArr;
 
 // Data of the quiz
 @property (nonatomic, retain) NSMutableArray        *quizData;

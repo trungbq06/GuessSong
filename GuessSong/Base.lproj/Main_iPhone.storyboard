@@ -49,6 +49,16 @@
                                         <rect key="frame" x="243" y="12" width="16" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="39V-BI-EDp">
+                                        <rect key="frame" x="12" y="4" width="32" height="32"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" backgroundImage="cup.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="btnCupClick:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Qfe-Ae-XC9"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="1" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -135,10 +145,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Congratulations!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1gY-XP-4jc">
-                                <rect key="frame" x="24" y="61" width="272" height="51"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GOOD JOB" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1gY-XP-4jc">
+                                <rect key="frame" x="24" y="59" width="272" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="35"/>
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="45"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -149,12 +159,13 @@
                                 <color key="textColor" red="1" green="0.66710668103448278" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="HKH-W2-Ihx">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HKH-W2-Ihx">
                                 <rect key="frame" x="60" y="422" width="200" height="52"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.12549020349979401" green="0.63921570777893066" blue="0.090196080505847931" alpha="1" colorSpace="deviceRGB"/>
-                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="30"/>
-                                <state key="normal" title="NEXT">
+                                <fontDescription key="fontDescription" name="DINAlternate-Bold" family="DIN Alternate" pointSize="28"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="CONTINUE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -221,6 +232,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAN-Tk-5rF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1856" y="-306"/>
+        </scene>
+        <!--Zoom Image View Controller-->
+        <scene sceneID="Cqg-xK-gVh">
+            <objects>
+                <viewController storyboardIdentifier="ZoomImageViewController" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" id="GkD-Ih-T0Q" customClass="ZoomImageViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fYV-an-lJn">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="200" height="200"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lN1-g3-qHx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1350" y="-76"/>
         </scene>
         <!--More App View Controller-->
         <scene sceneID="ubT-BW-Jbz">
@@ -406,7 +434,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lh8-QV-q8J">
-                                <rect key="frame" x="-3" y="112" width="40" height="40"/>
+                                <rect key="frame" x="-3" y="96" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="facebook.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -416,13 +444,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="x4s-gY-TIg">
-                                <rect key="frame" x="-3" y="167" width="40" height="40"/>
+                                <rect key="frame" x="-3" y="146" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" backgroundImage="twitter.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="shareFB:" destination="y3m-lQ-apM" eventType="touchUpInside" id="c0H-B1-0jj"/>
+                                    <action selector="showTweetSheet:" destination="y3m-lQ-apM" eventType="touchUpInside" id="gcs-BT-mrJ"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" id="zJb-sa-UIp" customClass="JingRoundView">
@@ -444,6 +472,31 @@
                                     <action selector="skipLevel:" destination="y3m-lQ-apM" eventType="touchUpInside" id="9Zw-lA-e4y"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ayI-pq-q2e">
+                                <rect key="frame" x="134" y="120" width="52" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="35"/>
+                                <color key="textColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="B8O-J7-nRL">
+                                <rect key="frame" x="19" y="80" width="120" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="oTf-by-BTA">
+                                <rect key="frame" x="183" y="80" width="120" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="NVD-Bo-y2g">
+                                <rect key="frame" x="-3" y="196" width="40" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" backgroundImage="itunes.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="btnItunesClick:" destination="y3m-lQ-apM" eventType="touchUpInside" id="sXk-hU-e5e"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -453,11 +506,16 @@
                         <outlet property="btnCoins" destination="zXZ-13-EJ4" id="9PA-Nh-B9J"/>
                         <outlet property="btnDelete" destination="wu4-4i-f51" id="i0Y-56-7kZ"/>
                         <outlet property="btnFacebook" destination="lh8-QV-q8J" id="x86-eN-o3N"/>
+                        <outlet property="btnItunes" destination="NVD-Bo-y2g" id="hEs-QE-8Km"/>
                         <outlet property="btnNext" destination="dOz-UO-27d" id="7fq-jS-v5g"/>
                         <outlet property="btnShow" destination="4WI-T8-sud" id="C7s-xP-zz1"/>
+                        <outlet property="btnTwitter" destination="x4s-gY-TIg" id="gsK-CE-JdW"/>
                         <outlet property="lbLevel" destination="BCw-6A-DWb" id="Cgj-9o-qKI"/>
+                        <outlet property="lblPlus" destination="ayI-pq-q2e" id="hhT-F1-5Mo"/>
+                        <outlet property="leftImage" destination="B8O-J7-nRL" id="R85-Lh-xfn"/>
                         <outlet property="navigationBar" destination="bQU-i1-dof" id="Git-wG-Tmh"/>
                         <outlet property="playingRound" destination="zJb-sa-UIp" id="OF1-Ch-SOM"/>
+                        <outlet property="rightImage" destination="oTf-by-BTA" id="esg-s0-tSB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dOi-oC-GaS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -470,10 +528,12 @@
         <image name="btn_bg.png" width="40" height="40"/>
         <image name="coins.png" width="24" height="24"/>
         <image name="coins_btn.png" width="75" height="25"/>
+        <image name="cup.png" width="32" height="32"/>
         <image name="delete.png" width="40" height="40"/>
-        <image name="facebook.png" width="32" height="32"/>
+        <image name="facebook.png" width="40" height="40"/>
         <image name="fcoins.png" width="334" height="360"/>
         <image name="itunes-button.png" width="140" height="52"/>
+        <image name="itunes.png" width="40" height="40"/>
         <image name="nav_split.png" width="320" height="2"/>
         <image name="play_btn.png" width="200" height="65"/>
         <image name="show.png" width="40" height="40"/>

@@ -19,6 +19,7 @@
 + (void) updateNewCoins:(int) newCoins success:(void (^)())_success;
 + (void) updateLevel:(int) newLevel success:(void (^)())_success;
 + (void) updateSound:(BOOL) newSound success:(void (^)())_success;
++ (void) updateNoAds:(BOOL)noAds success:(void (^)())_success;
 + (NSString *) localizedString:(NSString *) key;
 
 @end
