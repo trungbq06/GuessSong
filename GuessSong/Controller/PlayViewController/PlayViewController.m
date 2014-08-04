@@ -337,6 +337,12 @@
         [_btnNext setFrame:CGRectMake(226, startYImage, newWidth, newWidth)];
         [_btnTwitter setFrame:CGRectMake(98, startYImage, newWidth, newWidth)];
         
+        [_btnFacebook setBackgroundImage:[UIImage imageNamed:@"facebook_2"] forState:UIControlStateNormal];
+        [_btnDelete setBackgroundImage:[UIImage imageNamed:@"delete_2"] forState:UIControlStateNormal];
+        [_btnNext setBackgroundImage:[UIImage imageNamed:@"skip_2"] forState:UIControlStateNormal];
+        [_btnTwitter setBackgroundImage:[UIImage imageNamed:@"twitter_2"] forState:UIControlStateNormal];
+        [_btnShow setBackgroundImage:[UIImage imageNamed:@"show_2"] forState:UIControlStateNormal];
+        
         [_btnItunes setHidden:YES];
     }
     
@@ -472,6 +478,8 @@
 #pragma mark - CHAR SQUARE DELEGATE
 - (void) charSquareClicked:(CharSquare *)square
 {
+    [self resetColor];
+    
     if (square.charSource) {
         _charGenerator.remainingChar--;
         [square.charSource setHidden:NO];
@@ -646,6 +654,7 @@
 
 - (void) showCharHint
 {
+    [self resetColor];
     _currCoins -= kShowCoins;
     
     [Helper updateNewCoins:_currCoins success:nil];
@@ -655,7 +664,9 @@
     CharSquare *_char = [_charSquareArray objectAtIndex:iChar];
     NSString *_currChar = [_charGenerator.songChar objectAtIndex:iChar];
     
-    if (_charGenerator.remainingChar < [_charGenerator.songChar count]) {
+    DLog_Low(@"CurrChar: %@ - %@", _currChar, _char.character);
+    
+    if (_charGenerator.remainingChar <= [_charGenerator.songChar count]) {
         if (!_char.isHint) {
             if (![_char.character isEqualToString:_currChar])
                 [self chooseSource:_currChar];
@@ -670,11 +681,21 @@
                 }
             }
             [_char showHint];
+
+            for (CharSquare *_square in _charSquareArray) {
+                if ([_square.character isEqualToString:_currChar] && !_square.isHint) {
+                    [_square setCharacter:@""];
+                    _charGenerator.remainingChar--;
+                    
+                    break;
+                }
+            }
             
+            DLog_Low(@"Remaining char: %d", _charGenerator.remainingChar);
             if (_charGenerator.remainingChar == [_charGenerator.songChar count]) {
                 if (![self solving:FALSE]) {
-                    _charGenerator.remainingChar--;
-                    [self showCharHint];
+//                    _charGenerator.remainingChar--;
+//                    [self showCharHint];
                 } else {
                     [self congratulation];
                 }
@@ -698,6 +719,8 @@
 
 - (IBAction)deleteChar:(id)sender
 {
+    [self resetColor];
+    
     if ([self checkCoins:kDeleteCoins]) {
         int toRemoveChar = _totalChar - [_charSquareArray count];
         
@@ -719,10 +742,21 @@
     for (int i = 0;i < [_charSourceArray count];i++) {
         CharSource *_source = [_charSourceArray objectAtIndex:i];
         if (![_charGenerator.songChar containsObject:_source.character] && ![_source.character isEqualToString:@""]) {
+            // Remove from square character
+            for (CharSquare *_square in _charSquareArray) {
+                if ([_square.charSource isEqual:_source]) {
+                    [_square setCharacter:@""];
+                    _charGenerator.remainingChar--;
+                    
+                    break;
+                }
+            }
+            
             [_source removeFromSuperview];
             [_source setCharacter:@""];
             [_charSourceArray removeObject:_source];
             removed = TRUE;
+            
             break;
         }
     }

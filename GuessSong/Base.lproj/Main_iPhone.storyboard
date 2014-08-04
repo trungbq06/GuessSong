@@ -75,7 +75,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gEU-tC-NYj">
                                 <rect key="frame" x="51" y="353" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" backgroundImage="facebook.png">
+                                <state key="normal" backgroundImage="facebook_2.png">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -531,6 +531,7 @@
         <image name="cup.png" width="32" height="32"/>
         <image name="delete.png" width="40" height="40"/>
         <image name="facebook.png" width="40" height="40"/>
+        <image name="facebook_2.png" width="40" height="40"/>
         <image name="fcoins.png" width="334" height="360"/>
         <image name="itunes-button.png" width="140" height="52"/>
         <image name="itunes.png" width="40" height="40"/>
