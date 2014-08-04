@@ -47,6 +47,6 @@
 - (IBAction)rate:(id)sender;
 - (IBAction)moreApp:(id)sender;
 - (IBAction)btnVolumeClick:(id)sender;
-- (IBAction)btnCupClick:(id)sender;
+- (IBAction)showLeaderboard:(id)sender;
 
 @end

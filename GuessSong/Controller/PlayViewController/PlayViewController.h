@@ -17,13 +17,15 @@
 #import "CharacterGenerator.h"
 #import "JingRoundView.h"
 #import <POP/POP.h>
+#import "GameCenterManager.h"
 #import "PurchaseViewController.h"
+#import <GameKit/GameKit.h>
 #import "UIImageView+AFNetworking.h"
 #import <MediaPlayer/MPMoviePlayerController.h>
 #import "ZoomImageViewController.h"
 #import "QuizModel.h"
 
-@interface PlayViewController : UIViewController <CharSourceDelegate, CharSquarelegate, UIAlertViewDelegate, JingRoundViewDelegate>
+@interface PlayViewController : UIViewController <CharSourceDelegate, CharSquarelegate, UIAlertViewDelegate, JingRoundViewDelegate, GKGameCenterControllerDelegate>
 
 @property (nonatomic, retain) NSManagedObjectContext * context;
 
@@ -60,6 +62,7 @@
 @property (nonatomic, retain) NSTimer               *sliderTimer;
 @property (nonatomic, weak) IBOutlet UIImageView    *leftImage;
 @property (nonatomic, weak) IBOutlet UIImageView    *rightImage;
+@property (nonatomic, retain) GameCenterManager     *gameCenterManager;
 
 @property (nonatomic, assign) int                   totalChar;
 @property (nonatomic, assign) int                   removedChar;

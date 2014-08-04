@@ -135,7 +135,7 @@
                 
                 _sound = [_userInfo.sound boolValue];
                 
-                if (!_userInfo.sound) {
+                if (![_userInfo.sound boolValue]) {
                     [_btnVolume setBackgroundImage:[UIImage imageNamed:@"volume_off"] forState:UIControlStateNormal];
                 } else {
                     [_btnVolume setBackgroundImage:[UIImage imageNamed:@"volume"] forState:UIControlStateNormal];
@@ -203,8 +203,6 @@
     [super viewDidDisappear:animated];
     
     [_audioPlayer pause];
-    
-    DLog_Low(@"%@", NSLocalizedString(@"Congratulations", @"Congratulations"));
 }
 
 - (void) viewDidAppear:(BOOL)animated
@@ -520,4 +518,29 @@
     
     [self.navigationController pushViewController:_playController animated:YES];
 }
+
+- (void)gameCenterViewControllerDidFinish:(GKGameCenterViewController *)gameCenterViewController
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - SHOW LEADERBOARD
+- (IBAction)showLeaderboard:(id)sender
+{
+    GKGameCenterViewController *gcViewController = [[GKGameCenterViewController alloc] init];
+    
+    if (gcViewController != nil)
+    {
+        gcViewController.gameCenterDelegate = self;
+        
+        gcViewController.viewState = GKGameCenterViewControllerStateLeaderboards;
+        if (IS_IOS7)
+            gcViewController.leaderboardIdentifier = LEADER_BOARD_IDENTIFIER;
+        else
+            gcViewController.leaderboardCategory = LEADER_BOARD_IDENTIFIER;
+        
+        [self presentViewController:gcViewController animated:YES completion:nil];
+    }
+}
+
 @end

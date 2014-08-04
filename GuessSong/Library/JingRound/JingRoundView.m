@@ -60,7 +60,7 @@
     
     //set play state
     UIImage *stateImage;
-    if (self.isPlay) {
+    if (_isPlay) {
         stateImage = [UIImage imageNamed:PAUSE_IMAGE];
     }else{
         stateImage = [UIImage imageNamed:PLAY_IMAGE];
@@ -83,14 +83,14 @@
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     CGContextRef context = CGBitmapContextCreate(nil, self.frame.size.width, self.frame.size.height, 8, 0, colorSpace, kCGImageAlphaPremultipliedLast);
     CFRelease(colorSpace);
-    
+    /*
     CGContextSetStrokeColorWithColor(context, [[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.7] CGColor]);
     CGContextBeginPath(context);
     CGContextAddArc(context, center.x, center.y, center.x , 0, 2 * M_PI, 0);
     CGContextClosePath(context);
     CGContextSetLineWidth(context, 15.0);
     CGContextStrokePath(context);
-    
+    */
     
     // convert the context into a CGImageRef
     CGImageRef image = CGBitmapContextCreateImage(context);
@@ -118,7 +118,7 @@
     [self.roundImageView.layer addAnimation:rotationAnimation forKey:@"rotation"];
     
     //pause
-    if (!self.isPlay) {
+    if (!_isPlay) {
         self.layer.speed = 0.0;
     }
 }
@@ -128,7 +128,7 @@
 {
     _isPlay = aIsPlay;
     
-    if (self.isPlay) {
+    if (_isPlay) {
         [self startRotation];
     }else{
         [self pauseRotation];
@@ -142,15 +142,15 @@
 
 - (IBAction)playStateClick:(id)sender
 {
-    self.isPlay = !self.isPlay;
-    [self.delegate playStatusUpdate:self.isPlay];
+    _isPlay = !_isPlay;
+    [self.delegate playStatusUpdate:_isPlay];
 }
 
 //touchesBegan
 //-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 //{
-//    self.isPlay = !self.isPlay;
-//    [self.delegate playStatusUpdate:self.isPlay];
+//    _isPlay = !_isPlay;
+//    [self.delegate playStatusUpdate:_isPlay];
 //}
 
 -(void) startRotation
@@ -203,11 +203,11 @@
 
 -(void)play
 {
-    self.isPlay = YES;
+    _isPlay = YES;
 }
 -(void)pause
 {
-    self.isPlay = NO;
+    _isPlay = NO;
 }
 
 @end

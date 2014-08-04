@@ -40,6 +40,10 @@
 {
     [super viewDidLoad];
     
+    if ([GameCenterManager isGameCenterAvailable]) {
+        _gameCenterManager = [[GameCenterManager alloc] init];
+    }
+    
     [_lbLevel setFont:[UIFont fontWithName:FONT_FAMILY size:30]];
     [_btnCoins.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:15]];
     
@@ -83,7 +87,6 @@
     } else {
         [_playingRound setHidden:YES];
     }
-//    [self.view sendSubviewToBack:_playBtn];
     
     CDSingleton *_cdSingleton = [CDSingleton sharedCDSingleton];
     
@@ -109,6 +112,8 @@
                 _quiz = [_quizData objectAtIndex:_idxQuiz];
             
                 [self generateGame];
+//                [self performSelectorOnMainThread:@selector(generateGame) withObject:nil waitUntilDone:YES];
+//                [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(generateGame) userInfo:nil repeats:NO];
             } else {
                 [self finishGame];
             }
@@ -131,7 +136,7 @@
     
     _charGenerator = [[CharacterGenerator alloc] init];
     
-    
+    /*
     for (NSString *family in [UIFont familyNames])
     {
         NSLog(@"%@", family);
@@ -140,6 +145,7 @@
             NSLog(@"\t%@", font);
         }
     }
+    */
     
     // Load data for the first time
     if (!_quizData) {
@@ -269,6 +275,8 @@
 
 - (void) generateNewQuiz:(NSString*) quizName
 {
+    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(playSong:) userInfo:nil repeats:NO];
+    
     [_charSquareArray removeAllObjects];
     
     if (DATA_TYPE == 2) {
@@ -610,10 +618,18 @@
     
 //    [self presentPopupViewController:_solvedController animated:YES completion:nil];
     [Helper updateLevel:_currLevel + 1 success:^{
+        [self reportScore];
+        
         [self presentPopupViewController:_solvedController animated:YES completion:nil];
     }];
     
     return TRUE;
+}
+
+#pragma mark - REPORT SCORE
+-(void)reportScore
+{
+    [_gameCenterManager reportScore: [[NSNumber numberWithInt:_currLevel] longLongValue] forCategory: LEADER_BOARD_IDENTIFIER];
 }
 
 - (void) finishGame
@@ -635,7 +651,7 @@
 
 - (BOOL) sorry
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sorry" message:@"You didn't make it. Please try again !" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Sorry" message:@"You didn't make it. Please try again !" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //    [alertView show];
     
     return FALSE;
@@ -824,20 +840,31 @@
         // users will simply close the app or switch away, without logging out; this will
         // cause the implicit cached-token login to occur on next launch of the application
 //        [appDelegate.session closeAndClearTokenInformation];
-        
+        /*
         FBLinkShareParams *params = [[FBLinkShareParams alloc] init];
-        params.link = [NSURL URLWithString:kServerURL];
+        params.link = [NSURL URLWithString:kAppStoreUrl];
 //        params.picture = [NSURL URLWithString:@"https://fbcdn-sphotos-e-a.akamaihd.net/hphotos-ak-xpa1/t1.0-9/10513289_10202084649312804_5356930935114971960_n.jpg"];
-        params.picture = [NSURL fileURLWithPath:[self screenshot]];
+//        [self screenshot];
+        
+//        NSString *bundlePath = [[NSBundle mainBundle] bundlePath];
+        
+        NSString *_imagePath = [[NSBundle mainBundle] pathForResource:@"capturedImage" ofType:@"jpg" inDirectory:@"Documents"];
+        _imagePath = [self screenshot];
+        params.picture = [NSURL fileURLWithPath:_imagePath];
         params.name = @"Guess The Song";
         params.caption = @"Can you guess these song ?";
+        */
+        NSString *_imagePath = [self screenshot];
+        FBPhotoParams *params = [[FBPhotoParams alloc] init];
+        params.photos = @[[UIImage imageWithContentsOfFile:_imagePath]];
         
         /*
         FBPhotoParams *params = [[FBPhotoParams alloc] initWithPhotos:[NSArray arrayWithObjects:[self screenshot], nil]];
          */
-        BOOL canShare = [FBDialogs canPresentShareDialogWithParams:params];
+//        BOOL canShare = [FBDialogs canPresentShareDialogWithParams:params];
+        BOOL canShare = TRUE;
         if (canShare) {
-            [FBDialogs presentShareDialogWithParams:params clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
+            [FBDialogs presentShareDialogWithPhotoParams:params clientState:nil handler:^(FBAppCall *call, NSDictionary *results, NSError *error) {
                 if(error) {
                     DLog_Low(@"Error: %@", error.description);
                 } else {

@@ -35,9 +35,12 @@
     
     _finishArr = [NSArray arrayWithObjects:[Helper localizedString:@"Good Job"], [Helper localizedString:@"Amazing"],
                            [Helper localizedString:@"Great"],[Helper localizedString:@"Hooray"],
-                           [Helper localizedString:@"Awesome"],[Helper localizedString:@"Incredible"], nil];
+                           [Helper localizedString:@"Awesome"],[Helper localizedString:@"Incredible"], [Helper localizedString:@"Sensational"],
+                           [Helper localizedString:@"Fantastic"], [Helper localizedString:@"Excellent"], [Helper localizedString:@"Wonderful"],
+                  nil];
     
     int random = arc4random() % [_finishArr count];
+    
     NSString *_finish = [_finishArr objectAtIndex:random];
     [_lblCongrate setText:[NSString stringWithFormat:@"%@ !" , [_finish uppercaseString]]];
     [_lblCongrate setTextColor:[UIColor colorFromHex:kYellowColor]];
