@@ -49,6 +49,8 @@
 		379F3D61196F140000864C24 /* NSMutableArray+Shuffle.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F3D60196F140000864C24 /* NSMutableArray+Shuffle.m */; };
 		379F3D64196F344C00864C24 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F3D63196F344C00864C24 /* Helper.m */; };
 		379F4D5E1973E54700A09A03 /* SolvedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 379F4D5D1973E54700A09A03 /* SolvedViewController.m */; };
+		37A7E18F198FC90100A4292B /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 37A7E18D198FC90100A4292B /* Icon.png */; };
+		37A7E190198FC90100A4292B /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37A7E18E198FC90100A4292B /* Icon@2x.png */; };
 		37B3D7F81974FAC100210F2C /* PurchaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B3D7F71974FAC100210F2C /* PurchaseViewController.m */; };
 		37B4A99B198753C800E0C5AD /* source_bg_active.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B4A999198753C800E0C5AD /* source_bg_active.png */; };
 		37B4A99C198753C800E0C5AD /* source_bg_active@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37B4A99A198753C800E0C5AD /* source_bg_active@2x.png */; };
@@ -268,6 +270,8 @@
 		379F3D63196F344C00864C24 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
 		379F4D5C1973E54700A09A03 /* SolvedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SolvedViewController.h; sourceTree = "<group>"; };
 		379F4D5D1973E54700A09A03 /* SolvedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SolvedViewController.m; sourceTree = "<group>"; };
+		37A7E18D198FC90100A4292B /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		37A7E18E198FC90100A4292B /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		37B3D7F61974FAC100210F2C /* PurchaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PurchaseViewController.h; sourceTree = "<group>"; };
 		37B3D7F71974FAC100210F2C /* PurchaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PurchaseViewController.m; sourceTree = "<group>"; };
 		37B4A999198753C800E0C5AD /* source_bg_active.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = source_bg_active.png; sourceTree = "<group>"; };
@@ -952,6 +956,8 @@
 		67633A44196B6A1000475535 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				37A7E18D198FC90100A4292B /* Icon.png */,
+				37A7E18E198FC90100A4292B /* Icon@2x.png */,
 				378985CB198B430200E7C8F6 /* pause@2x.png */,
 				378985CC198B430200E7C8F6 /* play@2x.png */,
 				378985C9198B380100E7C8F6 /* cd_play1.png */,
@@ -1158,10 +1164,12 @@
 				37739CD51987A4070019F4C2 /* coins_btn@2x.png in Resources */,
 				6703DF98197B20E10080768F /* source_bg.png in Resources */,
 				673F1372198E539D0091FE2F /* skip_2.png in Resources */,
+				37A7E190198FC90100A4292B /* Icon@2x.png in Resources */,
 				670917291972C27E001A6CBD /* edit.png in Resources */,
 				6703DF8E197B20E10080768F /* delete.png in Resources */,
 				670917231972A8B4001A6CBD /* start.png in Resources */,
 				378985C8198B37C600E7C8F6 /* cd_play@2x.png in Resources */,
+				37A7E18F198FC90100A4292B /* Icon.png in Resources */,
 				6703A53F197DC7DD0094104B /* nav_split@2x.png in Resources */,
 				6704FE57198700C6001EF2B2 /* skip@2x.png in Resources */,
 				6703DF8A197B20E10080768F /* char_bg.png in Resources */,
@@ -1503,7 +1511,7 @@
 					"$(PROJECT_DIR)/GuessSong/Library/GoogleMobileAdsSdk",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Top Song Quiz";
 				PROVISIONING_PROFILE = "29E32556-FA49-4E3F-AC75-055DFAC868D2";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1533,7 +1541,7 @@
 					"$(PROJECT_DIR)/GuessSong/Library/GoogleMobileAdsSdk",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Top Song Quiz";
 				PROVISIONING_PROFILE = "29E32556-FA49-4E3F-AC75-055DFAC868D2";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

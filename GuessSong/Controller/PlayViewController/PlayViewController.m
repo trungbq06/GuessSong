@@ -264,13 +264,26 @@
 
 - (IBAction)imageClick:(id)sender
 {
-    ZoomImageViewController *_zoomController = [self.storyboard instantiateViewControllerWithIdentifier:@"ZoomImageViewController"];
-    UIImageView *object = (UIImageView*) [sender view];
-    [_zoomController setImageView:[[UIImageView alloc] initWithImage:[object image]]];
+    POPSpringAnimation *basicAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    //    basicAnimation.property = [POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+    basicAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0f, 1.0f)];
+    basicAnimation.fromValue =[NSValue valueWithCGSize:CGSizeMake(1.4f, 1.4f)];
+    basicAnimation.springSpeed = 5;
+    basicAnimation.springBounciness = 10;
     
-    [self presentPopupViewController:_zoomController animated:YES completion:^{
+    [basicAnimation setCompletionBlock:^(POPAnimation *animation, BOOL finished) {
         
     }];
+    
+    [_leftImage.layer pop_addAnimation:basicAnimation forKey:@"positionAnimation"];
+    
+//    ZoomImageViewController *_zoomController = [self.storyboard instantiateViewControllerWithIdentifier:@"ZoomImageViewController"];
+//    UIImageView *object = (UIImageView*) [sender view];
+//    [_zoomController setImageView:[[UIImageView alloc] initWithImage:[object image]]];
+//    
+//    [self presentPopupViewController:_zoomController animated:YES completion:^{
+//        
+//    }];
 }
 
 - (void) generateNewQuiz:(NSString*) quizName
@@ -295,9 +308,9 @@
         [_leftImage setUserInteractionEnabled:YES];
         [_rightImage setUserInteractionEnabled:YES];
         
-        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
-        tapGesture.numberOfTapsRequired = 1;
-        [_leftImage setGestureRecognizers:[NSArray arrayWithObjects:tapGesture, nil]];
+//        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+//        tapGesture.numberOfTapsRequired = 1;
+//        [_leftImage setGestureRecognizers:[NSArray arrayWithObjects:tapGesture, nil]];
         
         NSArray *_imgArr = (NSArray*) _quiz.qSource;
         [_leftImage setImageWithURL:[NSURL URLWithString:[_imgArr objectAtIndex:0]]];
@@ -446,8 +459,7 @@
     basicAnimation.springBounciness = 10;
     
     [basicAnimation setCompletionBlock:^(POPAnimation *animation, BOOL finished) {
-        //        [_btnPlay setFrame:normalFrame];
-        //        [_btnPlay.titleLabel setFont:[UIFont fontWithName:@"Verdana-Bold" size:30]];
+        
     }];
     
     [_btnShow.layer pop_addAnimation:basicAnimation forKey:@"positionAnimation"];
@@ -1012,7 +1024,7 @@
 #pragma mark - PLAYING SONG
 - (void) playSong
 {
-    if (!_isPlaying) {
+    if (!_isPlaying && DATA_TYPE == 1) {
         _isPlaying = TRUE;
         [_playingRound setIsPlay:_isPlaying];
         [_playBtn setBackgroundImage:[UIImage imageNamed:PAUSE_IMAGE] forState:UIControlStateNormal];

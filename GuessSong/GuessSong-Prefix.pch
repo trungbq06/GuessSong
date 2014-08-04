@@ -87,7 +87,7 @@
 #define PAUSE_IMAGE                 @"pause"
 #define LANG_CODE                   @"Base"
 
-#define DEBUG           0
+#define DEBUG           1
 
 #ifdef DEBUG
 #   define NSLog(...) NSLog(__VA_ARGS__)
