@@ -1050,7 +1050,7 @@
     
 //    DLog_Low(@"Current Time %d", _currentTime);
     
-    if (_currentTime > 20) {
+    if (_currentTime > MAX_TIME_PLAY) {
         [self stopPlayer];
         
         [_sliderTimer invalidate];

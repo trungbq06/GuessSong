@@ -79,6 +79,7 @@
 #define kShowPreview                65
 #define kSkipAlert                  1007
 #define kOpenItunes                 1008
+#define MAX_TIME_PLAY               10
 #define RATED_APP                   @"rated_app"
 #define kSound                      @"sound"
 #define kNoAds                      @"no_ads"
@@ -107,7 +108,7 @@
 #   define ULog(...)
 #endif
 
-#define LOG_LEVEL 4
+#define LOG_LEVEL 1
 
 // Define Log function by level. Set LOG_LEVEL to 1 when distribute
 #ifdef DEBUG
