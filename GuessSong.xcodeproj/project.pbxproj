@@ -345,7 +345,7 @@
 		37FD592D1988983A00EA6E11 /* btn_click_on.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = btn_click_on.mp3; sourceTree = "<group>"; };
 		37FD593019889E8900EA6E11 /* tada.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tada.mp3; sourceTree = "<group>"; };
 		37FD593219889EEF00EA6E11 /* incorrect_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = incorrect_sound.mp3; sourceTree = "<group>"; };
-		6701008A1969D049001D8926 /* GuessSong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuessSong.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6701008A1969D049001D8926 /* 2 Pics.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "2 Pics.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6701008D1969D049001D8926 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6701008F1969D049001D8926 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		670100911969D049001D8926 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -741,7 +741,7 @@
 		6701008B1969D049001D8926 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6701008A1969D049001D8926 /* GuessSong.app */,
+				6701008A1969D049001D8926 /* 2 Pics.app */,
 				670100AE1969D04A001D8926 /* GuessSongTests.xctest */,
 			);
 			name = Products;
@@ -1086,7 +1086,7 @@
 			);
 			name = GuessSong;
 			productName = GuessSong;
-			productReference = 6701008A1969D049001D8926 /* GuessSong.app */;
+			productReference = 6701008A1969D049001D8926 /* 2 Pics.app */;
 			productType = "com.apple.product-type.application";
 		};
 		670100AD1969D04A001D8926 /* GuessSongTests */ = {
@@ -1511,7 +1511,7 @@
 					"$(PROJECT_DIR)/GuessSong/Library/GoogleMobileAdsSdk",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_NAME = "Top Song Quiz";
+				PRODUCT_NAME = "2 Pics";
 				PROVISIONING_PROFILE = "29E32556-FA49-4E3F-AC75-055DFAC868D2";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
@@ -1541,7 +1541,7 @@
 					"$(PROJECT_DIR)/GuessSong/Library/GoogleMobileAdsSdk",
 				);
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_NAME = "Top Song Quiz";
+				PRODUCT_NAME = "2 Pics";
 				PROVISIONING_PROFILE = "29E32556-FA49-4E3F-AC75-055DFAC868D2";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;

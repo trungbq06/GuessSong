@@ -67,6 +67,11 @@
 @property (nonatomic, assign) int                   totalChar;
 @property (nonatomic, assign) int                   removedChar;
 @property (nonatomic, assign) int                   currentTime;
+@property (nonatomic, retain) UIView                *dimView;
+@property (nonatomic, assign) CGRect                leftOriginFrame;
+@property (nonatomic, assign) CGRect                rightOriginFrame;
+@property (nonatomic, assign) BOOL                  isLeftZoom;
+@property (nonatomic, assign) BOOL                  isRightZoom;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnFacebook;
 @property (weak, nonatomic) IBOutlet UIButton *btnShow;

@@ -163,6 +163,16 @@
     _tadaPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:playURL2 error:nil];
     
     _removedChar = 0;
+    
+    _dimView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.view addSubview:_dimView];
+    [_dimView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0.5]];
+    [_dimView setHidden:YES];
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(backgroundClick:)];
+    tapGesture.numberOfTapsRequired = 1;
+    [_dimView setGestureRecognizers:[NSArray arrayWithObjects:tapGesture, nil]];
+    [_dimView setUserInteractionEnabled:YES];
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -262,28 +272,62 @@
     }];
 }
 
+- (IBAction)backgroundClick:(id)sender
+{
+    POPSpringAnimation *animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
+    animation.springBounciness = 8;
+    
+    if (_isLeftZoom) {
+        animation.toValue = [NSValue valueWithCGRect:_leftOriginFrame];
+        
+        [_leftImage pop_addAnimation:animation forKey:@"fullscreen"];
+        
+        [self.view sendSubviewToBack:_leftImage];
+    } else if (_isRightZoom) {
+        animation.toValue = [NSValue valueWithCGRect:_rightOriginFrame];
+        
+        [_rightImage pop_addAnimation:animation forKey:@"fullscreen"];
+        
+        [self.view sendSubviewToBack:_rightImage];
+    }
+    
+    [_dimView setHidden:YES];
+    _isLeftZoom = FALSE;
+    _isRightZoom = FALSE;
+}
+
+- (IBAction)rightImageClick:(id)sender
+{
+    if (!_isRightZoom) {
+        [_dimView setHidden:NO];
+        CGRect fullRect = CGRectMake(10,self.view.center.y - 300 / 2, 300, 300);
+        
+        POPSpringAnimation *animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
+        animation.springBounciness = 2;
+        
+        animation.toValue = [NSValue valueWithCGRect:fullRect];
+        
+        [_rightImage pop_addAnimation:animation forKey:@"fullscreen"];
+        [self.view bringSubviewToFront:_rightImage];
+        _isRightZoom = TRUE;
+    }
+}
+
 - (IBAction)imageClick:(id)sender
 {
-    POPSpringAnimation *basicAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
-    //    basicAnimation.property = [POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
-    basicAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0f, 1.0f)];
-    basicAnimation.fromValue =[NSValue valueWithCGSize:CGSizeMake(1.4f, 1.4f)];
-    basicAnimation.springSpeed = 5;
-    basicAnimation.springBounciness = 10;
-    
-    [basicAnimation setCompletionBlock:^(POPAnimation *animation, BOOL finished) {
+    if (!_isLeftZoom) {
+        [_dimView setHidden:NO];
+        CGRect fullRect = CGRectMake(10,self.view.center.y - 300 / 2, 300, 300);
         
-    }];
-    
-    [_leftImage.layer pop_addAnimation:basicAnimation forKey:@"positionAnimation"];
-    
-//    ZoomImageViewController *_zoomController = [self.storyboard instantiateViewControllerWithIdentifier:@"ZoomImageViewController"];
-//    UIImageView *object = (UIImageView*) [sender view];
-//    [_zoomController setImageView:[[UIImageView alloc] initWithImage:[object image]]];
-//    
-//    [self presentPopupViewController:_zoomController animated:YES completion:^{
-//        
-//    }];
+        POPSpringAnimation *animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
+        animation.springBounciness = 2;
+        
+        animation.toValue = [NSValue valueWithCGRect:fullRect];
+        
+        [_leftImage pop_addAnimation:animation forKey:@"fullscreen"];
+        [self.view bringSubviewToFront:_leftImage];
+        _isLeftZoom = TRUE;
+    }
 }
 
 - (void) generateNewQuiz:(NSString*) quizName
@@ -308,13 +352,20 @@
         [_leftImage setUserInteractionEnabled:YES];
         [_rightImage setUserInteractionEnabled:YES];
         
-//        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
-//        tapGesture.numberOfTapsRequired = 1;
-//        [_leftImage setGestureRecognizers:[NSArray arrayWithObjects:tapGesture, nil]];
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick:)];
+        tapGesture.numberOfTapsRequired = 1;
+        [_leftImage setGestureRecognizers:[NSArray arrayWithObjects:tapGesture, nil]];
+        
+        UITapGestureRecognizer *rightTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(rightImageClick:)];
+        tapGesture.numberOfTapsRequired = 1;
+        [_rightImage setGestureRecognizers:[NSArray arrayWithObjects:rightTapGesture, nil]];
         
         NSArray *_imgArr = (NSArray*) _quiz.qSource;
         [_leftImage setImageWithURL:[NSURL URLWithString:[_imgArr objectAtIndex:0]]];
         [_rightImage setImageWithURL:[NSURL URLWithString:[_imgArr objectAtIndex:1]]];
+        
+        _rightOriginFrame = _rightImage.frame;
+        _leftOriginFrame = _leftImage.frame;
     } else {
         [_leftImage setHidden:YES];
         [_rightImage setHidden:YES];

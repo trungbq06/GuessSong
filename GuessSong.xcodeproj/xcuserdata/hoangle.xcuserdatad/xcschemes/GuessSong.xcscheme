@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "670100891969D049001D8926"
-               BuildableName = "GuessSong.app"
+               BuildableName = "Top Song Quiz.app"
                BlueprintName = "GuessSong"
                ReferencedContainer = "container:GuessSong.xcodeproj">
             </BuildableReference>
@@ -43,7 +43,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "670100891969D049001D8926"
-            BuildableName = "GuessSong.app"
+            BuildableName = "Top Song Quiz.app"
             BlueprintName = "GuessSong"
             ReferencedContainer = "container:GuessSong.xcodeproj">
          </BuildableReference>
@@ -62,7 +62,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "670100891969D049001D8926"
-            BuildableName = "GuessSong.app"
+            BuildableName = "Top Song Quiz.app"
             BlueprintName = "GuessSong"
             ReferencedContainer = "container:GuessSong.xcodeproj">
          </BuildableReference>
@@ -86,7 +86,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "670100891969D049001D8926"
-            BuildableName = "GuessSong.app"
+            BuildableName = "Top Song Quiz.app"
             BlueprintName = "GuessSong"
             ReferencedContainer = "container:GuessSong.xcodeproj">
          </BuildableReference>
