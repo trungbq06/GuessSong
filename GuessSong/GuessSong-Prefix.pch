@@ -36,9 +36,18 @@
 #define BG_MUSIC            @"memphis_soul"
 #define KWRONG_MP3          @"incorrect_sound"
 #define kTADA_MP3           @"tada"
-#define NAV_BG_COLOR        @"#ce1852"
-#define kBackgroundColor    @"#00c3bb"
-#define kYellowColor        @"#FFE100"
+
+// SONG COLOR
+//#define NAV_BG_COLOR        @"#ce1852"
+//#define kBackgroundColor    @"#00c3bb"
+//#define kYellowColor        @"#FFE100"
+
+// IMAGE COLOR
+#define NAV_BG_COLOR        @"#ff6768"
+//#define kBackgroundColor    @"#34b8c7"
+#define kBackgroundColor    @"#72537c"
+#define kYellowColor        @"#E60067"
+
 #define kAppStoreUrl        @"https://itunes.apple.com/us/app/top-song-quiz/id898856997?ls=1&mt=8"
 #define kAppID              @"id898856997"
 
@@ -70,7 +79,7 @@
 #define kQuizData                   @"quiz_data"
 #define kUpdatedDate                @"updated_date"
 #define kDoneClick                  @"done_click"
-#define kBackgroundImage            @"background_image"
+#define kBackgroundImage            @"bg20"
 #define kShowHintAlert              1005
 #define kDeleteAlert                1006
 #define kDeleteCoins                25

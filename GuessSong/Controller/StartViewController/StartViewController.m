@@ -283,7 +283,7 @@
         bgImage = @"background";
     
 //    bgImage = [bgImage stringByAppendingString:@".jpg"];
-//    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:bgImage]]];
+//    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:kBackgroundImage]]];
     [self.view setBackgroundColor:[UIColor colorFromHex:kBackgroundColor]];
 }
 

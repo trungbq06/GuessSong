@@ -183,7 +183,7 @@
     if (!bgImage)
         bgImage = @"background";
     
-//    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:bgImage]]];
+//    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:kBackgroundImage]]];
     [self.view setBackgroundColor:[UIColor colorFromHex:kBackgroundColor]];
 }
 
@@ -280,15 +280,19 @@
     if (_isLeftZoom) {
         animation.toValue = [NSValue valueWithCGRect:_leftOriginFrame];
         
-        [_leftImage pop_addAnimation:animation forKey:@"fullscreen"];
+        [animation setCompletionBlock:^(POPAnimation *animation, BOOL finished) {
+            [self.view sendSubviewToBack:_leftImage];
+        }];
         
-        [self.view sendSubviewToBack:_leftImage];
+        [_leftImage pop_addAnimation:animation forKey:@"fullscreen"];
     } else if (_isRightZoom) {
         animation.toValue = [NSValue valueWithCGRect:_rightOriginFrame];
         
-        [_rightImage pop_addAnimation:animation forKey:@"fullscreen"];
+        [animation setCompletionBlock:^(POPAnimation *animation, BOOL finished) {
+            [self.view sendSubviewToBack:_rightImage];
+        }];
         
-        [self.view sendSubviewToBack:_rightImage];
+        [_rightImage pop_addAnimation:animation forKey:@"fullscreen"];
     }
     
     [_dimView setHidden:YES];
@@ -300,7 +304,7 @@
 {
     if (!_isRightZoom) {
         [_dimView setHidden:NO];
-        CGRect fullRect = CGRectMake(10,self.view.center.y - 300 / 2, 300, 300);
+        CGRect fullRect = CGRectMake(15,_rightImage.frame.origin.y, 290, 290);
         
         POPSpringAnimation *animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
         animation.springBounciness = 2;
@@ -317,7 +321,7 @@
 {
     if (!_isLeftZoom) {
         [_dimView setHidden:NO];
-        CGRect fullRect = CGRectMake(10,self.view.center.y - 300 / 2, 300, 300);
+        CGRect fullRect = CGRectMake(15,_leftImage.frame.origin.y, 290, 290);
         
         POPSpringAnimation *animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
         animation.springBounciness = 2;
@@ -495,6 +499,7 @@
     }
     
     [NSTimer scheduledTimerWithTimeInterval:4.0f target:self selector:@selector(animation) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:4.2f target:self selector:@selector(animationDelete) userInfo:nil repeats:YES];
     
     _totalChar = [_charSourceArray count];
 }
@@ -514,6 +519,23 @@
     }];
     
     [_btnShow.layer pop_addAnimation:basicAnimation forKey:@"positionAnimation"];
+}
+
+- (void) animationDelete
+{
+    // Animate button
+    POPSpringAnimation *basicAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPLayerScaleXY];
+    //    basicAnimation.property = [POPAnimatableProperty propertyWithName:kPOPLayerScaleXY];
+    basicAnimation.toValue = [NSValue valueWithCGSize:CGSizeMake(1.0f, 1.0f)];
+    basicAnimation.fromValue =[NSValue valueWithCGSize:CGSizeMake(1.4f, 1.4f)];
+    basicAnimation.springSpeed = 5;
+    basicAnimation.springBounciness = 10;
+    
+    [basicAnimation setCompletionBlock:^(POPAnimation *animation, BOOL finished) {
+        
+    }];
+    
+    [_btnDelete.layer pop_addAnimation:basicAnimation forKey:@"positionAnimation"];
 }
 
 #pragma mark - CHAR SOURCE DELEGATE
