@@ -72,6 +72,7 @@
 @property (nonatomic, assign) CGRect                rightOriginFrame;
 @property (nonatomic, assign) BOOL                  isLeftZoom;
 @property (nonatomic, assign) BOOL                  isRightZoom;
+@property (nonatomic, retain) UIView                *sourceCharView;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnFacebook;
 @property (weak, nonatomic) IBOutlet UIButton *btnShow;

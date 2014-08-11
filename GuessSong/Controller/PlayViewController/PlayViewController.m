@@ -44,6 +44,9 @@
         _gameCenterManager = [[GameCenterManager alloc] init];
     }
     
+    CGRect appframe = [[UIScreen mainScreen] applicationFrame];
+    _sourceCharView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, appframe.size.width, 10)];
+    
     [_lbLevel setFont:[UIFont fontWithName:FONT_FAMILY size:30]];
     [_btnCoins.titleLabel setFont:[UIFont fontWithName:FONT_FAMILY size:15]];
     
@@ -476,6 +479,10 @@
     
     CGRect appFrame = [[UIScreen mainScreen] bounds];
     
+    int sourceCharHeight = SOURCE_CHAR_WIDTH * totalRow;
+    [_sourceCharView setFrame:CGRectMake(0, appFrame.size.height - sourceCharHeight - 30, appFrame.size.width, sourceCharHeight)];
+    sOffsetY = 0;
+    
     // Draw source character
     for (int i = 0;i < totalRow;i++) {
         offsetX = (appFrame.size.width - SOURCE_VIEW_WIDTH) / 2 - CHAR_SPACING * 3;
@@ -490,13 +497,15 @@
             CharSource *_char = [[CharSource alloc] initWithChar:character andFrame:frame];
             _char.delegate = self;
             
-            [self.view addSubview:_char];
-            [self.view sendSubviewToBack:_char];
+            [_sourceCharView addSubview:_char];
+//            [self.view sendSubviewToBack:_char];
             
             offsetX += SOURCE_CHAR_WIDTH + CHAR_SPACING;
             [_charSourceArray addObject:_char];
         }
     }
+    
+    [self.view addSubview:_sourceCharView];
     
     [NSTimer scheduledTimerWithTimeInterval:4.0f target:self selector:@selector(animation) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:4.2f target:self selector:@selector(animationDelete) userInfo:nil repeats:YES];

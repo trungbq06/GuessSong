@@ -19,7 +19,7 @@
 #define MY_BANNER_INTERSITIAL_UNIT_ID @"ca-app-pub-3108667850339338/7746773252"
 #define LEADER_BOARD_IDENTIFIER @"com.dragon.topsongquiz.leaderboard"
 
-#define DATA_TYPE         2         // 1: SONG; 2: IMAGE
+#define DATA_TYPE         1         // 1: SONG; 2: IMAGE
 #define WIDTH             28
 #define CHAR_SPACING      3
 #define LINE_SPACING      32
